@@ -1,0 +1,29 @@
+<% provide(:title, "Sign in") %>
+<% @title=" | Sign in " %>
+<%= render 'flash' %>
+
+<script> 
+   update_title('<%=@title%>'); 
+   document.getElementById("page_status").innerHTML = '';
+</script>
+
+ <div class="erow">
+    <%= form_for(:session, url: sessions_path) do |f| %>
+
+       <div class="erow" >
+         <%= "Email" %>
+       </div>
+      <%= f.text_field :email %>
+
+      <div class="erow" >
+        <%= "Password" %>
+      </div>
+      <%= f.password_field :password %>
+      <br/>
+
+      <%= f.submit "Sign in", class: "btn btn-small btn-primary" %>
+      <%#= link_to "(forgotton password?)", new_password_reset_path, remote: true %>
+    <% end %>
+
+    <p> <%#= link_to "Sign up now!", signup_path, remote: true %></p>
+</div>

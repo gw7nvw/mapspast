@@ -22,7 +22,11 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: postgis
+  encoding: unicode
+  postgis_extension: postgis      # default is postgis
+  schema_search_path: public,postgis
+  database: mapspast_production
   pool: 5
-  timeout: 5000
+  username: route_guides_production
+  password: littledog
