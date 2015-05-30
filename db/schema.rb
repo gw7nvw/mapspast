@@ -11,10 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150523041822) do
+ActiveRecord::Schema.define(version: 20150527194643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authlists", force: true do |t|
+    t.string   "address"
+    t.string   "name"
+    t.boolean  "allow",       default: false
+    t.boolean  "forbid",      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "auth_digest"
+  end
+
+  create_table "messages", force: true do |t|
+    t.string   "subject"
+    t.text     "message"
+    t.string   "fromName"
+    t.string   "fromEmail"
+    t.boolean  "approved"
+    t.integer  "toUser_id"
+    t.integer  "fromUser_id"
+    t.integer  "forum_id"
+    t.string   "auth_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", force: true do |t|
     t.string   "name"

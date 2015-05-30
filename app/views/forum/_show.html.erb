@@ -1,0 +1,47 @@
+<div class="erow">
+<% provide(:title, 'Forums') %>
+<% @title=" | Forums" %>
+<%= render 'flash' %>
+
+<script>
+//   update_title('<%=@title%>');
+//   reset_map_controllers();
+//   document.getElementById("page_status").innerHTML = '';
+
+$(function () {
+  $('#left_panel .pagination a').on('click', function () {
+    $.getScript(this.href);
+    return false;
+  });
+});
+
+</script>
+
+  <div class="erow-10px"><b><%= link_to "All topics ", '/forum/'+@id.to_s, remote: true%></b></div>
+
+  <% if @threads %>
+  <div class="name_pagination"> <%= will_paginate(@threads) %></div>
+    <% count=0%>
+    <% @threads.each do |thread| %>
+      <div class="erow">
+       <% if (thread.count>1)  %>
+           <% @show_message=thread.first %>
+           <% render 'message_details_brief' %> 
+      <% end %>
+           <% @show_message=thread.last %>
+           <% @count=@counts[count]%>
+           <%= render 'message_details_brief' %>
+         <div class="hrline">
+            <hr noshade size="4">
+         </div>
+       </div>
+
+       <% count+=1%>
+    <% end %>
+  <div class="erow"><div class="name_pagination"> <%= will_paginate(@threads) %></div></div>
+
+  <% end %>
+
+<% @subject=nil%>
+<%=render 'message_form'%>
+</div>

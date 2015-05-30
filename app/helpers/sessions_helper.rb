@@ -14,6 +14,10 @@ module SessionsHelper
   end
 
   def signed_in?
+    if(!current_user.nil?)
+      puts "Username:"
+       puts current_user.name
+    end
     !current_user.nil?
   end
 
