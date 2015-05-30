@@ -1,0 +1,26 @@
+           <div class="tarea">
+             <small>
+               <span style="color: #009900"><b>@<%= @show_message.fromName.capitalize %></b></span>
+               <% message=@show_message.message.html_safe%>
+               <%= h(message).gsub(/(?:\n\r?|\r\n?)/, '<br>').html_safe %>
+               <br/>
+               <span style="color: #999999">(<%=@show_message.created_at.strftime("%Y/%m/%d %H:%M")%>)</span>
+               <% if (signed_in? and @current_user.role_id==1) %>
+                 <% if @show_message.approved==false %>
+                    <%= form_tag '/forum/approve', :remote=> true, :method=> 'post'%>
+                      <input type="hidden" name="selected_id" value='<%=@show_message.id%>' />
+                      <input type="hidden" name="id" value='<%=@id%>' />
+                      <input type="hidden" name="subject" value='<%=@subject%>' />
+                      <%= submit_tag "Approve",  :type => :image, :src => '/assets/tick.png', :style => 'margin-bottom:0;border:none',  id: "Approve", onclick: "linkHandler('approve')"  %>
+                    </form>
+                  <% end %>
+                  <%= form_tag '/forum/destroy', :remote=> true, :method=> 'post'%>
+                    <input type="hidden" name="selected_id" value='<%=@show_message.id%>' />
+                    <input type="hidden" name="id" value='<%=@id%>' />
+                    <input type="hidden" name="subject" value='<%=@subject%>' />
+                    <%= submit_tag "Destroy",  :type => :image, :src => '/assets/red-x.png', :style => 'margin-bottom:0;border:none',  id: "Approve", onclick: "linkHandler('approve')"  %>
+                  </form>
+               <% end %>
+             </small>
+           </div>
+

@@ -1,0 +1,2 @@
+if (window.history.pushState!=null) window.history.pushState(null, 'MapsPast | Forums', '/forum/<%=@id.to_s+"/?thread="+URI.escape(@subject)%>');
+$('#left_panel').html("<%= escape_javascript(render(:partial => 'forum/show_thread')).html_safe %>");

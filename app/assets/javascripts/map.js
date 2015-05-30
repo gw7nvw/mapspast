@@ -1,29 +1,21 @@
-var map;
-var mapBounds = new OpenLayers.Bounds(748961,3808210, 2940563,  6836339);
-
+// browser history handler
 if (typeof(lastUrl)=='undefined')  var lastUrl=document.URL;
+
 window.onpopstate = function(event)  {
   if (document.URL != lastUrl) location.reload();
 };
 
-
+var map;
+var mapBounds = new OpenLayers.Bounds(748961,3808210, 2940563,  6836339);
 var mapMinZoom = 5;
 var mapMaxZoom = 14;
 var emptyTileURL = "http://www.maptiler.org/img/none.png";
 OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
 
-function init(){
-//  var containerWidth =900;
-  var containerWidth= $("#main_page").width()-5;
-  var nbpanels = 2;
-  var padding = 5;
-
-  window.onresize = function()
-  {
-    setTimeout( function() { map.updateSize();}, 1000);
-  }
-//  $(".panel").width( (containerWidth / nbpanels) - (nbpanels * padding - 2 * padding));
-
+function init_resize() {
+  // Window resize handling
+  var padding = 10;
+  var containerWidth= $("#main_page").width()-padding;
   $(".panel").resizable({
     handles: 'e',
     maxWidth: containerWidth-120,
@@ -32,120 +24,138 @@ function init(){
       var currentWidth = ui.size.width;
       // set the content panel width
       $("#right_panel").css('margin-left', currentWidth+padding*2+'px' );
+      $("#map_map").width(containerWidth - currentWidth-padding*2);
       $("#right_panel").width(containerWidth);
+      $("#left_panel_container").width(currentWidth);
 
-      $(this).width(currentWidth);
-      $("#map_map").width(containerWidth - currentWidth -padding*2);
     }
   });
 
-    Proj4js.defs["EPSG:2193"] = "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
-    Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
-    Proj4js.defs["EPSG:27200"] = "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +ellps=intl +datum=nzgd49 +units=m +no_defs";
-    Proj4js.defs["ESPG:4326"] = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs '
+}
+
+function init(){
+
+  init_resize();
+
+  // update map size and start 'don't do again until' timer
+  window.onresize = function()
+  {
+    setTimeout( function() { map.updateSize();}, 1000);
+  }
 
 
-                  var options = {
-                      maxResolution: 4891.969809375,
-                      numZoomLevels: 11,
-                      maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34),
-                      div: "map_map",
-                      controls: [],
-                      projection: new OpenLayers.Projection("EPSG:2193"),
-                      units: "m",
-                      displayProjection: new OpenLayers.Projection("EPSG:2193"),
-                  };
-                  map = new OpenLayers.Map(options);
+  //Projections
+  Proj4js.defs["EPSG:2193"] = "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
+  Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
+  Proj4js.defs["EPSG:27200"] = "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +ellps=intl +datum=nzgd49 +units=m +no_defs";
+  Proj4js.defs["ESPG:4326"] = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs '
 
-                  // Create Google Mercator layers
+  // map 
+  var options = {
+      maxResolution: 4891.969809375,
+      numZoomLevels: 11,
+      maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34),
+      div: "map_map",
+      controls: [],
+      projection: new OpenLayers.Projection("EPSG:2193"),
+      units: "m",
+      displayProjection: new OpenLayers.Projection("EPSG:2193"),
+  };
+  map = new OpenLayers.Map(options);
 
-                   var nztm2009 = new OpenLayers.Layer.TMS("Topo50 2009", "http://tiles.mapspast.org.nz/topo50/",
-                  {
-                      serviceVersion: '.',
-                      layername: '.',
-                      alpha: true,
-                      type: 'png',
-                      isBaseLayer: true,
-                      getURL: getURL
-                  });
-                   var nzms1999 = new OpenLayers.Layer.TMS("NZMS260 1999", "http://au.mapspast.org.nz/nzms260-1999/",
-                  {
-                      serviceVersion: '.',
-                      layername: '.',
-                      alpha: true,
-                      type: 'png',
-                      isBaseLayer: true,
-                      getURL: getURL
-                  });
-                   var nzms1989 = new OpenLayers.Layer.TMS("NZMS1 1989", "http://au.mapspast.org.nz/nzms-1989/",
-                  {
-                      serviceVersion: '.',
-                      layername: '.',
-                      alpha: true,
-                      type: 'png',
-                      isBaseLayer: true,
-                      getURL: getURL
-                  });
-                   var nzms1979 = new OpenLayers.Layer.TMS("NZMS1 1979", "http://au.mapspast.org.nz/nzms-1979/",
-                  {
-                      serviceVersion: '.',
-                      layername: '.',
-                      alpha: true,
-                      type: 'png',
-                      isBaseLayer: true,
-                      getURL: getURL
-                  });
-                   var nzms1969 = new OpenLayers.Layer.TMS("NZMS1 1969", "http://tiles.mapspast.org.nz/nzms-1969/",
-                  {
-                      serviceVersion: '.',
-                      layername: '.',
-                      alpha: true,
-                      type: 'png',
-                      isBaseLayer: true,
-                      getURL: getURL
-                  });
-                   var nzms1959 = new OpenLayers.Layer.TMS("NZMS1 1959", "http://au.mapspast.org.nz/nzms-1959/",
-                  {
-                      serviceVersion: '.',
-                      layername: '.',
-                      alpha: true,
-                      type: 'png',
-                      isBaseLayer: true,
-                      getURL: getURL
-                  });
+  // layers
+  var nztm2009 = new OpenLayers.Layer.TMS("Topo50 2009", "http://au.mapspast.org.nz/topo50/",
+  {
+      serviceVersion: '.',
+      layername: '.',
+      alpha: true,
+      type: 'png',
+      isBaseLayer: true,
+      getURL: getURL
+  });
 
-                  map.addLayers([ nztm2009, nzms1999, nzms1989, nzms1979, nzms1969, nzms1959]);
+  var nzms1999 = new OpenLayers.Layer.TMS("NZMS260 1999", "http://au.mapspast.org.nz/nzms260-1999/",
+  {
+      serviceVersion: '.',
+      layername: '.',
+      alpha: true,
+      type: 'png',
+      isBaseLayer: true,
+      getURL: getURL
+  });
 
-                  var switcherControl = new OpenLayers.Control.LayerSwitcher();
-                  map.addControl(switcherControl);
-                  switcherControl.maximizeControl();
+  var nzms1989 = new OpenLayers.Layer.TMS("NZMS1/260 1989", "http://au.mapspast.org.nz/nzms-1989/",
+  {
+      serviceVersion: '.',
+      layername: '.',
+      alpha: true,
+      type: 'png',
+      isBaseLayer: true,
+      getURL: getURL
+  });
 
-                  map.zoomToExtent(mapBounds.transform(map.displayProjection, map.projection));
+  var nzms1979 = new OpenLayers.Layer.TMS("NZMS1 1979", "http://au.mapspast.org.nz/nzms-1979/",
+  {
+      serviceVersion: '.',
+      layername: '.',
+      alpha: true,
+      type: 'png',
+      isBaseLayer: true,
+      getURL: getURL
+  });
+
+  var nzms1969 = new OpenLayers.Layer.TMS("NZMS1 1969", "http://au.mapspast.org.nz/nzms-1969/",
+  {
+      serviceVersion: '.',
+      layername: '.',
+      alpha: true,
+      type: 'png',
+      isBaseLayer: true,
+      getURL: getURL
+  });
+
+  var nzms1959 = new OpenLayers.Layer.TMS("NZMS1 1959", "http://au.mapspast.org.nz/nzms-1959/",
+  {
+      serviceVersion: '.',
+      layername: '.',
+      alpha: true,
+      type: 'png',
+      isBaseLayer: true,
+      getURL: getURL
+  });
+
+  map.addLayers([ nztm2009, nzms1999, nzms1989, nzms1979, nzms1969, nzms1959]);
+
+  // controllers
+  var switcherControl = new OpenLayers.Control.LayerSwitcher();
+  map.addControl(switcherControl);
+  switcherControl.maximizeControl();
+
+  map.zoomToExtent(mapBounds.transform(map.displayProjection, map.projection));
           
-                  map.addControls([new OpenLayers.Control.PanZoomBar(),
-                                   new OpenLayers.Control.Navigation(),
-                                   new OpenLayers.Control.MousePosition(),
-                                   new OpenLayers.Control.ArgParser(),
-                                   new OpenLayers.Control.Attribution()]);
-              }
+  map.addControls([new OpenLayers.Control.PanZoomBar(),
+                   new OpenLayers.Control.Navigation(),
+                   new OpenLayers.Control.MousePosition(),
+                   new OpenLayers.Control.Scale()]);
+}
           
-              function getURL(bounds) {
-                  bounds = this.adjustBounds(bounds);
-                  var res = this.getServerResolution();
-                  var x = Math.round((bounds.left - this.tileOrigin.lon) / (res * this.tileSize.w));
-                  var y = Math.round((bounds.bottom - this.tileOrigin.lat) / (res * this.tileSize.h));
-                  var z = this.getServerZoom()+5;
-                  var path = this.serviceVersion + "/" + this.layername + "/" + z + "/" + x + "/" + y + "." + this.type; 
-                  var url = this.url;
-                  if (OpenLayers.Util.isArray(url)) {
-                      url = this.selectUrl(path, url);
-                  }
-                  if (mapBounds.intersectsBounds(bounds) && (z >= mapMinZoom) && (z <= mapMaxZoom)) {
-                      return url + path;
-                  } else {
-                      return emptyTileURL;
-                  }
-              } 
+function getURL(bounds) {
+  bounds = this.adjustBounds(bounds);
+  var res = this.getServerResolution();
+  var x = Math.round((bounds.left - this.tileOrigin.lon) / (res * this.tileSize.w));
+  var y = Math.round((bounds.bottom - this.tileOrigin.lat) / (res * this.tileSize.h));
+  var z = this.getServerZoom()+5;
+  var path = this.serviceVersion + "/" + this.layername + "/" + z + "/" + x + "/" + y + "." + this.type; 
+  var url = this.url;
+  if (OpenLayers.Util.isArray(url)) {
+      url = this.selectUrl(path, url);
+  }
+  if (mapBounds.intersectsBounds(bounds) && (z >= mapMinZoom) && (z <= mapMaxZoom)) {
+      return url + path;
+  } else {
+      return emptyTileURL;
+  }
+} 
           
            function getWindowHeight() {
                 if (self.innerHeight) return self.innerHeight;
@@ -213,3 +223,9 @@ function linkHandler(entity_name) {
      };
    });
 }
+
+   function update_title(title) {
+     document.getElementById('logo').innerHTML='MapsPast'+title;
+     document.title = 'MapsPast'+title;
+}
+
