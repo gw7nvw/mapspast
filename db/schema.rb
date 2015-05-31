@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150527194643) do
+ActiveRecord::Schema.define(version: 20150530214755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,39 @@ ActiveRecord::Schema.define(version: 20150527194643) do
     t.string   "auth_digest"
   end
 
+  create_table "mapseries", force: true do |t|
+    t.string   "name"
+    t.integer  "year_of_snapshot"
+    t.string   "series"
+    t.string   "edition"
+    t.string   "details"
+    t.integer  "scale"
+    t.integer  "createdBy_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mapsheets", force: true do |t|
+    t.string   "name"
+    t.integer  "series_id"
+    t.integer  "year_printed"
+    t.integer  "year_revised"
+    t.integer  "scale"
+    t.string   "series"
+    t.string   "sheet"
+    t.string   "edition"
+    t.string   "details"
+    t.integer  "source_srid"
+    t.decimal  "xleft"
+    t.decimal  "xright"
+    t.decimal  "ytop"
+    t.decimal  "ybottom"
+    t.integer  "createdBy_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.spatial  "extent",       limit: {:srid=>4326, :type=>"polygon"}
+  end
+
   create_table "messages", force: true do |t|
     t.string   "subject"
     t.text     "message"
@@ -36,6 +69,15 @@ ActiveRecord::Schema.define(version: 20150527194643) do
     t.integer  "fromUser_id"
     t.integer  "forum_id"
     t.string   "auth_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projections", force: true do |t|
+    t.string   "name"
+    t.string   "proj4"
+    t.string   "wkt"
+    t.integer  "epsg"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
