@@ -1,0 +1,12 @@
+<% if @mapsheets and @mapsheets.count>0%>
+    <% ms=@mapsheets.first %>
+    <ul>
+      <li>Series:  <%=ms.series%></li>
+      <li>Name:  <%=ms.name%></li>
+      <li>Sheet:   <%=ms.sheet%></li>
+      <li>Printed: <%=ms.year_printed%></li>
+      <li>Revised: <%=ms.year_revised%></li>
+      <li>Edition: <%=ms.edition%></li>
+      <li>Scale:   1:<%=ms.scale%></li>
+    </ul> 
+<% end %>

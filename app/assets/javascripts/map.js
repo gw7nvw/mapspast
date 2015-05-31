@@ -6,6 +6,7 @@ window.onpopstate = function(event)  {
 };
 
 var map;
+var clickMode=""
 var mapBounds = new OpenLayers.Bounds(748961,3808210, 2940563,  6836339);
 var mapMinZoom = 5;
 var mapMaxZoom = 14;
@@ -62,6 +63,7 @@ function init(){
       displayProjection: new OpenLayers.Projection("EPSG:2193"),
   };
   map = new OpenLayers.Map(options);
+
 
   // layers
   var nztm2009 = new OpenLayers.Layer.TMS("Topo50 2009", "http://au.mapspast.org.nz/topo50/",
@@ -126,14 +128,44 @@ function init(){
 
   map.addLayers([ nztm2009, nzms1999, nzms1989, nzms1979, nzms1969, nzms1959]);
 
+  /* create click controllers*/
+  add_click_to_query_controller();
+  click_to_query = new OpenLayers.Control.Click();
+  map.addControl(click_to_query);
+
+var my_button = new OpenLayers.Control.Button({
+displayClass: 'olControlInfo',
+trigger: mapInfo,
+title: 'Show map sheet details when you click on the map'
+});
+    var panel = new OpenLayers.Control.Panel({
+//        defaultControl: my_button,
+        createControlMarkup: function(control) {
+            var button = document.createElement('button'),
+                iconSpan = document.createElement('span'),
+                textSpan = document.createElement('span');
+            iconSpan.innerHTML = '&nbsp;';
+            button.appendChild(iconSpan);
+            if (control.text) {
+                textSpan.innerHTML = control.text;
+            }
+            button.appendChild(textSpan);
+            return button;
+       }
+    });
+
+    panel.addControls([my_button])
+    
+    map.addControl(panel);
   // controllers
   var switcherControl = new OpenLayers.Control.LayerSwitcher();
   map.addControl(switcherControl);
   switcherControl.maximizeControl();
 
   map.zoomToExtent(mapBounds.transform(map.displayProjection, map.projection));
+  map.zoomIn()
           
-  map.addControls([new OpenLayers.Control.PanZoomBar(),
+  map.addControls([new OpenLayers.Control.Zoom(),
                    new OpenLayers.Control.Navigation(),
                    new OpenLayers.Control.MousePosition(),
                    new OpenLayers.Control.Scale()]);
@@ -228,4 +260,71 @@ function linkHandler(entity_name) {
      document.getElementById('logo').innerHTML='MapsPast'+title;
      document.title = 'MapsPast'+title;
 }
+
+function mapInfo() { 
+   if (clickMode!="query") {
+     click_to_query.activate();
+     clickMode="query";
+     document.getElementsByClassName("olControlInfoItemInactive")[0].style.backgroundColor="#008800"
+     document.getElementById("info_details").style.display="block";
+   } else {
+     click_to_query.deactivate();
+     clickMode="";
+     document.getElementsByClassName("olControlInfoItemInactive")[0].style.backgroundColor="#FFFFFF"
+     document.getElementById("info_details").style.display="none";
+     document.getElementById("info_details").innerHTML="";
+   }
+}
+
+function add_click_to_query_controller() {
+  OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
+     defaultHandlerOptions: {
+         'single': true,
+         'double': true,
+         'pixelTolerance': 5,
+         'stopSingle': false,
+         'stopDouble': false
+     },
+
+
+    initialize: function(options) {
+       this.handlerOptions = OpenLayers.Util.extend(
+           {}, this.defaultHandlerOptions
+       );
+       OpenLayers.Control.prototype.initialize.apply(
+           this, arguments
+       );
+       this.handler = new OpenLayers.Handler.Click(
+           this, {
+               'click': this.trigger
+           }, this.handlerOptions
+       );
+    },
+
+    /*naviagte to selection */
+     trigger: function(e) {
+        var xy = map.getLonLatFromPixel(e.xy);
+        BootstrapDialog.show({
+            title: "Selected map sheet",
+            message: $('<div id="info_details2">Retrieving ...</div>'),
+            size: "size-small"
+        });
+
+        $.ajax({
+          beforeSend: function (xhr){
+            xhr.setRequestHeader("Content-Type","application/javascript");
+            xhr.setRequestHeader("Accept","text/javascript");
+          },
+          type: "GET",
+          timeout: 20000,
+          url: "/query/?x="+xy.lon+"&y="+xy.lat+"&layer="+map.baseLayer.name,
+          complete: function() {
+              /* complete also fires when error ocurred, so only clear if no error has been shown */
+//              document.getElementById("page_status").innerHTML = '';
+          }
+
+        });
+    }
+  });
+ }
 

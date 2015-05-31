@@ -16,7 +16,7 @@ root 'viewer#home'
   post 'forum/destroy' => "forum#destroy"
   delete 'logout' => "sessions#destroy"
   match '/forum', to: 'forum#update',    via:'post'
-
+  get "query" => "query#show" 
 
   
 end
