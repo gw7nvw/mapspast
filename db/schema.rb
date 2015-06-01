@@ -11,10 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530214755) do
+ActiveRecord::Schema.define(version: 20150601014158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
+  enable_extension "postgis_topology"
 
   create_table "authlists", force: true do |t|
     t.string   "address"
@@ -86,6 +88,42 @@ ActiveRecord::Schema.define(version: 20150530214755) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "uploadedmaps", force: true do |t|
+    t.string   "filename"
+    t.string   "name"
+    t.string   "series"
+    t.string   "edition"
+    t.integer  "scale"
+    t.string   "sheet"
+    t.string   "source"
+    t.string   "attribution"
+    t.integer  "year_printed"
+    t.integer  "year_revised"
+    t.text     "description"
+    t.integer  "source_srid"
+    t.string   "projection_name"
+    t.decimal  "xresolution"
+    t.decimal  "yresolution"
+    t.decimal  "grid_xleft"
+    t.decimal  "grid_xright"
+    t.decimal  "grid_ytop"
+    t.decimal  "grid_ybottom"
+    t.decimal  "grid_width"
+    t.decimal  "grid_height"
+    t.integer  "pix_xleft"
+    t.integer  "pix_xright"
+    t.integer  "pix_ytop"
+    t.integer  "pix_ybottom"
+    t.integer  "pix_width"
+    t.integer  "pix_height"
+    t.integer  "createdby_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.spatial  "extent",          limit: {:srid=>4326, :type=>"polygon"}
+    t.integer  "maxzoom"
+    t.string   "url"
   end
 
   create_table "users", force: true do |t|
