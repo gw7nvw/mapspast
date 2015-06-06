@@ -9,6 +9,7 @@ Mapspast::Application.configure do
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
+  host = "mapspast.org.nz"
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
@@ -77,4 +78,30 @@ Mapspast::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = true
+#  config.action_mailer.delivery_method = :test
+  host = "mapspast.org.nz"
+  config.action_mailer.default_url_options = { host: host }
+
+  # Print deprecation notices to the Rails logger.
+  config.active_support.deprecation = :log
+
+  # Raise an error on page load if there are pending migrations
+  config.active_record.migration_error = :page_load
+
+  # Debug mode disables concatenation and preprocessing of assets.
+  # This option may cause significant delays in view rendering with a large
+  # number of complex assets.
+  config.assets.debug = true
+
+config.action_mailer.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+   :address => "madpom",
+   :port => 25,
+   :domain => "wharncliffe.co.nz",
+   :authentication => :none,
+:openssl_verify_mode  => 'none'
+}
+
 end

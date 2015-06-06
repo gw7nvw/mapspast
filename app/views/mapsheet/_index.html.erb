@@ -1,0 +1,8 @@
+<% if @mapsheets %>
+  <ul>
+    <% @mapsheets.each do |ms| %>
+      <li><%=link_to ms.name, '/mapsheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %></li>
+    <% end %>
+  </ul>
+<% end %> 
+  

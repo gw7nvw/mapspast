@@ -23,6 +23,10 @@ div.tarea {
         margin-bottom: 6px;
 
 }
+.half {
+	width: 50%;
+	float: left;
+}
 
 .ui-resizable-e {
   cursor: e-resize;
@@ -325,3 +329,10 @@ h1 {
           width: 24px;
           top: 2px;
         }
+.list-group.panel > .list-group-item {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px
+}
+.list-group-submenu {
+  margin-left:20px;
+}

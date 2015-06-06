@@ -60,13 +60,14 @@
 .bootstrap-dialog.size-large .bootstrap-dialog-title {
   font-size: 24px;
 }
-.bootstrap-dialog.size-small  {
-  width: 250px;
-}
 
 .bootstrap-dialog.size-large .bootstrap-dialog-close-button {
   font-size: 30px;
 }
 .bootstrap-dialog.size-large .bootstrap-dialog-message {
   font-size: 18px;
+}
+
+.bootstrap-dialog.size-small {
+  width: 250px;
 }

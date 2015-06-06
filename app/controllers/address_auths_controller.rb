@@ -5,7 +5,7 @@ class AddressAuthsController < ApplicationController
     if authlist && !authlist.allow && !authlist.forbid && authlist.authenticated?(:auth, params[:id])
       authlist.activate
       flash[:success] = "Address authenticated!"
-      redirect_to forum_url
+      redirect_to '/forum/'
     else
       flash[:danger] = "Invalid authentication link"
       redirect_to root_url

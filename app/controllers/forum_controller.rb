@@ -1,4 +1,6 @@
 class ForumController < ApplicationController
+ before_action :signed_in_user, only: [:destroy]
+
   def index
    @id=1
    show()
@@ -103,13 +105,15 @@ def update
           if authlist
              authlist.send_auth_email
              flash[:info] = "Check your mail and authenticate your address"
+           #  flash[:success] = "Comment submitted to moderator for approval."
           else
             @message.approved=false
             flash[:success] = "Address validation failed. Comment submitted to moderator for approval." 
           end
         else
           @message.approved=false
-          flash[:success] = "Comment submitted to moderator for approval. Providing your email address will avoid this step"
+          flash[:success] = "Comment submitted to moderator for approval."
+# Providing your email address will avoid this step"
         end
       end
    end

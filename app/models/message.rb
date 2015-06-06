@@ -21,7 +21,7 @@ def checkAuth
     else
       authnames=Authlist.find_by_sql [ "select * from authlists where name = ?", self.fromName ]
         if authnames.count>0 
-        auth=auths.first
+        auth=authnames.first
         if !self.fromEmail or (self.fromEmail and auth.address != self.fromEmail)
            authorised="error"
         end
