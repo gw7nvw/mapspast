@@ -1,0 +1,2 @@
+if (window.history.pushState!=null) window.history.pushState(null, 'MapsPast | Mapsheets | Edit', '/mapsheet/<%=params[:id]%>/edit');
+$('#left_panel').html("<%= escape_javascript(render(:partial => 'mapsheet/map_workflow')).html_safe %>");

@@ -19,7 +19,7 @@
        <p style="text-align: right">
          <small>
              <% if @count and @count>1 %> 
-                <%=link_to @count.to_s+" more messages ...", '/forum/1/?thread='+URI.escape(@show_message.subject), remote: true%>
+                <%=link_to (@count-1).to_s+" more messages ...", '/forum/1/?thread='+URI.escape(@show_message.subject), remote: true%>
              <% end %>
          </small>
        </p>

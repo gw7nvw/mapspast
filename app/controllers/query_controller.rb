@@ -9,6 +9,7 @@ def show
   if(layers and layers.count>0) 
    layer_id=layers[0].id
    @mapsheets=Mapsheet.find_by_point(x,y,2193,layer_id)
+   @layer=layer
   end
  
 end

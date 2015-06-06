@@ -1,7 +1,12 @@
 class Uploadedmap < ActiveRecord::Base
+belongs_to :mapstatus
 
 def destroy_files
-    cmd="rm  /home/mbriggs/"+self.filename
+    cmd="rm  /var/www/html/maps/"+self.filename
+    puts "Running "+cmd
+    success = system( cmd )
+
+    cmd="rm  /var/www/html/maps/"+self.id.to_s+".map"
     puts "Running "+cmd
     success = system( cmd )
 
@@ -12,26 +17,55 @@ def destroy_files
     (success and success2)
 end
 
+def is_image?
+   if self.filename
+      cmd="gdalinfo /var/www/html/maps/"+self.filename+" | grep Driver:"
+      filetype=`#{cmd}`
+      if filetype and filetype[0..5]=="Driver" then true else false end
+   end
+end
+
+def is_tiff?
+   if self.filename
+      cmd="gdalinfo /var/www/html/maps/"+self.filename+" | grep Driver: | cut -c9-"
+      filetype=`#{cmd}`
+      if filetype and filetype[0..4]=="GTiff" then true else false end
+   end
+end
 def is_geotiff?
-   cmd="gdalinfo /home/mbriggs/"+self.filename+" | grep AUTHORITY | tail -n 1"
-   projection=`#{cmd}`
-   if projection and projection.length>0 then true else false end
+   if self.filename
+      #check for geotiff
+      cmd="gdalinfo /var/www/html/maps/"+self.filename+" | grep AUTHORITY | tail -n 1"
+      projection=`#{cmd}`
+      if projection and projection.length>0 then true 
+      else 
+        #maybe a TFW.  Check if it has a resolution and if we know the projection
+        cmd="gdalinfo /var/www/html/maps/"+self.filename+" | grep 'Pixel Size' | tail -n 1"
+        projection=`#{cmd}`
+        if projection and projection.length>0 and projection[0..4]="Pixel" and self.source_srid and self.source_srid>0 then true else false end
+
+      end
+  end
 end
 
 def is_palette?
-   cmd="gdalinfo /home/mbriggs/"+self.filename+" | grep Palette | tail -n 1"
-   palette=`#{cmd}`
-   if palette and palette.length>0 then true else false end
+   if self.filename
+      cmd="gdalinfo /var/www/html/maps/"+self.filename+" | grep Palette | tail -n 1"
+      palette=`#{cmd}`
+      if palette and palette.length>0 then true else false end
+  end
 end
 
 def is_rgba?
-   cmd="gdalinfo /home/mbriggs/"+self.filename+" | grep 'Band 4' | tail -n 1"
-   rgba=`#{cmd}`
-   if rgba and rgba.length>0 then true else false end
+   if self.filename
+      cmd="gdalinfo /var/www/html/maps/"+self.filename+" | grep 'Band 4' | tail -n 1"
+      rgba=`#{cmd}`
+      if rgba and rgba.length>0 then true else false end
+  end
 end
 
 def get_projection_from_gtiff
-   cmd="gdalinfo /home/mbriggs/"+self.filename+" | grep AUTHORITY | tail -n 1"
+   cmd="gdalinfo /var/www/html/maps/"+self.filename+" | grep AUTHORITY | tail -n 1"
    projection=`#{cmd}`
 
    prj=projection.split('"')
@@ -51,7 +85,7 @@ end
 
 
 def get_size_from_gtiff
-   cmd="gdalinfo /home/mbriggs/"+self.filename+"| grep 'Size is' | sed -e 's/\,//g' | tail -n 1"
+   cmd="gdalinfo /var/www/html/maps/"+self.filename+"| grep 'Size is' | sed -e 's/\,//g' | tail -n 1"
    str=`#{cmd}`
 
    arr=str.split(' ')
@@ -66,11 +100,16 @@ def get_size_from_gtiff
      self.pix_ytop=0
      self.pix_ybottom=y
    end  
+   #Preload top-left and bottom-right into TICs
+   self.pix_xtic1=0
+   self.pix_ytic1=0
+   self.pix_xtic2=x
+   self.pix_ytic2=y
    if x and y then [x, y] else nil end
 end
    
 def get_extent_from_gtiff
-   cmd="gdalinfo /home/mbriggs/"+self.filename+"| grep 'Upper Left' | sed -e 's/\,//g' | tail -n 1"
+   cmd="gdalinfo /var/www/html/maps/"+self.filename+"| grep 'Upper Left' | sed -e 's/\,//g' | tail -n 1"
    str=`#{cmd}`
 
    arr=str.split(' ')
@@ -80,7 +119,7 @@ def get_extent_from_gtiff
      self.grid_ytop=arr[4].to_f
    end
 
-   cmd="gdalinfo /home/mbriggs/"+self.filename+"| grep 'Lower Right' | sed -e 's/\,//g' | tail -n 1"
+   cmd="gdalinfo /var/www/html/maps/"+self.filename+"| grep 'Lower Right' | sed -e 's/\,//g' | tail -n 1"
    str=`#{cmd}`
 
    arr=str.split(' ')
@@ -97,7 +136,7 @@ def get_extent_from_gtiff
 end
 
 def get_resolution_from_gtiff
-   cmd="gdalinfo /home/mbriggs/"+self.filename+"| grep 'Pixel Size' | sed -e 's/,/ /g' | sed -e 's/(/ /g'| sed -e 's/)/ /g' | tail -n 1"
+   cmd="gdalinfo /var/www/html/maps/"+self.filename+"| grep 'Pixel Size' | sed -e 's/,/ /g' | sed -e 's/(/ /g'| sed -e 's/)/ /g' | tail -n 1"
    str=`#{cmd}`
 
    arr=str.split(' ')
@@ -158,43 +197,46 @@ def calc_resolution
  [self.xresolution, self.yresolution, self.maxzoom]
 end
 
-def do_get_file
-  cmd="wget "+self.url+" -O /home/mbriggs/"+self.filename+" --no-check-certificate"
-  puts "Running "+cmd
-  success = system( cmd )
+def do_upload
+  if self.url
+     cmd="wget "+self.url+" -O /var/www/html/maps/"+self.filename+" --no-check-certificate"
+     puts "Running "+cmd
+     success = system( cmd )
+  success
+  else false end
 end
 
 def do_nearwhite_nongeo
-    cmd='mogrify /home/mbriggs/'+self.filename+' -format tif -fill "#FFFFFF" -opaque "#FEFEFE"'
+    cmd='mogrify /var/www/html/maps/'+self.filename+' -format tif -fill "#FFFFFF" -opaque "#FEFEFE"'
     puts "Running "+cmd
     success = system( cmd )
 end
 
 def do_nearwhite
-  cmd="listgeo /home/mbriggs/"+self.filename+" > /home/mbriggs/"+self.filename+".geo"
+  cmd="listgeo /var/www/html/maps/"+self.filename+" > /var/www/html/maps/"+self.filename+".geo"
   puts "Running "+cmd
   success = system( cmd )
 
   if success
-    cmd='mogrify /home/mbriggs/'+self.filename+' -format tif -fill "#FFFFFF" -opaque "#FEFEFE"'
+    cmd='mogrify /var/www/html/maps/'+self.filename+' -format tif -fill "#FFFFFF" -opaque "#FEFEFE"'
     puts "Running "+cmd
     success = system( cmd )
   end
   
   if success  
-    cmd="geotifcp -g /home/mbriggs/"+self.filename+".geo /home/mbriggs/"+self.filename+" /home/mbriggs/"+self.filename+"_nearwht.tif"
+    cmd="geotifcp -g /var/www/html/maps/"+self.filename+".geo /var/www/html/maps/"+self.filename+" /var/www/html/maps/"+self.filename+"_nearwht.tif"
     puts "Running "+cmd
     success = system( cmd )
   end
 
   if success
-    cmd="rm /home/mbriggs/"+self.filename+".geo /home/mbriggs/"+self.filename
+    cmd="rm /var/www/html/maps/"+self.filename+".geo /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
   end
 
   if success
-    cmd="mv /home/mbriggs/"+self.filename+"_nearwht.tif /home/mbriggs/"+self.filename
+    cmd="mv /var/www/html/maps/"+self.filename+"_nearwht.tif /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
   end
@@ -203,12 +245,12 @@ def do_nearwhite
 end
 
 def do_convert_to_tiff
-  cmd='gdal_translate  /home/mbriggs/'+self.filename+'  /home/mbriggs/'+self.filename+'.tif'
+  cmd='gdal_translate  /var/www/html/maps/'+self.filename+'  /var/www/html/maps/'+self.filename+'.tif'
   puts "Running "+cmd
   success = system( cmd )
 
   if success
-    cmd="rm /home/mbriggs/"+self.filename
+    cmd="rm /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
   end
@@ -217,28 +259,46 @@ def do_convert_to_tiff
 end
 
 def do_expand_palette
-  cmd='gdal_translate  /home/mbriggs/'+self.filename+' -ot byte -expand rgb /home/mbriggs/'+self.filename+'_rgb.tif'
+  cmd='gdal_translate  /var/www/html/maps/'+self.filename+' -ot byte -expand rgb /var/www/html/maps/'+self.filename+'_rgb.tif'
   puts "Running "+cmd
   success = system( cmd )
 
   if success
-    cmd="rm /home/mbriggs/"+self.filename
+    cmd="rm /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
   end
 
   if success
-    cmd="mv /home/mbriggs/"+self.filename+"_rgb.tif /home/mbriggs/"+self.filename
+    cmd="mv /var/www/html/maps/"+self.filename+"_rgb.tif /var/www/html/maps/"+self.filename
+    puts "Running "+cmd
+    success = system( cmd )
+  end
+  success
+end
+def do_rotate_nongeo
+  cmd='convert  /var/www/html/maps/'+self.filename+' -page +0+0 -rotate '+self.deg_rotation.to_s+' /var/www/html/maps/'+self.filename+'_rotate.tif'
+  puts "Running "+cmd
+  success = system( cmd )
+
+  if success
+    cmd="rm /var/www/html/maps/"+self.filename
+    puts "Running "+cmd
+    success = system( cmd )
+  end
+
+  if success
+    cmd="mv /var/www/html/maps/"+self.filename+"_rotate.tif /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
   end
   success
 end
 
-def do_crop_nogeo
+def do_crop_nongeo
   newwidth=self.pix_xright-self.pix_xleft
   newheight=self.pix_ybottom-self.pix_ytop
-  cmd='convert  /home/mbriggs/'+self.filename+' -crop '+newwidth.to_s+'x'+newheight.to_s+'+'+self.pix_xleft.to_s+'+'+self.pix_ytop.to_s+' /home/mbriggs/'+self.filename+'_crop.tif'
+  cmd='convert  /var/www/html/maps/'+self.filename+' -crop '+newwidth.to_s+'x'+newheight.to_s+'+'+self.pix_xleft.to_s+'+'+self.pix_ytop.to_s+' /var/www/html/maps/'+self.filename+'_crop.tif'
   puts "Running "+cmd
   success = system( cmd )
 
@@ -250,13 +310,13 @@ def do_crop_nogeo
     self.pix_ybottom=newheight
     self.pix_height=newheight
  
-    cmd="rm /home/mbriggs/"+self.filename
+    cmd="rm /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
   end
 
   if success
-    cmd="mv /home/mbriggs/"+self.filename+"_crop.tif /home/mbriggs/"+self.filename
+    cmd="mv /var/www/html/maps/"+self.filename+"_crop.tif /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
   end
@@ -265,18 +325,18 @@ end
  
 
 def do_warp
-  cmd='gdalwarp -overwrite -s_srs EPSG:'+self.source_srid.to_s+' -t_srs EPSG:2193 -r bilinear -dstnodata 255 -of Gtiff /home/mbriggs/'+self.filename+' /home/mbriggs/'+self.filename+'_warp.tif'
+  cmd='gdalwarp -overwrite -s_srs EPSG:'+self.source_srid.to_s+' -t_srs EPSG:2193 -r bilinear -dstnodata 255 -of Gtiff /var/www/html/maps/'+self.filename+' /var/www/html/maps/'+self.filename+'_warp.tif'
   puts "Running "+cmd
   success = system( cmd )
 
   if success
-    cmd="rm /home/mbriggs/"+self.filename
+    cmd="rm /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
   end
 
   if success
-    cmd="mv /home/mbriggs/"+self.filename+"_warp.tif /home/mbriggs/"+self.filename
+    cmd="mv /var/www/html/maps/"+self.filename+"_warp.tif /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
   end
@@ -287,18 +347,18 @@ def do_warp
 end
 
 def do_to_rgb
-  cmd='gdal_translate /home/mbriggs/'+self.filename+' /home/mbriggs/'+self.filename+'_rgb.tif -b 1 -b 2 -b 3'
+  cmd='gdal_translate /var/www/html/maps/'+self.filename+' /var/www/html/maps/'+self.filename+'_rgb.tif -b 1 -b 2 -b 3'
   puts "Running "+cmd
   success = system( cmd )
 
   if success
-    cmd="rm /home/mbriggs/"+self.filename
+    cmd="rm /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
   end
 
   if success
-    cmd="mv /home/mbriggs/"+self.filename+"_rgb.tif /home/mbriggs/"+self.filename
+    cmd="mv /var/www/html/maps/"+self.filename+"_rgb.tif /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
   end
@@ -308,7 +368,7 @@ def do_to_rgb
 end
 
 def do_tile
-  cmd='gdal2tiles.py -z 5-'+self.maxzoom.to_s+' -r bilinear --srcnodata 255 /home/mbriggs/'+self.filename+' /var/www/html/mapspast/public/tiles/tiles-'+self.id.to_s
+  cmd='gdal2tiles.py -z 5-'+self.maxzoom.to_s+' -r bilinear --srcnodata 255 /var/www/html/maps/'+self.filename+' /var/www/html/maps/tiles-'+self.id.to_s
   puts "Running "+cmd
   success = system( cmd )
 
@@ -316,10 +376,27 @@ def do_tile
 end
 
 def do_georeference
-cmd ="echo '"+self.xresolution.to_s+"\n0\n0\n"+(-self.yresolution).to_s+"\n"+self.grid_xleft.to_s+"\n"+self.grid_ytop.to_s+"' > /home/mbriggs/"+self.filename[0..self.filename.length-5]+".tfw"
+cmd ="echo '"+self.xresolution.to_s+"\n0\n0\n"+(self.yresolution).to_s+"\n"+self.grid_xleft.to_s+"\n"+self.grid_ytop.to_s+"' > /var/www/html/maps/"+self.filename[0..self.filename.length-5]+".tfw"
   puts "Running "+cmd
   success = system( cmd )
 
+end
+
+def do_write_mapfile
+  dummyWidth=20037508.34
+  dummyHeight=20037508.34
+  if self.pix_width>self.pix_height then
+    dummyHeight=(self.pix_height.to_f/self.pix_width)*20037508.34
+  end
+  if self.pix_width<self.pix_height then
+    dummyWidth=(self.pix_width.to_f/self.pix_height)*20037508.34
+  end
+
+  extentStr="-"+dummyWidth.to_s+" -"+dummyHeight.to_s+" "+dummyWidth.to_s+" "+dummyHeight.to_s
+
+  cmd="cat /var/www/html/maps/maptemplate.map | sed -e 's/XXFILENAMEXX/"+self.filename+"/g' | sed -e 's/XXEXTENTXX/"+extentStr+"/g' > /var/www/html/maps/"+self.id.to_s+".map"
+  puts "Running "+cmd
+  success = system( cmd )
 end
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150601014158) do
+ActiveRecord::Schema.define(version: 20150605200529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,10 @@ ActiveRecord::Schema.define(version: 20150601014158) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.spatial  "extent",       limit: {:srid=>4326, :type=>"polygon"}
+  end
+
+  create_table "mapstatuses", force: true do |t|
+    t.string "name"
   end
 
   create_table "messages", force: true do |t|
@@ -124,6 +128,27 @@ ActiveRecord::Schema.define(version: 20150601014158) do
     t.spatial  "extent",          limit: {:srid=>4326, :type=>"polygon"}
     t.integer  "maxzoom"
     t.string   "url"
+    t.integer  "mapstatus_id"
+    t.integer  "pix_xtl"
+    t.integer  "pix_ytl"
+    t.integer  "pix_xtr"
+    t.integer  "pix_ytr"
+    t.integer  "pix_xbr"
+    t.integer  "pix_ybr"
+    t.integer  "pix_xbl"
+    t.integer  "pix_ybl"
+    t.integer  "pix_xtic1"
+    t.integer  "pix_ytic1"
+    t.integer  "pix_xtic2"
+    t.integer  "pix_ytic2"
+    t.decimal  "grid_xtic1"
+    t.decimal  "grid_ytic1"
+    t.decimal  "grid_xtic2"
+    t.decimal  "grid_ytic2"
+    t.decimal  "pix_rotation"
+    t.decimal  "deg_rotation"
+    t.boolean  "crop_done"
+    t.boolean  "rotate_done"
   end
 
   create_table "users", force: true do |t|

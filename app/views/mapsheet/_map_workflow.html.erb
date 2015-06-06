@@ -1,0 +1,212 @@
+<div class="bs-example">
+  <%= form_tag '/redisplay', :remote=> true, :id => "thelink", :name=> 'selectform', :method=> 'post'%>
+    <div class="row">
+     <input type="hidden" name="mapName" value="<%=@map.id.to_s%>"/>
+     <input type="hidden" name="pix_height" value="<%=@map.pix_height%>"/>
+     <input type="hidden" name="pix_width" value="<%=@map.pix_width%>"/>
+    </div>
+  </form>
+
+  <button type="button" id="showupload" onclick="show_uploaded_map(event)">Show uploaded map</button>
+  <button type="button" id="hideupload" onclick="hide_uploaded_map(event)" style="display:none">Show topomap</button>
+  <%#= link_to 'Show topomap', '#', remote: true, :id => 'hide_uploaded', :onclick => "hide_uploaded_map(event)"  %><br/>
+
+   <%="Status: "+@map.mapstatus.name%> 
+<%= link_to '(refresh...)', '/mapsheet/'+@map.id.to_s+'/edit', remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <%if @map.is_image?  %>
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. Upload (done)</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+            <% else %>
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. Upload</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+            <% end %>
+                <div class="panel-body"><p>
+                      <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
+                        <%= render 'shared/error_messages' %>
+                  
+                        <%= f.label :url %>
+                        <%= f.text_field :url %>
+                      
+                        <%= f.submit "Upload", class: "btn btn-small btn-primary", name: "upload", onclick: "linkHandler('uploadbutton')", id:  "uploadbutton" %>
+                      <% end %>
+                    
+
+                </p></div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <% if (@map.crop_done and @map.rotate_done) %>
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Crop & rotate (done)</a>
+                    <% else %>
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Crop & rotate</a>
+                    <% end %>
+                </h4>
+            </div>
+            <%if @map.mapstatus.compare("converted")=="="  %>
+              <div id="collapseTwo" class="panel-collapse collapse in">
+              <script> show_uploaded_map() </script>
+            <% else %>
+              <div id="collapseTwo" class="panel-collapse collapse">
+            <% end %>
+
+            <div class="panel-body">
+
+              <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
+                <%= render 'shared/error_messages' %>
+                <p>Select (click) or type the coordinates of each corner of the map within the image (exclude any border, title, etc)</p>
+                <div>Top left (x,y):            
+                  <div class="leftbuttons">
+                    <span title="Click to draw location on map">
+                      <img id="tlplus" src="/assets/draw-point.png" onclick="selectPix('tl')" width="16" style="display:block">
+                    </span>
+                  </div>
+                </div> 
+                  <div class="half"><%= f.text_field :pix_xtl %></div>
+                  <div class="half"><%= f.text_field :pix_ytl %></div>
+                <div>Top right (x,y):            
+                  <div class="leftbuttons">
+                    <span title="Click to draw location on map">
+                      <img id="trplus" src="/assets/draw-point.png" onclick="selectPix('tr')" width="16" style="display:block">
+                    </span>
+                  </div>
+                </div> 
+                  <div class="half"><%= f.text_field :pix_xtr %></div>
+                  <div class="half"><%= f.text_field :pix_ytr %></div>
+                <div>Bottom right (x,y): 
+                  <div class="leftbuttons">
+                    <span title="Click to draw location on map">
+                      <img id="brplus" src="/assets/draw-point.png" onclick="selectPix('br')" width="16" style="display:block">
+                    </span>
+                  </div>
+                </div> 
+                  <div class="half"><%= f.text_field :pix_xbr %></div>
+                  <div class="half"><%= f.text_field :pix_ybr %></div>
+                  <div>Bottom left (x,y):
+                    <div class="leftbuttons">
+                      <span title="Click to draw location on map">
+                        <img id="blplus" src="/assets/draw-point.png" onclick="selectPix('bl')" width="16" style="display:block">
+                      </span>
+                    </div>
+                  </div> 
+                  <div class="half"><%= f.text_field :pix_xbl %></div>
+                  <div class="half"><%= f.text_field :pix_ybl %></div>
+
+                  <%= f.submit "Calculate", class: "btn btn-small btn-primary", name: "calculate", onclick: "linkHandler('calculatebutton')", id:  "calculatebutton" %>
+              <% end %>
+              <% if @map.pix_rotation and @map.deg_rotation %>
+                <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
+                  <p>Rotation clockwise (pixels/degrees): </p>
+                  <div class="half"><%= f.text_field :pix_rotation %></div>
+                  <div class="half"><%= f.text_field :deg_rotation %></div>
+                  <%= f.submit "Rotate", class: "btn btn-small btn-primary", name: "rotate", onclick: "linkHandler('rotate')", id:  "rotate" %>
+                  <%= f.submit "Crop", class: "btn btn-small btn-primary", name: "crop", onclick: "linkHandler('crop')", id:  "crop" %>
+                  <%= f.submit "Skip", class: "btn btn-small btn-primary", name: "skiprotate", onclick: "linkHandler('skiprotate')", id:  "skiprotate" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <% if @map.is_geotiff? %>
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. Georeference (done)</a>
+              </h4>
+            </div>
+          <% else %>
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. Georeference</a>
+              </h4>
+            </div>
+          <% end %>
+
+          <% if @map.crop_done and @map.rotate_done and !@map.is_geotiff?%>
+            <div id="collapseThree" class="panel-collapse collapse in">
+          <% else %>
+            <div id="collapseThree" class="panel-collapse collapse">
+          <% end %>
+
+          <div class="panel-body">
+            <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
+            <p>Choose known locations to use for georefencing. Default is top-left, bottom-right.</p>
+              <p>Projection</p>
+              <div><%= collection_select( :map, :source_srid, Projection.all.order(:name), :epsg, :name, {}) %></div>
+              <div>Point 1 (pixels x,y): 
+                <div class="leftbuttons">
+                  <span title="Click to draw location on map">
+                    <img id="tic1plus" src="/assets/draw-point.png" onclick="selectPix('tic1')" width="16" style="display:block">
+                  </span>
+                </div>
+              </div>
+
+              <div class="half"><%= f.text_field :pix_xtic1 %></div>
+              <div class="half"><%= f.text_field :pix_ytic1 %></div>
+              <div>Point 2 (pixels x,y): 
+                  <div class="leftbuttons">
+                  <span title="Click to draw location on map">
+                    <img id="tic2plus" src="/assets/draw-point.png" onclick="selectPix('tic2')" width="16" style="display:block">
+                  </span>
+                </div>
+              </div>
+              <div class="half"><%= f.text_field :pix_xtic2 %></div>
+              <div class="half"><%= f.text_field :pix_ytic2 %></div>
+              <p>Enter grid references for above locations, or select them from the topomap</p> 
+              <div>Point 1 (grid x,y): 
+                <div class="leftbuttons">
+                  <span title="Click to select location from topomap">
+                    <img id="gridtic1plus" src="/assets/draw-point.png" onclick="selectGrid('tic1')" width="16" style="display:block">
+                  </span>
+                </div>
+              </div>
+              <div class="half"><%= f.text_field :grid_xtic1 %></div>
+              <div class="half"><%= f.text_field :grid_ytic1 %></div>
+              <div>Point 2 (grid x,y):
+                <div class="leftbuttons">
+                  <span title="Click to select location from topomap">
+                    <img id="gridtic2plus" src="/assets/draw-point.png" onclick="selectGrid('tic2')" width="16" style="display:block">
+                  </span>
+                </div>
+              </div>
+              <div class="half"><%= f.text_field :grid_xtic2 %></div>
+              <div class="half"><%= f.text_field :grid_ytic2 %></div>
+
+              <%= f.submit "Goereference", class: "btn btn-small btn-primary", name: "georeference", onclick: "linkHandler('georeference')", id:  "georeference" %>
+            <% end %>
+          </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">4. Create tiles</a>
+                </h4>
+            </div>
+            <% if @map.rotate_done and @map.crop_done and @map.is_geotiff? %>
+              <div id="collapseFour" class="panel-collapse collapse in">
+            <% else %>
+              <div id="collapseFour" class="panel-collapse collapse">
+            <% end %>
+                <div class="panel-body">
+                    <p>... and press "Create" to complete processing
+                    <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
+                      <%= f.submit "Create", class: "btn btn-small btn-primary", name: "create", onclick: "linkHandler('create')", id:  "create" %>
+                    <% end %>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

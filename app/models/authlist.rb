@@ -50,7 +50,7 @@ class Authlist < ActiveRecord::Base
     foundError=false
     #check for existing entries
     als=Authlist.find_by_sql [ 'select * from authlists where "address"=?', authlist[:address] ]
-    if als.count>1
+    if als.count>0
       als.each do |al|
         #remove unauthenticated duplicates, error for valid existing entries
         if al.forbid==true or al.allow==true then foundError=true end

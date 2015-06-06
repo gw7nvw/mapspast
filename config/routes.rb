@@ -1,8 +1,12 @@
+require 'resque/server'
 Mapspast::Application.routes.draw do
+
+  mount Resque::Server.new, at: "/resque"
 resources :sessions, only: [:new, :create, :destroy]
 resources :users
 resources :forum, only: [:index, :show, :update, :approve, :destroy]
 resources :address_auths, only: [:edit]
+resources :mapsheet
 
 
 root 'viewer#home'
