@@ -24,7 +24,13 @@ class Do_create
         success=map.do_tile
       end
       if success then 
-        map.mapstatus=Mapstatus.find_by(:name => "tiled")
+        map.mapstatus=Mapstatus.find_by(:name => "compressing ...")
+        map.save
+        success=map.do_compress
+      end
+
+      if success then
+        map.mapstatus=Mapstatus.find_by(:name => "compressed")
         map.save
       end
       puts "done"

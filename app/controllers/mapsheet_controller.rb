@@ -1,5 +1,5 @@
 class MapsheetController < ApplicationController
- before_action :signed_in_user, only: [:create, :update]
+ before_action :signed_in_user, only: [:create, :update, :edit, :destroy]
 
 
 def show
@@ -8,13 +8,23 @@ def show
 end
 
 def index
-  @mapsheets=Uploadedmap.all
+  ms1=Mapstatus.find_by(:name => "tiled")
+  ms2=Mapstatus.find_by(:name => "compressed")
+  if signed_in? then
+    @mapsheets=Uploadedmap.all
+  else
+    @mapsheets=Uploadedmap.find_by_sql [ "select * from uploadedmaps where mapstatus_id = ? or mapstatus_id = ?",ms1.id.to_s, ms2.id.to_s ]
+  end
 
 end
 
 def edit
   @map=Uploadedmap.find_by_id(params[:id])
-  if !@map.mapstatus_id then @map.mapstatus_id=1 end
+  if !@map then
+    redirect_to root_path
+  else
+    if !@map.mapstatus_id then @map.mapstatus_id=1 end
+  end
 end
 
 def show
@@ -23,6 +33,17 @@ end
 
 def new
    @map=Uploadedmap.new
+end
+
+def destroy
+   @map=Uploadedmap.find_by_id(params[:id])
+   if @map.createdby_id==@current_user.id or @current_user.roleid==1
+     @map.destroy_files
+     @map.delete
+     redirect_to '/mapsheet'
+   else
+     render 'show'
+   end 
 end
 
 def create
@@ -40,6 +61,7 @@ def create
     @map.year_revised=params[:uploadedmap][:year_revised]
     @map.description=params[:uploadedmap][:description]
     @map.mapstatus=Mapstatus.find_by(:name => "new")
+    @map.createdby_id=@current_user.id
     success=@map.save
  end
  if success
@@ -52,11 +74,37 @@ end
 def update
   @map=Uploadedmap.find_by_id(params[:id])
 
+  if params[:describe]
+    @map.name=params[:uploadedmap][:name]
+    @map.series=params[:uploadedmap][:series]
+    @map.edition=params[:uploadedmap][:edition]
+    @map.scale=params[:uploadedmap][:scale]
+    @map.sheet=params[:uploadedmap][:sheet]
+    @map.source=params[:uploadedmap][:source]
+    @map.attribution=params[:uploadedmap][:attribution]
+    @map.year_printed=params[:uploadedmap][:year_printed]
+    @map.year_revised=params[:uploadedmap][:year_revised]
+    @map.description=params[:uploadedmap][:description]
+    if !@map.mapstatus_id then @map.mapstatus=Mapstatus.find_by(:name => "new") end
+    success=@map.save
+  end
+
   if params[:upload]
-     if params[:uploadedmap][:url] and params[:uploadedmap][:url].length>0 then @map.url=params[:uploadedmap][:url] end
-     @map.mapstatus=Mapstatus.find_by(:name=> "uploading ...")
-     @map.save
-     Resque.enqueue(Do_upload, @map.id)
+     #upload OR download (not both)
+     if params[:uploadedmap][:image] then 
+       @map.image=params[:uploadedmap][:image]
+       @map.url=nil
+       @map.save
+     else
+       if params[:uploadedmap][:url] and params[:uploadedmap][:url].length>0 then 
+         @map.url=params[:uploadedmap][:url] 
+         @map.mapstatus=Mapstatus.find_by(:name=> "uploading ...")
+         @map.save
+         Resque.enqueue(Do_upload, @map.id) 
+       end
+     end
+     Resque.enqueue(Do_upload, @map.id) 
+
   end
 
   if params[:calculate]
@@ -97,6 +145,7 @@ def update
     @map.pix_rotation=params[:uploadedmap][:pix_rotation]
     @map.deg_rotation=params[:uploadedmap][:deg_rotation]
     @map.mapstatus=Mapstatus.find_by(:name=> "rotating ...")
+    @map.rotate_done=true
 
     @map.save
     Resque.enqueue(Do_rotate, @map.id)
@@ -106,6 +155,7 @@ def update
      puts "rotate"
 
     @map.mapstatus=Mapstatus.find_by(:name=> "cropping ...")
+    @map.crop_done=true
 
     @map.save
     Resque.enqueue(Do_crop, @map.id)
@@ -113,12 +163,10 @@ def update
 
  if params[:skip]
      puts "skip"
-
     @map.mapstatus=Mapstatus.find_by(:name=> "cropped")
     @map.crop_done=true
     @map.rotate_done=true
     @map.save
-    Resque.enqueue(Do_crop, @map.id)
   end
 
  if params[:georeference]

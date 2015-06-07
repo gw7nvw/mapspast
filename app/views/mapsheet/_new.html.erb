@@ -1,3 +1,4 @@
+<div class="erow">
   <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
     <%= render 'shared/error_messages' %>
 
@@ -33,4 +34,4 @@
 
     <%= f.submit "Create", class: "btn btn-small btn-primary", name: "create", onclick: "linkHandler('create')", id:  "create" %>
   <% end %>
-
+</div>

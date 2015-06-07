@@ -1,7 +1,14 @@
 class Uploadedmap < ActiveRecord::Base
+has_attached_file :image,
+  :path => "/var/www/html/maps/:id.:extension",
+  :url => "/maps/:id.:extension"
+
+validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/tif", "image/jp2"]
+
 belongs_to :mapstatus
 
 def destroy_files
+  if (self.filename and self.filename.length>0)
     cmd="rm  /var/www/html/maps/"+self.filename
     puts "Running "+cmd
     success = system( cmd )
@@ -13,8 +20,9 @@ def destroy_files
     cmd="rm -r /var/www/html/mapspast/public/tiles/tiles-"+self.id.to_s
     puts "Running "+cmd
     success2 = system( cmd )
+  end
 
-    (success and success2)
+  (success and success2)
 end
 
 def is_image?
@@ -101,10 +109,10 @@ def get_size_from_gtiff
      self.pix_ybottom=y
    end  
    #Preload top-left and bottom-right into TICs
-   self.pix_xtic1=0
-   self.pix_ytic1=0
-   self.pix_xtic2=x
-   self.pix_ytic2=y
+   if !self.pix_xtic1 then self.pix_xtic1=0 end
+   if !self.pix_ytic1 then self.pix_ytic1=0 end
+   if !self.pix_xtic2 then self.pix_xtic2=x end
+   if !self.pix_ytic2 then self.pix_ytic2=y end
    if x and y then [x, y] else nil end
 end
    
@@ -399,7 +407,17 @@ def do_write_mapfile
   success = system( cmd )
 end
 
+def do_compress
+  cmd ="find /var/www/html/maps/tiles-"+self.id.to_s+" -name '*.xml' -delete"
+  puts "Running "+cmd
+  success = system( cmd )
 
+  cmd=" find /var/www/html/maps/tiles-"+self.id.to_s+" -name '*.png' > /var/www/html/maps/tmp"+self.id.to_s+".lst; mogrify @/var/www/html/maps/tmp"+self.id.to_s+".lst -background white -alpha remove -quantize RGB -dither None -colors 255 -quantize RGB -dither None -colors 255; rm /var/www/html/maps/tm"+self.id.to_s+".lst"
+  puts "Running "+cmd
+  success = system( cmd )
+
+
+end
 #helpers
 
 def arr_to_s(arr)

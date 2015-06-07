@@ -146,21 +146,12 @@ function init(){
       getURL: getURL
   });
 
-  var sheetLayer = new OpenLayers.Layer.TMS("selected sheet", "http://mapspast.org.nz/maps/tiles-1/",
-  {
-      serviceVersion: '.',
-      layername: '.',
-      alpha: true,
-      type: 'png',
-      isBaseLayer: true,
-      getURL: getURL
-  });
 
   vectorLayer = new OpenLayers.Layer.Vector("Current feature", {
               //renderers: renderer,
               displayInLayerSwitcher:false
           });
-  map.addLayers([ nztm2009, nzms1999, nzms1989, nzms1979, nzms1969, nzms1959, vectorLayer, sheetLayer]);
+  map.addLayers([ nztm2009, nzms1999, nzms1989, nzms1979, nzms1969, nzms1959, vectorLayer]);
 
   /* create click controllers*/
   add_click_to_query_controller();
@@ -194,7 +185,6 @@ title: 'Show map sheet details when you click on the map'
 
     panel.addControls([my_button])
     
-    map.addControl(panel);
   // controllers
   var switcherControl = new OpenLayers.Control.LayerSwitcher();
   map.addControl(switcherControl);
@@ -206,7 +196,9 @@ title: 'Show map sheet details when you click on the map'
   map.addControls([new OpenLayers.Control.Zoom(),
                    new OpenLayers.Control.Navigation(),
                    new OpenLayers.Control.MousePosition(),
-                   new OpenLayers.Control.Scale()]);
+                   new OpenLayers.Control.Scale(),
+                   panel
+                   ]);
 }
 
 function hide_uploaded_map(event) {
@@ -545,6 +537,12 @@ function add_click_to_create_controller() {
 }
 
 function selectPix(dest) {
+  if (typeof(tiff_map)=='undefined') {
+    show_uploaded_map();
+  } else {
+    if (!tiff_map.layers) { show_uploaded_map() };
+  }
+
   selectNothing();
   document.getElementById(dest+"plus").style.border="2px solid lightgreen";
   clickDest=dest;
@@ -555,6 +553,11 @@ function selectPix(dest) {
 }
 
 function selectGrid(dest) {
+  if (typeof(map)=='undefined') {
+    hide_uploaded_map();
+  } else {
+    if (!map.layers) { hide_uploaded_map() };
+  }
   if(document.getElementById("map_source_srid").value=="") { 
      alert("You must select a projection first");
   } else {
@@ -590,3 +593,30 @@ function deactivate_all_click() {
     if(typeof(click_to_create)!='undefined') click_to_create.deactivate();
 }
 
+function update_selected_layer(layer_id) {
+  ourlayer=map.getLayersByName("selected sheet");
+  if (ourlayer.length>0) {
+    map.removeLayer(ourlayer[0]);
+  }
+
+  create_selected_layer(layer_id);
+  ourlayer=map.getLayersByName("selected sheet");
+  if (ourlayer.length>0) {
+    map.setBaseLayer(ourlayer[0]);
+  }
+}
+
+function create_selected_layer(layer_id) {
+
+  var sheetLayer = new OpenLayers.Layer.TMS("selected sheet", "http://mapspast.org.nz/maps/tiles-"+layer_id+"/",
+  {
+      serviceVersion: '.',
+      layername: '.',
+      alpha: true,
+      type: 'png',
+      isBaseLayer: true,
+      getURL: getURL
+  });
+
+  map.addLayer(sheetLayer);
+}
