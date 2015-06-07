@@ -37,5 +37,7 @@ Mapstatus.create(id: 16, name: "converting to RGB ...")
 Mapstatus.create(id: 17, name: "converted to RGB")
 Mapstatus.create(id: 18, name: "tiling ...")
 Mapstatus.create(id: 19, name: "tiled")
+Mapstatus.create(id: 20, name: "compressing ...")
+Mapstatus.create(id: 21, name: "compressed")
 
 

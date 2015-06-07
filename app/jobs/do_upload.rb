@@ -2,13 +2,21 @@ class Do_upload
   @queue = :sleep
  
   def self.perform(map_id)
-      puts "start"
-      map=Uploadedmap.find_by_id(map_id)
-      extension=map.url.split('.').last 
-      map.filename=map.id.to_s+"."+extension
-      map.save
+     puts "start"
+     map=Uploadedmap.find_by_id(map_id)
+     success=true
+     if map.url and map.url.length>0 then
+        extension=map.url.split('.').last 
+        map.filename=map.id.to_s+"."+extension
+        map.save
       
-      success=map.do_upload
+        success=map.do_upload
+     else
+        extension=map.image_file_name.split('.').last
+        map.filename=map.id.to_s+"."+extension
+        map.save
+     end
+
      if success then map.mapstatus=Mapstatus.find_by(:name => "uploaded")
      else map.mapstatus=Mapstatus.find_by(:name => "new")
      end

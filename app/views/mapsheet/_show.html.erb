@@ -1,34 +1,46 @@
-    <p><b>Sheet Name</b><br/>
-    <%=  @map.name %></p>
+<div class="erow">
+  <% if signed_in? %>
+    <div class="leftbuttons">
+      <span title="Edit"%>
+        <%=  link_to image_tag("/assets/pencil_edit.png", :border=>0, :class => 'dock-item'), '/mapsheet/'+@map.id.to_s+'/edit', remote: true, onclick: "linkHandler('editbutton')", id:  "editbutton"  %>
+      </span>
+    </div>
+  <% end %>
+  <script>
+    update_selected_layer(<%=@map.id%>);
+  </script>
 
-    <p><b>Series</b><br/>
-    <%= @map.series %></p>
+  <p><b>Sheet Name</b><br/>
+  <%=  @map.name %></p>
 
-    <p><b>Edition</b><br/>
-    <%= @map.edition %></p>
+  <p><b>Series</b><br/>
+  <%= @map.series %></p>
 
-    <p><b>Scale</b><br/>
-    <% if @map.scale then %> <%= "1:"+@map.scale.to_s %></p> <% end %>
+  <p><b>Edition</b><br/>
+  <%= @map.edition %></p>
 
-    <p><b>Sheet number</b><br/>
-    <%= @map.sheet %></p>
+  <p><b>Scale</b><br/>
+  <% if @map.scale then %> <%= "1:"+@map.scale.to_s %></p> <% end %>
 
-    <p><b>Published by</b><br/>
-    <%= @map.source %></p>
+  <p><b>Sheet number</b><br/>
+  <%= @map.sheet %></p>
 
-    <p><b>Copyright notice</b><br/>
-    <%= @map.attribution %></p>
+  <p><b>Published by</b><br/>
+  <%= @map.source %></p>
 
-    <p><b>Year printed</b><br/>
-    <%= @map.year_printed %></p>
+  <p><b>Copyright notice</b><br/>
+  <%= @map.attribution %></p>
 
-    <p><b>Year surveyed/revised</b><br/>
-    <%= @map.year_revised %></p>
+  <p><b>Year printed</b><br/>
+  <%= @map.year_printed %></p>
+
+  <p><b>Year surveyed/revised</b><br/>
+  <%= @map.year_revised %></p>
     
-    <p><b>Projection</b><br/>
-    <%= @map.source_srid %></p>
+  <p><b>Projection</b><br/>
+  <%= @map.source_srid %></p>
 
 
-    <p><b>Description</b><br/>
-    <%= @map.description %></p>
-
+  <p><b>Description</b><br/>
+  <%= @map.description %></p>
+</div>

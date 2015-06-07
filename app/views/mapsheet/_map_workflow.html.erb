@@ -1,4 +1,9 @@
-<div class="bs-example">
+<div class="erow">
+  <div style="border:solid;itext-align:center">
+    <b><%="Status: "+@map.mapstatus.name%> </b>
+    <%= link_to '(click to refresh...)', '/mapsheet/'+@map.id.to_s+'/edit', remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
+  </div>
+
   <%= form_tag '/redisplay', :remote=> true, :id => "thelink", :name=> 'selectform', :method=> 'post'%>
     <div class="row">
      <input type="hidden" name="mapName" value="<%=@map.id.to_s%>"/>
@@ -7,59 +12,91 @@
     </div>
   </form>
 
-  <button type="button" id="showupload" onclick="show_uploaded_map(event)">Show uploaded map</button>
-  <button type="button" id="hideupload" onclick="hide_uploaded_map(event)" style="display:none">Show topomap</button>
-  <%#= link_to 'Show topomap', '#', remote: true, :id => 'hide_uploaded', :onclick => "hide_uploaded_map(event)"  %><br/>
+  <button type="button" id="showupload" style="margin-left:17px" class="btn btn-small btn-primary" onclick="show_uploaded_map(event)">Show uploaded map</button>
+  <button type="button" id="hideupload" class="btn btn-small btn-primary" onclick="hide_uploaded_map(event)" style="margin-left:17px;display:none">Show topomap</button>
 
-   <%="Status: "+@map.mapstatus.name%> 
-<%= link_to '(refresh...)', '/mapsheet/'+@map.id.to_s+'/edit', remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
-    <div class="panel-group" id="accordion">
+  <div class="panel-group" id="accordion">
         <div class="panel panel-default">
-            <%if @map.is_image?  %>
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. Upload (done)</a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse">
-            <% else %>
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. Upload</a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-            <% end %>
-                <div class="panel-body"><p>
-                      <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
-                        <%= render 'shared/error_messages' %>
-                  
-                        <%= f.label :url %>
-                        <%= f.text_field :url %>
-                      
-                        <%= f.submit "Upload", class: "btn btn-small btn-primary", name: "upload", onclick: "linkHandler('uploadbutton')", id:  "uploadbutton" %>
-                      <% end %>
-                    
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseZero">1. Describe <%='(done)' if @map.name and @map.name.length>0%></a>
+            </h4>
+          </div>
+          <div id="collapseZero" class="panel-collapse collapse <%='in' if !(@map.name and @map.name.length>0)%>">
+                <div class="panel-body">
 
-                </p></div>
+                  <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
+                    <%= render 'shared/error_messages' %>
+
+                    Sheet Name*
+                    <%= f.text_field :name %>
+                
+                    Series (e.g. NZMS57)
+                    <%= f.text_field :series %>
+                                
+                    Edition (e.g. Edition 1)
+                    <%= f.text_field :edition %>
+                
+                    Scale (e.g. for 1:50k enter 50000)
+                    <%= f.text_field :scale %>
+                
+                    Sheet number (e.g. S128)
+                    <%= f.text_field :sheet %>
+                
+                    Published by (e.g. LINZ)
+                    <%= f.text_field :source %>
+                
+                    Copyright notice (if required)
+                    <%= f.text_field :attribution %>
+
+                    Year printed* (e.g. 1945)
+                    <%= f.text_field :year_printed %>
+                
+                    Year surveyed/revised (e.g. 1942)
+                    <%= f.text_field :year_revised %>
+                
+                    Description
+                    <%= f.text_area :description %>
+                
+                    <%= f.submit "Describe", class: "btn btn-small btn-primary", name: "describe", onclick: "linkHandler('describe')", id:  "describe" %>
+                  <% end %>
+                </div>
             </div>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <% if (@map.crop_done and @map.rotate_done) %>
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Crop & rotate (done)</a>
-                    <% else %>
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. Crop & rotate</a>
-                    <% end %>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">2. Upload <%='(done)' if @map.is_image?%></a>
                 </h4>
             </div>
-            <%if @map.mapstatus.compare("converted")=="="  %>
-              <div id="collapseTwo" class="panel-collapse collapse in">
-              <script> show_uploaded_map() </script>
-            <% else %>
-              <div id="collapseTwo" class="panel-collapse collapse">
-            <% end %>
+            <div id="collapseOne" class="panel-collapse collapse <%='in' if !@map.is_image?%>">
+              <div class="panel-body">
+                <%= form_for  @map, :remote=> false, authenticity_token: true,  :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
+                  <%= render 'shared/error_messages' %>
+                  Image file:
+                   
+                  <p>Either: choose the file to upload, or enter a URL from which it can be downloaded:</p>
+                  <div class="erow">File<br/>
+                    <%= f.file_field :image %>
+                  </div>
+
+                  <div class="erow">URL:<br/>
+                    <%= f.text_field :url %>
+                  </div>
+                    
+                  <%= f.submit "Upload", class: "btn btn-small btn-primary", name: "upload", onclick: "linkHandler('uploadbutton')", id:  "uploadbutton" %>
+                <% end %>
+              </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">3. Crop & rotate <%='(done)' if @map.crop_done and @map.rotate_done%></a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse <%='in' if @map.mapstatus.compare("converted")=="="%>">
+            <script> show_uploaded_map() </script>
 
             <div class="panel-body">
 
@@ -104,6 +141,7 @@
                   <div class="half"><%= f.text_field :pix_ybl %></div>
 
                   <%= f.submit "Calculate", class: "btn btn-small btn-primary", name: "calculate", onclick: "linkHandler('calculatebutton')", id:  "calculatebutton" %>
+                  <%= f.submit "Skip", class: "btn btn-small btn-primary", name: "skiprotate", onclick: "linkHandler('skiprotate')", id:  "skiprotate" %>
               <% end %>
               <% if @map.pix_rotation and @map.deg_rotation %>
                 <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
@@ -112,44 +150,32 @@
                   <div class="half"><%= f.text_field :deg_rotation %></div>
                   <%= f.submit "Rotate", class: "btn btn-small btn-primary", name: "rotate", onclick: "linkHandler('rotate')", id:  "rotate" %>
                   <%= f.submit "Crop", class: "btn btn-small btn-primary", name: "crop", onclick: "linkHandler('crop')", id:  "crop" %>
-                  <%= f.submit "Skip", class: "btn btn-small btn-primary", name: "skiprotate", onclick: "linkHandler('skiprotate')", id:  "skiprotate" %>
                 <% end %>
               <% end %>
             </div>
           </div>
         </div>
         <div class="panel panel-default">
-          <% if @map.is_geotiff? %>
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. Georeference (done)</a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">4. Georeference <%='(done)' if @map.is_geotiff?%></a>
               </h4>
             </div>
-          <% else %>
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. Georeference</a>
-              </h4>
-            </div>
-          <% end %>
 
-          <% if @map.crop_done and @map.rotate_done and !@map.is_geotiff?%>
-            <div id="collapseThree" class="panel-collapse collapse in">
-          <% else %>
-            <div id="collapseThree" class="panel-collapse collapse">
-          <% end %>
+            <div id="collapseThree" class="panel-collapse collapse <%='in' if @map.crop_done and @map.rotate_done and !@map.is_geotiff?%>">
 
           <div class="panel-body">
             <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
             <p>Choose known locations to use for georefencing. Default is top-left, bottom-right.</p>
               <p>Projection</p>
               <div><%= collection_select( :map, :source_srid, Projection.all.order(:name), :epsg, :name, {}) %></div>
-              <div>Point 1 (pixels x,y): 
+              <div>Point 1 (pixels x,y):
                 <div class="leftbuttons">
                   <span title="Click to draw location on map">
                     <img id="tic1plus" src="/assets/draw-point.png" onclick="selectPix('tic1')" width="16" style="display:block">
                   </span>
                 </div>
+                
               </div>
 
               <div class="half"><%= f.text_field :pix_xtic1 %></div>
@@ -191,14 +217,10 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">4. Create tiles</a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">5. Create tiles <%='(done)' if @map.mapstatus.compare('tiling ...')=='>' %></a>
                 </h4>
             </div>
-            <% if @map.rotate_done and @map.crop_done and @map.is_geotiff? %>
-              <div id="collapseFour" class="panel-collapse collapse in">
-            <% else %>
-              <div id="collapseFour" class="panel-collapse collapse">
-            <% end %>
+            <div id="collapseFour" class="panel-collapse collapse <%='in' if @map.rotate_done and @map.crop_done and @map.is_geotiff? and @map.mapstatus.compare('tiled')=='<' %>">
                 <div class="panel-body">
                     <p>... and press "Create" to complete processing
                     <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
@@ -209,4 +231,10 @@
             </div>
         </div>
     </div>
+    <% if @map.createdby_id==@current_user.id or @current_user.roleid==1 %>
+      <%= form_tag '/mapsheet/destroy', :remote=> true, :method=> 'post'%>
+        <input type="hidden" name="id" value='<%=@map.id%>' />
+        <%= submit_tag "Delete", class: "btn btn-small btn-primary", :style => 'margin-left:17px;', name: "delete", onclick: "linkHandler('deletebutton')", id:  "deletebutton" %>
+      </form> 
+    <% end %>
 </div>

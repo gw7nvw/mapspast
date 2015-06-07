@@ -18,6 +18,7 @@ root 'viewer#home'
   post 'login' => "sessions#create"
   post 'forum/approve' => "forum#approve"
   post 'forum/destroy' => "forum#destroy"
+  post 'mapsheet/destroy' => "mapsheet#destroy"
   delete 'logout' => "sessions#destroy"
   match '/forum', to: 'forum#update',    via:'post'
   get "query" => "query#show" 

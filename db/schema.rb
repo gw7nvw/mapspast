@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150605200529) do
+ActiveRecord::Schema.define(version: 20150607021224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20150605200529) do
     t.integer  "createdby_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.spatial  "extent",          limit: {:srid=>4326, :type=>"polygon"}
+    t.spatial  "extent",             limit: {:srid=>4326, :type=>"polygon"}
     t.integer  "maxzoom"
     t.string   "url"
     t.integer  "mapstatus_id"
@@ -149,6 +149,10 @@ ActiveRecord::Schema.define(version: 20150605200529) do
     t.decimal  "deg_rotation"
     t.boolean  "crop_done"
     t.boolean  "rotate_done"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "users", force: true do |t|

@@ -1,8 +1,15 @@
-<% if @mapsheets %>
-  <ul>
-    <% @mapsheets.each do |ms| %>
-      <li><%=link_to ms.name, '/mapsheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %></li>
-    <% end %>
-  </ul>
-<% end %> 
+<div class="erow">
+  <% if @mapsheets %>
+    <ul>
+      <% @mapsheets.each do |ms| %>
+        <%if ms.year_printed%>
+         <li><%=link_to ms.name+" ("+ms.year_printed.to_s+")", '/mapsheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %></li>
+        <% else %>
+          <li><%=link_to ms.name, '/mapsheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %></li>
+        <% end %>
+  
+      <% end %>
+    </ul>
+  <% end %> 
+</div>
   
