@@ -10,8 +10,10 @@
 
 </script>
 <div class="erow">
+  <%= render 'flash' %>
   <div style="border:solid;itext-align:center">
     <b><%="Status: "+@map.mapstatus.name%> </b>
+
     <%= link_to '(click to refresh...)', '/mapsheet/'+@map.id.to_s+'/edit', remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
   </div>
 
@@ -259,7 +261,7 @@
             </div>
         </div>
     </div>
-    <% if @map.createdby_id==@current_user.id or @current_user.roleid==1 %>
+    <% if @map.createdby_id==@current_user.id or @current_user.role_id==1 %>
       <%= form_tag '/mapsheet/destroy', :remote=> true, :method=> 'post'%>
         <input type="hidden" name="id" value='<%=@map.id%>' />
         <%= submit_tag "Delete", class: "btn btn-small btn-primary", :style => 'margin-left:17px;', name: "delete", onclick: "linkHandler('deletebutton')", id:  "deletebutton" %>

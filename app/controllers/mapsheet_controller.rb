@@ -75,7 +75,8 @@ def create
 end
 
 def update
-  @map=Uploadedmap.find_by_id(params[:id])
+ @map=Uploadedmap.find_by_id(params[:id])
+ if signed_in? and (@map.createdby_id==@current_user.id or @current_user.role_id==1) 
 
   if params[:describe]
     @map.name=params[:uploadedmap][:name]
@@ -236,7 +237,10 @@ def update
     Resque.enqueue(Do_create, @map.id)
 
   end
-  render 'mapsheet/edit'
+ else
+  flash[:error]="Only the creating user can edit a mapsheet"
+ end
+ render 'mapsheet/edit'
 end
 
 end
