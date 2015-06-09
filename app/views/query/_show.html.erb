@@ -1,6 +1,6 @@
 <% if @mapsheets and @mapsheets.count>0%>
 
-    <% ms=@mapsheets.first %>
+    <% @mapsheets.each do |ms| %>
       <ul>
         <li>Series:  <%=ms.series%></li>
         <li>Name:  <%=ms.name%></li>
@@ -10,6 +10,7 @@
         <li>Edition: <%=ms.edition%></li>
         <li>Scale:   1:<%=ms.scale%></li>
       </ul>
+    <% end %>
 <% else %>
   No map sheets found
 <% end %>

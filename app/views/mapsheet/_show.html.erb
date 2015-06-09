@@ -1,46 +1,57 @@
 <div class="erow">
+  <div class="erow">
+    <%= link_to "All mapsheets-> ", '/mapsheet/', remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %>
+    <b><%=link_to @map.name, '/mapsheet/'+@map.id.to_s, remote: true, :id => 'thread_link', :onclick => "linkHandler('thread_link')" %> </b>
+  </div>
+  <% provide(:title, 'Mapsheet | '+@map.name ) %>
+  <% @title=" | Mapsheet | "+@map.name %>
+  <%= render 'flash' %>
+  <script>
+     update_title('<%=@title%>');
+     document.getElementById("page_status").innerHTML = '';
+  </script>
   <% if signed_in? %>
     <div class="leftbuttons">
       <span title="Edit"%>
-        <%=  link_to image_tag("/assets/pencil_edit.png", :border=>0, :class => 'dock-item'), '/mapsheet/'+@map.id.to_s+'/edit', remote: true, onclick: "linkHandler('editbutton')", id:  "editbutton"  %>
+        <%=  link_to image_tag("/assets/divencil_edit.png", :border=>0, :class => 'dock-item'), '/mapsheet/'+@map.id.to_s+'/edit', remote: true, onclick: "linkHandler('editbutton')", id:  "editbutton"  %>
       </span>
     </div>
   <% end %>
   <script>
-    update_selected_layer(<%=@map.id%>);
+    update_selected_layer(<%=@map.id%>, '<%=@map.serverpath%>');
   </script>
 
-  <p><b>Sheet Name</b><br/>
+  <p><b>Sheet Name</b></br>
   <%=  @map.name %></p>
 
-  <p><b>Series</b><br/>
+  <p><b>Series</b></br>
   <%= @map.series %></p>
 
-  <p><b>Edition</b><br/>
+  <p><b>Edition</b></br>
   <%= @map.edition %></p>
 
-  <p><b>Scale</b><br/>
-  <% if @map.scale then %> <%= "1:"+@map.scale.to_s %></p> <% end %>
+  <p><b>Scale</b></br>
+  <% if @map.scale then %> <%= "1:"+@map.scale.to_s %> <% end %></p>
 
-  <p><b>Sheet number</b><br/>
+  <p><b>Sheet number</b></br>
   <%= @map.sheet %></p>
 
-  <p><b>Published by</b><br/>
+  <p><b>Published by</b></br>
   <%= @map.source %></p>
 
-  <p><b>Copyright notice</b><br/>
+  <p><b>Copyright notice</b></br>
   <%= @map.attribution %></p>
 
-  <p><b>Year printed</b><br/>
+  <p><b>Year printed</b></br>
   <%= @map.year_printed %></p>
 
-  <p><b>Year surveyed/revised</b><br/>
+  <p><b>Year surveyed/revised</b></br>
   <%= @map.year_revised %></p>
     
-  <p><b>Projection</b><br/>
+  <p><b>Projection</b></br>
   <%= @map.source_srid %></p>
 
 
-  <p><b>Description</b><br/>
+  <p><b>Description</b></br>
   <%= @map.description %></p>
 </div>

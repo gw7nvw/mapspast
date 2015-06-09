@@ -12,6 +12,7 @@
 #Mapseries.create(name: "NZMS1/260 1989", year_of_snapshot: 1989, series: "NZMS1/260", edition: nil, scale:50000, details: "Snapshot of the latest editions of the NZMS260 (where available) or NZMS1 series as of the last day of 1989", createdBy_id: 1)
 #Mapseries.create(name: "NZMS260 1999", year_of_snapshot: 1999, series: "NZMS260", edition: nil, scale:50000, details: "Snapshot of the latest editions of the NZMS260 series as of the last day of 1999", createdBy_id: 1)
 #Mapseries.create(name: "Topo50 2009", year_of_snapshot: 2009, series: "Topo50", edition: nil, scale:50000, details: "Snapshot of the first editions of the Topo50 series in 1999", createdBy_id: 1)
+#Mapseries.create(name: "selected sheet", year_of_snapshot: nil, series: nil, edition: nil, scale:nil, details: nil, createdBy_id: 1)
 #Projection.create(id: 2193, name: "NZTM2000", proj4: "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towg", wkt: "", epsg: 2193)
 #Projection.create(id: 4326, name: "WGS84", proj4: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", wkt: "", epsg: 4326)
 #Projection.create(id: 27200, name: "NZMG49", proj4: "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +ellps=intl +datum=nzgd49 +units=m +no_defs", wkt: "", epsg: 27200)

@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   attr_accessor :remeber_token, :activation_token, :reset_token
   before_save :downcase_email
   before_create :create_activation_digest
+  belongs_to :role
+
  # belongs_to :role
   validates :role_id, presence: true
   validates :firstName, presence: true

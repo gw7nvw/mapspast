@@ -4,9 +4,11 @@ class Do_create
   def self.perform(map_id)
       puts "start"
       map=Uploadedmap.find_by_id(map_id)
+      map.create_extent_polygon
       map.mapstatus=Mapstatus.find_by(:name => "nearwhite ...")
       map.save
       success=map.do_nearwhite 
+
       if success then
         map.mapstatus=Mapstatus.find_by(:name => "warping ...")
         map.save
@@ -24,6 +26,7 @@ class Do_create
         success=map.do_tile
       end
       if success then 
+        map.publish
         map.mapstatus=Mapstatus.find_by(:name => "compressing ...")
         map.save
         success=map.do_compress

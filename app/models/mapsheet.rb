@@ -39,7 +39,7 @@ def self.find_by_point(x,y, srid, series_id)
       if series_id and series_id>0 then
         Mapsheet.find_by_sql [ "select * from mapsheets where series_id = ? and ST_Contains(extent, ST_GeomFromText( 'POINT(? ?)',4326));", series_id, pointarr[0], pointarr[1]] 
       else
-        Mapsheet.find_by_sql [ "select * from mapsheets where ST_Contains(extent, ST_GeomFromText( 'POINT(? ?)',4326)) order by year_published desc;", pointarr[0], pointarr[1]] 
+        Mapsheet.find_by_sql [ "select min(id), name, year_printed, series, sheet, year_revised, edition, scale from mapsheets where ST_Contains(extent, ST_GeomFromText( 'POINT(? ?)',4326)) group by name, edition, year_printed, year_revised, series, scale,sheet  order by year_printed desc;", pointarr[0], pointarr[1]] 
       end
    end
 
