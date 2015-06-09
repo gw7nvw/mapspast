@@ -11,6 +11,10 @@ class UserMailer < ActionMailer::Base
     mail to: authlist.address, subject: "Address authentication"
   end
 
+  def account_activation(user)
+    @user = user
+    mail to: user.email, subject: "Account activation"
+  end
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #

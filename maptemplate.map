@@ -1,0 +1,25 @@
+MAP
+    NAME "sample"
+    STATUS ON
+    EXTENT -20037508.34 -20037508.34 20037508.34 20037508.34
+    SHAPEPATH "."
+    IMAGECOLOR 255 255 255
+
+    WEB
+      IMAGEPATH "/ms4w/tmp/ms_tmp/"
+      IMAGEURL "/ms_tmp/"
+    END # WEB
+    PROJECTION
+      "init=epsg:3857"
+    END
+    LAYER
+        NAME 'test'
+        TYPE RASTER
+        STATUS DEFAULT
+        DATA "XXFILENAMEXX"
+        XXEXTENTXX
+        PROJECTION
+         "init=epsg:XXPROJXX"
+        END
+    END # LAYER
+END # MAP

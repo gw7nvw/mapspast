@@ -1,0 +1,26 @@
+<div class="erow">
+<% provide(:title, @mtitle) %>
+<% @title=" | "+@mtitle %>
+<%= render 'flash' %>
+<script>
+   update_title('<%=@title%>');
+</script>
+<div class="erow-10px"><%= link_to "All topics-> ", '/maptalk/'+@id.to_s, remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %>
+  <% if @messages and @messages.count>0 %>
+    <b><%=link_to @messages.first.subject.capitalize, '/maptalk/'+@id.to_s+'/?thread='+URI.escape(@messages.first.subject), remote: true, :id => 'thread_link', :onclick => "linkHandler('thread_link')" %> </b></div>
+
+    <% @messages.each do |message| %>
+      <div class="erow">
+           <% @show_message=message %>
+           <%= render 'message_details' %>
+       </div>
+    <% end %>
+  <% end %>
+<div class="erow">
+ <div class="hrline">
+    <hr noshade size="4">
+ </div>
+</div>
+<% @subject=@messages.first.subject.capitalize %>
+<%=render 'message_form'%>
+</div>

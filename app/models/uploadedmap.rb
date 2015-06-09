@@ -303,6 +303,29 @@ def do_rotate_nongeo
   success
 end
 
+def do_crop_geo
+  cmd='gdalwarp  -overwrite /var/www/html/maps/'+self.filename+' -te '+self.grid_xleft.to_s+' '+self.grid_ybottom.to_s+' '+self.grid_xright.to_s+' '+self.grid_ytop.to_s+' /var/www/html/maps/'+self.filename+'_crop.tif'
+  puts "Running "+cmd
+  success = system( cmd )
+
+  if success
+    cmd="rm /var/www/html/maps/"+self.filename
+    puts "Running "+cmd
+    success = system( cmd )
+  end
+
+  if success
+    cmd="mv /var/www/html/maps/"+self.filename+"_crop.tif /var/www/html/maps/"+self.filename
+    puts "Running "+cmd
+    success = system( cmd )
+  end
+
+  self.get_all_from_gtiff
+
+  success
+
+end
+
 def do_crop_nongeo
   newwidth=self.pix_xright-self.pix_xleft
   newheight=self.pix_ybottom-self.pix_ytop
@@ -391,18 +414,24 @@ cmd ="echo '"+self.xresolution.to_s+"\n0\n0\n"+(self.yresolution).to_s+"\n"+self
 end
 
 def do_write_mapfile
-  dummyWidth=20037508.34
-  dummyHeight=20037508.34
-  if self.pix_width>self.pix_height then
-    dummyHeight=(self.pix_height.to_f/self.pix_width)*20037508.34
-  end
-  if self.pix_width<self.pix_height then
-    dummyWidth=(self.pix_width.to_f/self.pix_height)*20037508.34
+  if self.is_geotiff? then
+    source_srid=self.source_srid.to_s
+    extentStr=""
+  else
+    dummyWidth=20037508.34
+    dummyHeight=20037508.34
+    if self.pix_width>self.pix_height then
+      dummyHeight=(self.pix_height.to_f/self.pix_width)*20037508.34
+    end
+    if self.pix_width<self.pix_height then
+      dummyWidth=(self.pix_width.to_f/self.pix_height)*20037508.34
+    end
+  
+    extentStr="EXTENT -"+dummyWidth.to_s+" -"+dummyHeight.to_s+" "+dummyWidth.to_s+" "+dummyHeight.to_s
+    source_srid="3857"
   end
 
-  extentStr="-"+dummyWidth.to_s+" -"+dummyHeight.to_s+" "+dummyWidth.to_s+" "+dummyHeight.to_s
-
-  cmd="cat /var/www/html/maps/maptemplate.map | sed -e 's/XXFILENAMEXX/"+self.filename+"/g' | sed -e 's/XXEXTENTXX/"+extentStr+"/g' > /var/www/html/maps/"+self.id.to_s+".map"
+  cmd="cat /var/www/html/maps/maptemplate.map | sed -e 's/XXFILENAMEXX/"+self.filename+"/g' | sed -e 's/XXEXTENTXX/"+extentStr+"/g' | sed -r 's/XXPROJXX/"+source_srid+"/g'> /var/www/html/maps/"+self.id.to_s+".map"
   puts "Running "+cmd
   success = system( cmd )
 end
@@ -412,12 +441,44 @@ def do_compress
   puts "Running "+cmd
   success = system( cmd )
 
-  cmd=" find /var/www/html/maps/tiles-"+self.id.to_s+" -name '*.png' > /var/www/html/maps/tmp"+self.id.to_s+".lst; mogrify @/var/www/html/maps/tmp"+self.id.to_s+".lst -background white -alpha remove -quantize RGB -dither None -colors 255 -quantize RGB -dither None -colors 255; rm /var/www/html/maps/tm"+self.id.to_s+".lst"
+  cmd=" find /var/www/html/maps/tiles-"+self.id.to_s+" -name '*.png' > /var/www/html/maps/tmp"+self.id.to_s+".lst; mogrify @/var/www/html/maps/tmp"+self.id.to_s+".lst -background white -alpha remove -quantize RGB -dither None -colors 255 -quantize RGB -dither None -colors 255; rm /var/www/html/maps/tmp"+self.id.to_s+".lst"
   puts "Running "+cmd
   success = system( cmd )
-
-
 end
+
+def publish
+  ms=Mapsheet.new
+  ms.name=self.name
+  ms.series_id=Mapseries.find_by(:name => "selected sheet").id
+  ms.year_printed=self.year_printed
+  ms.year_revised=self.year_revised
+  ms.scale=self.scale
+  ms.series=self.series
+  ms.sheet=self.sheet
+  ms.edition=self.edition
+  ms.details=self.description[0..255]
+  ms.source_srid=self.source_srid
+  ms.xleft=self.grid_xleft
+  ms.xright=self.grid_xright
+  ms.ytop=self.grid_ytop
+  ms.ybottom=self.grid_ybottom
+  ms.extent=self.extent
+  if @current_user then ms.createdBy_id=@current_user.id end
+  ms.uploadedmap_id=self.id
+  ms.save
+
+  self.serverpath="http://mapspast.org.nz/maps/"
+end
+
+def unpublish
+  ms=Mapsheet.find_by_sql [ "select * from mapsheets where uploadedmap_id=?", self.id ]
+  if ms then
+    ms.each do |m|
+      m.destroy
+    end
+  end
+end
+
 #helpers
 
 def arr_to_s(arr)

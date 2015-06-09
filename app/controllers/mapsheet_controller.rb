@@ -35,10 +35,13 @@ def new
    @map=Uploadedmap.new
 end
 
+def new_info
+end
 def destroy
    @map=Uploadedmap.find_by_id(params[:id])
    if @map.createdby_id==@current_user.id or @current_user.roleid==1
      @map.destroy_files
+     @map.unpublish
      @map.delete
      redirect_to '/mapsheet'
    else
@@ -107,6 +110,28 @@ def update
 
   end
 
+ if params[:cropgeo]
+     puts "cropgeo"
+
+    @map.mapstatus=Mapstatus.find_by(:name=> "cropping ...")
+    @map.crop_done=true
+    pix_xtl=params[:uploadedmap][:pix_xtl].to_f 
+    pix_ytl=params[:uploadedmap][:pix_ytl].to_f 
+    pix_xtr=params[:uploadedmap][:pix_xtr].to_f 
+    pix_ytr=params[:uploadedmap][:pix_ytr].to_f 
+    pix_xbr=params[:uploadedmap][:pix_xbr].to_f 
+    pix_ybr=params[:uploadedmap][:pix_ybr].to_f 
+    pix_xbl=params[:uploadedmap][:pix_xbl].to_f 
+    pix_ybl=params[:uploadedmap][:pix_ybl].to_f 
+    @map.grid_xleft=(pix_xtl+pix_xbl)/2
+    @map.grid_xright=(pix_xtr+pix_xbr)/2
+    @map.grid_ytop=(pix_ytl+pix_ytr)/2
+    @map.grid_ybottom=(pix_ybl+pix_ybr)/2
+
+    @map.save
+    Resque.enqueue(Do_cropgeo, @map.id)
+  end
+
   if params[:calculate]
      puts "calc"
 
@@ -161,8 +186,8 @@ def update
     Resque.enqueue(Do_crop, @map.id)
   end
 
- if params[:skip]
-     puts "skip"
+ if params[:skiprotate]
+     puts "skiprotate"
     @map.mapstatus=Mapstatus.find_by(:name=> "cropped")
     @map.crop_done=true
     @map.rotate_done=true

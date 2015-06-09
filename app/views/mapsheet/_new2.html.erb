@@ -1,0 +1,67 @@
+<div class="erow">
+<p>
+Warning:  the functionality to allow user to add maps is new and still undergoing testing.
+You are welcome to try it out, but be aware that the interface is still pretty basic, and that bugs may exist.
+Please leave comments on the forum regarding any issues you have - that way they can be resolved.</p>
+<h4>Georeferenced maps</h4>
+<p>Georeferenced maps can be loaded onto the system with a minimum of steps</p>
+<ul>
+  <li>Describe the map</li>
+  <li>Upload the map</li>
+  <li>Optionally, crop the border off the map</li>
+  <li>Click on Create</li>
+</ul>
+<p>Note that display of georeferenced maps during the upload process will be very slow.</p>
+<h4>Plain image maps</h4>
+<p>Simple scanned maps can be loaded onto the system with a few extra steps</p>
+<ul>
+  <li>Describe the map</li>
+  <li>Upload the map</li>
+  <li>Check if the map is square on the page and rotate if required</li>
+  <li>Optionally, crop the border off the map</li>
+  <li>Enter the projection of the map</li>
+  <li>Provide the coordinates (in the grid system used by the map) for 2 known points on the map, or look them up on the topomaps</li>
+  <li>Click on Create</li>
+</ul>
+<p>Note: maps who's projection is unknown are not supported at this time.</p>
+<p>Note: you must manually click 'refresh' at the top of the left panel to check the status.  Some operations can take several minutes.</p>
+<p>Note: you will have to refresh your browser (e.g. F5) after any step that changes the mapi to see those changes, namely: crop and rotate.</p>
+
+</div>
+<div class="erow">
+  <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
+    <%= render 'shared/error_messages' %>
+
+    Sheet Name*
+    <%= f.text_field :name %>
+
+    Series (e.g. NZMS57)
+    <%= f.text_field :series %>
+
+    Edition (e.g. Edition 1)
+    <%= f.text_field :edition %>
+
+    Scale (e.g. for 1:50k enter 50000)
+    <%= f.text_field :scale %>
+
+    Sheet number (e.g. S128)
+    <%= f.text_field :sheet %>
+
+    Published by (e.g. LINZ)
+    <%= f.text_field :source %>
+
+    Copyright notice (if required)
+    <%= f.text_field :attribution %>
+
+    Year printed* (e.g. 1945)
+    <%= f.text_field :year_printed %>
+
+    Year surveyed/revised (e.g. 1942)
+    <%= f.text_field :year_revised %>
+
+    Description
+    <%= f.text_area :description %>
+
+    <%= f.submit "Create", class: "btn btn-small btn-primary", name: "create", onclick: "linkHandler('create')", id:  "create" %>
+  <% end %>
+</div>

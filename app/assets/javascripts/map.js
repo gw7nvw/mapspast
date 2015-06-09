@@ -9,25 +9,28 @@ var tiff_map;
 
 var map;
 var vectorLayer;
+var searchMode;
 var cross_red;
 var click_to_create;
 var click_to_create_grid;
 var clickDest;
 var layer_style;
-//var renderer;
 var clickMode=""
 var mapBounds = new OpenLayers.Bounds(748961,3808210, 2940563,  6836339);
 var tiffBounds = new OpenLayers.Bounds( -20037508.34,-20037508.34,20037508.34,20037508.34)
+var tiffProj="900913";
 var mapMinZoom = 5;
 var mapMaxZoom = 14;
 var emptyTileURL = "http://www.maptiler.org/img/none.png";
 OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
 
+  
+
 function init_resize() {
   // Window resize handling
   var padding = 10;
   var containerWidth= $("#main_page").width()-padding;
-  $(".panel").resizable({
+  $(".panelsize").resizable({
     handles: 'e',
     maxWidth: containerWidth-120,
     minWidth: 120,
@@ -55,6 +58,13 @@ function init_resize() {
 
 function init(){
 
+  //Projections
+  Proj4js.defs["EPSG:2193"] = "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
+  Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
+  Proj4js.defs["EPSG:27200"] = "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +ellps=intl +datum=nzgd49 +units=m +no_defs";
+  Proj4js.defs["EPSG:27291"] = "+proj=tmerc +lat_0=-39 +lon_0=175.5 +k=1 +x_0=274319.5243848086 +y_0=365759.3658464114 +ellps=intl +datum=nzgd49 +to_meter=0.9143984146160287 +no_defs";
+  Proj4js.defs["EPSG:27292"] = "+proj=tmerc +lat_0=-44 +lon_0=171.5 +k=1 +x_0=457199.2073080143 +y_0=457199.2073080143 +ellps=intl +datum=nzgd49 +to_meter=0.9143984146160287 +no_defs";
+  Proj4js.defs["ESPG:4326"] = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs '
   init_resize();
   // update map size and start 'don't do again until' timer
   window.onresize = function()
@@ -63,13 +73,6 @@ function init(){
   }
 
 
-  //Projections
-  Proj4js.defs["EPSG:2193"] = "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
-  Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
-  Proj4js.defs["EPSG:27200"] = "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +ellps=intl +datum=nzgd49 +units=m +no_defs";
-  Proj4js.defs["EPSG:27291"] = "+proj=tmerc +lat_0=-39 +lon_0=175.5 +k=1 +x_0=274319.5243848086 +y_0=365759.3658464114 +ellps=intl +datum=nzgd49 +to_meter=0.9143984146160287 +no_defs";
-  Proj4js.defs["EPSG:27292"] = "+proj=tmerc +lat_0=-44 +lon_0=171.5 +k=1 +x_0=457199.2073080143 +y_0=457199.2073080143 +ellps=intl +datum=nzgd49 +to_meter=0.9143984146160287 +no_defs";
-  Proj4js.defs["ESPG:4326"] = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs '
 
   // map 
   var options = {
@@ -165,8 +168,14 @@ function init(){
 var my_button = new OpenLayers.Control.Button({
 displayClass: 'olControlInfo',
 trigger: mapInfo,
-title: 'Show map sheet details when you click on the map'
+title: 'Show mapsheet details for current series when you click on the map'
 });
+var search_button = new OpenLayers.Control.Button({
+displayClass: 'olControlSearch',
+trigger: mapSearch,
+title: 'List all available mapsheets at point you click on the map'
+});
+
     var panel = new OpenLayers.Control.Panel({
 //        defaultControl: my_button,
         createControlMarkup: function(control) {
@@ -184,6 +193,7 @@ title: 'Show map sheet details when you click on the map'
     });
 
     panel.addControls([my_button])
+    panel.addControls([search_button])
     
   // controllers
   var switcherControl = new OpenLayers.Control.LayerSwitcher();
@@ -208,7 +218,7 @@ function hide_uploaded_map(event) {
      document.getElementById("showupload").style.display="block";
      document.getElementById("hideupload").style.display="none";
 }
-function show_uploaded_map(event) {
+function show_uploaded_map() {
      map.destroy();
      map_map.innerHTML="";
      init_tiff_map();
@@ -217,13 +227,13 @@ function show_uploaded_map(event) {
 }
 
 function init_tiff_map() {       
-  Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
+ var srcProj=new OpenLayers.Projection("EPSG:27291");
                   var mapName=document.selectform.mapName.value;
                   var tiff_options = {
                       div: "map_map",
                       controls: [],
                       projection: "EPSG:900913",
-                      displayProjection: new OpenLayers.Projection("EPSG:900913"),
+                      displayProjection: new OpenLayers.Projection("EPSG:"+tiffProj),
                       numZoomLevels: 20
                   };
                   tiff_map = new OpenLayers.Map(tiff_options);
@@ -251,9 +261,11 @@ function init_tiff_map() {
                   tiff_map.addLayer(vectorLayer);
 
 
-                  tiff_map.zoomToExtent(tiffBounds);
+  //                tiff_map.zoomToExtent(tiffBounds);
+                  tiff_map.zoomToExtent(tiffBounds.transform(srcProj, tiff_map.projection));
           
                   tiff_map.addControls([new OpenLayers.Control.Zoom(),
+                   new OpenLayers.Control.MousePosition(),
                                    new OpenLayers.Control.Navigation()]);
                   add_click_to_create_controller();
                   click_to_create = new OpenLayers.Control.Click();
@@ -331,30 +343,30 @@ function linkHandler(entity_name) {
     $('.dropdown').removeClass('open');
 
     /* show 'loading ...' */
-//    document.getElementById("page_status").innerHTML = 'Loading ...'
+    document.getElementById("page_status").innerHTML = 'Loading ...'
 
     $(function() {
      $.rails.ajax = function (options) {
        options.tryCount= (!options.tryCount) ? 0 : options.tryCount;0;
-       options.timeout = 15000*(options.tryCount+1);
+       options.timeout = 7000*(options.tryCount+1);
        options.retryLimit=3;
        options.complete = function(jqXHR, thrownError) {
          /* complete also fires when error ocurred, so only clear if no error has been shown */
          if(thrownError=="timeout") {
            this.tryCount++;
- //          document.getElementById("page_status").innerHTML = 'Retrying ...';
+           document.getElementById("page_status").innerHTML = 'Retrying ...';
            this.timeout=15000*this.tryCount;
            if(this.tryCount<=this.retryLimit) {
              $.rails.ajax(this);
            } else {
-  //           document.getElementById("page_status").innerHTML = 'Timeout';
+             document.getElementById("page_status").innerHTML = 'Timeout';
            }
          }
          if(thrownError=="error") {
-   //        document.getElementById("page_status").innerHTML = 'Error';
+           document.getElementById("page_status").innerHTML = 'Error';
          }
          if(thrownError=="success") {
- //          document.getElementById("page_status").innerHTML = ''
+           document.getElementById("page_status").innerHTML = ''
          }
          lastUrl=document.URL;
        }
@@ -369,21 +381,36 @@ function linkHandler(entity_name) {
      document.title = 'MapsPast'+title;
 }
 
+function deactivateAllQuery() {
+
+     document.getElementsByClassName("olControlSearchItemInactive")[0].style.backgroundColor="#FFFFFF"
+     document.getElementsByClassName("olControlInfoItemInactive")[0].style.backgroundColor="#FFFFFF"
+     click_to_query.deactivate();
+     clickMode="";
+}
 function mapInfo() { 
+   if (clickMode=="search") {deactivateAllQuery();}
    if (clickMode!="query") {
+     searchMode="current";
      click_to_query.activate();
      clickMode="query";
      document.getElementsByClassName("olControlInfoItemInactive")[0].style.backgroundColor="#008800"
-     document.getElementById("info_details").style.display="block";
    } else {
-     click_to_query.deactivate();
-     clickMode="";
-     document.getElementsByClassName("olControlInfoItemInactive")[0].style.backgroundColor="#FFFFFF"
-     document.getElementById("info_details").style.display="none";
-     document.getElementById("info_details").innerHTML="";
+     deactivateAllQuery();
    }
 }
 
+function mapSearch() { 
+   if (clickMode=="query") {deactivateAllQuery();}
+   if (clickMode!="search") {
+     searchMode="all";
+     click_to_query.activate();
+     clickMode="search";
+     document.getElementsByClassName("olControlSearchItemInactive")[0].style.backgroundColor="#008800"
+   } else {
+     deactivateAllQuery();
+   }
+}
 function add_click_to_query_controller() {
   OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
      defaultHandlerOptions: {
@@ -412,6 +439,12 @@ function add_click_to_query_controller() {
     /*naviagte to selection */
      trigger: function(e) {
         var xy = map.getLonLatFromPixel(e.xy);
+        var layername;
+        if (searchMode=="all") {
+          layername="";
+        } else {
+          layername=map.baseLayer.name;
+        }
         BootstrapDialog.show({
             title: "Selected map sheet",
             message: $('<div id="info_details2">Retrieving ...</div>'),
@@ -425,10 +458,10 @@ function add_click_to_query_controller() {
           },
           type: "GET",
           timeout: 20000,
-          url: "/query/?x="+xy.lon+"&y="+xy.lat+"&layer="+map.baseLayer.name,
+          url: "/query/?x="+xy.lon+"&y="+xy.lat+"&layer="+layername,
           complete: function() {
               /* complete also fires when error ocurred, so only clear if no error has been shown */
-//              document.getElementById("page_status").innerHTML = '';
+              document.getElementById("page_status").innerHTML = '';
           }
 
         });
@@ -510,16 +543,24 @@ function add_click_to_create_controller() {
     trigger: function(e) {
         var lonlat = tiff_map.getLonLatFromPixel(e.xy);
 
-       /*convert to pexels */
-       projWidth=20037508.34;
-       mapWidth=document.selectform.pix_width.value;
-       mapHeight=document.selectform.pix_height.value;
-       if(mapWidth>mapHeight) {
-         x=(lonlat.lon+projWidth)*mapWidth/(projWidth*2);
-         y=(-lonlat.lat+projWidth)*mapWidth/(projWidth*2)+(mapHeight-mapWidth)/2;
+       if (tiffProj=="900913") {
+         /*convert to pixels */
+         projWidth=20037508.34;
+         mapWidth=document.selectform.pix_width.value;
+         mapHeight=document.selectform.pix_height.value;
+         if(mapWidth>mapHeight) {
+           x=(lonlat.lon+projWidth)*mapWidth/(projWidth*2);
+           y=(-lonlat.lat+projWidth)*mapWidth/(projWidth*2)+(mapHeight-mapWidth)/2;
+         } else {
+           x=(lonlat.lon+projWidth)*mapHeight/(projWidth*2)+(mapWidth-mapHeight)/2;
+           y=(-lonlat.lat+projWidth)*mapHeight/(projWidth*2);
+         }
        } else {
-         x=(lonlat.lon+projWidth)*mapHeight/(projWidth*2)+(mapWidth-mapHeight)/2;
-         y=(-lonlat.lat+projWidth)*mapHeight/(projWidth*2);
+         // use map proejection
+         var thisPoint = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat).transform(tiff_map.projection,tiff_map.displayProjection);
+         x=thisPoint.x;
+         y=thisPoint.y;
+
        }
 
          document.getElementById("uploadedmap_pix_x"+clickDest).value=x;
@@ -593,22 +634,22 @@ function deactivate_all_click() {
     if(typeof(click_to_create)!='undefined') click_to_create.deactivate();
 }
 
-function update_selected_layer(layer_id) {
+function update_selected_layer(layer_id, serverpath) {
   ourlayer=map.getLayersByName("selected sheet");
   if (ourlayer.length>0) {
     map.removeLayer(ourlayer[0]);
   }
 
-  create_selected_layer(layer_id);
+  create_selected_layer(layer_id, serverpath);
   ourlayer=map.getLayersByName("selected sheet");
   if (ourlayer.length>0) {
     map.setBaseLayer(ourlayer[0]);
   }
 }
 
-function create_selected_layer(layer_id) {
+function create_selected_layer(layer_id, serverpath) {
 
-  var sheetLayer = new OpenLayers.Layer.TMS("selected sheet", "http://mapspast.org.nz/maps/tiles-"+layer_id+"/",
+  var sheetLayer = new OpenLayers.Layer.TMS("selected sheet", serverpath+"tiles-"+layer_id+"/",
   {
       serviceVersion: '.',
       layername: '.',

@@ -1,4 +1,11 @@
-<div class="erow">
+<div class="erow-10px"><b><%= link_to "All mapsheets", '/mapsheet/', remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %></b>
+  <% provide(:title, 'Mapsheets' ) %>
+  <% @title=" | Mapsheets" %>
+  <%= render 'flash' %>
+  <script>
+     update_title('<%=@title%>');
+     document.getElementById("page_status").innerHTML = '';
+  </script>
   <% if @mapsheets %>
     <ul>
       <% @mapsheets.each do |ms| %>

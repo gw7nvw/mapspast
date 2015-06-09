@@ -52,10 +52,10 @@ div.tarea {
 }
 
 .rowtext25 {
+        margin-top: 1px;
         padding-left: 25px;
-        width: calc( 100% - 25px);
-        float: left;
 }
+
 
 .leftbuttons {
         width: 25px;
@@ -336,6 +336,18 @@ h1 {
         }
         .olControlPanel .olControlInfoItemActive span:first-child { 
           background-image: url("/assest/info24-on.png");
+          height: 24px;
+          width: 24px;
+          top: 2px;
+        }
+        .olControlPanel .olControlSearchItemInactive span:first-child { 
+          background-image: url("/assets/search.png");
+          height: 24px;
+          width: 24px;
+          top: 2px;
+        }
+        .olControlPanel .olControlSearchItemActive span:first-child { 
+          background-image: url("/assest/search24-on.png");
           height: 24px;
           width: 24px;
           top: 2px;
