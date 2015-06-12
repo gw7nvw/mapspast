@@ -28,6 +28,14 @@ div.tarea {
 	float: left;
 }
 
+#mapstatus {
+  border:solid;
+  text-align:center;
+  font-size: 1.3em;
+  font-weight: bold;
+  background-color: #c2ffe0; 
+  line-height: 1.7em;
+}
 .ui-resizable-e {
   cursor: e-resize;
   width: 7px;
@@ -282,7 +290,7 @@ ul {
 
 #map_map {
         width: calc(100% - 20px);
-        height: calc(100%);
+        height: calc( 100% - 41px);
         border: 0px;
         margin: 0px;
         margin-left: 20px;
@@ -328,6 +336,18 @@ h1 {
           position: absolute;
           left: 2px;
         }
+        .olControlPanel .olControlMaxExtentItemInactive span:first-child { 
+          background-image: url("/assets/maxextent.png");
+          height: 24px;
+          width: 24px;
+          top: 2px;
+        }
+        .olControlPanel .olControlMaxExtentItemActive span:first-child { 
+          background-image: url("/assest/maxextent-on.png");
+          height: 24px;
+          width: 24px;
+          top: 2px;
+        }
         .olControlPanel .olControlInfoItemInactive span:first-child { 
           background-image: url("/assets/info24.png");
           height: 24px;
@@ -341,13 +361,14 @@ h1 {
           top: 2px;
         }
         .olControlPanel .olControlSearchItemInactive span:first-child { 
-          background-image: url("/assets/search.png");
+          background-image: url("/assets/infolist.png");
           height: 24px;
           width: 24px;
           top: 2px;
+          left: 4px;
         }
         .olControlPanel .olControlSearchItemActive span:first-child { 
-          background-image: url("/assest/search24-on.png");
+          background-image: url("/assest/infolist-on.png");
           height: 24px;
           width: 24px;
           top: 2px;

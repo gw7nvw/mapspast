@@ -4,7 +4,7 @@
   <%= render 'flash' %>
   <script>
      update_title('<%=@title%>');
-     document.getElementById("page_status").innerHTML = '';
+     if (document.readyState==="completed") document.getElementById("page_status").innerHTML = '';
   </script>
   <% if @mapsheets %>
     <ul>

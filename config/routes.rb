@@ -14,6 +14,8 @@ root 'maptalk#show'
   get "about" => "viewer#home"
   get "sessions" => 'maptalk#show'
   get "mapsheetinfo" => "mapsheet#new_info"
+  match "mapsheet/:id/status" => "mapsheet#status",
+      :via => :get
   get "maptalk/index"
   get "maptalk/show"
   get "mapnews/index" => "maptalk#index"

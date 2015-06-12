@@ -23,9 +23,12 @@ Please leave comments on the forum regarding any issues you have - that way they
   <li>Provide the coordinates (in the grid system used by the map) for 2 known points on the map, or look them up on the topomaps</li>
   <li>Click on Create</li>
 </ul>
+<p>Note: maps will not be displayed in 'shop uploaded map' after they have been georeferenced.</p>
 <p>Note: maps who's projection is unknown are not supported at this time.</p>
-<p>Note: you must manually click 'refresh' at the top of the left panel to check the status.  Some operations can take several minutes.</p>
-<p>Note: you will have to refresh your browser (e.g. F5) after any step that changes the mapi to see those changes, namely: crop and rotate.</p>
+<p>Note: Some operations can take several minutes. If the progress indicator stops drawing dots but still says it is processing, try hitting F5 to refresh the screen</p>
+<p>Note: If you navigate away from the screen without switching back to 'show topomap' you'll need to press F5 (refresh) to get the topomap back on your screen.
+<p>Note: Once the map is tiled you (or anyone) can view it by selecting it from the mapsheets menu</p>
+<p>Note: Only 1 map can be processed at one time.  If someone else is processing a map then your job will be queued until theirs completes</p>
         <%=  link_to "Continue", '/mapsheet/new', class: "btn btn-small btn-primary", remote: true %>
         <%=  link_to "Cancel", '/mapsheet/', class: "btn btn-small btn-primary", remote: true %>
 

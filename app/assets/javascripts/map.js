@@ -6,7 +6,7 @@ window.onpopstate = function(event)  {
 };
 
 var tiff_map;
-
+var dots="";
 var map;
 var vectorLayer;
 var searchMode;
@@ -14,9 +14,11 @@ var cross_red;
 var click_to_create;
 var click_to_create_grid;
 var clickDest;
+var clickForm;
 var layer_style;
 var clickMode=""
 var mapBounds = new OpenLayers.Bounds(748961,3808210, 2940563,  6836339);
+var preferredExtent = new OpenLayers.Bounds(1078269,4639780, 2098245,  6268806);
 var tiffBounds = new OpenLayers.Bounds( -20037508.34,-20037508.34,20037508.34,20037508.34)
 var tiffProj="900913";
 var mapMinZoom = 5;
@@ -175,6 +177,11 @@ displayClass: 'olControlSearch',
 trigger: mapSearch,
 title: 'List all available mapsheets at point you click on the map'
 });
+var maxextent_button = new OpenLayers.Control.Button({
+displayClass: 'olControlMaxExtent',
+trigger: zoom_to_mapsheet,
+title: 'Zoom to extent of current mapsheet/series'
+});
 
     var panel = new OpenLayers.Control.Panel({
 //        defaultControl: my_button,
@@ -192,16 +199,15 @@ title: 'List all available mapsheets at point you click on the map'
        }
     });
 
-    panel.addControls([my_button])
-    panel.addControls([search_button])
+    panel.addControls([my_button, search_button, maxextent_button]);
     
   // controllers
   var switcherControl = new OpenLayers.Control.LayerSwitcher();
   map.addControl(switcherControl);
   switcherControl.maximizeControl();
 
-  map.zoomToExtent(mapBounds.transform(map.displayProjection, map.projection));
-  map.zoomIn()
+  map.zoomToExtent(preferredExtent.transform(map.displayProjection, map.projection));
+  map.zoomIn();
           
   map.addControls([new OpenLayers.Control.Zoom(),
                    new OpenLayers.Control.Navigation(),
@@ -546,8 +552,8 @@ function add_click_to_create_controller() {
        if (tiffProj=="900913") {
          /*convert to pixels */
          projWidth=20037508.34;
-         mapWidth=document.selectform.pix_width.value;
-         mapHeight=document.selectform.pix_height.value;
+         mapWidth=Number(document.selectform.pix_width.value);
+         mapHeight=Number(document.selectform.pix_height.value);
          if(mapWidth>mapHeight) {
            x=(lonlat.lon+projWidth)*mapWidth/(projWidth*2);
            y=(-lonlat.lat+projWidth)*mapWidth/(projWidth*2)+(mapHeight-mapWidth)/2;
@@ -562,9 +568,9 @@ function add_click_to_create_controller() {
          y=thisPoint.y;
 
        }
-
-         document.getElementById("uploadedmap_pix_x"+clickDest).value=x;
-         document.getElementById("uploadedmap_pix_y"+clickDest).value=y;
+       
+         document.getElementsByName("uploadedmap[pix_x"+clickDest+"]")[clickForm].value=x;
+         document.getElementsByName("uploadedmap[pix_y"+clickDest+"]")[clickForm].value=y;
 
        /* move the star */
        vectorLayer.destroyFeatures();
@@ -577,7 +583,7 @@ function add_click_to_create_controller() {
   });
 }
 
-function selectPix(dest) {
+function selectPix(form, dest) {
   if (typeof(tiff_map)=='undefined') {
     show_uploaded_map();
   } else {
@@ -585,8 +591,9 @@ function selectPix(dest) {
   }
 
   selectNothing();
-  document.getElementById(dest+"plus").style.border="2px solid lightgreen";
+  document.getElementById(dest+form+"plus").style.border="2px solid lightgreen";
   clickDest=dest;
+  clickForm=form;
   vectorLayer.destroyFeatures();
   deactivate_all_click();
   click_to_create.activate();
@@ -618,12 +625,16 @@ function selectNothing() {
 //  document.getElementById("placetick").style.display="none";
 
   /* resisplay all point / lines from from */
-  document.getElementById("tlplus").style.border="none";
-  document.getElementById("trplus").style.border="none";
-  document.getElementById("brplus").style.border="none";
-  document.getElementById("blplus").style.border="none";
-  document.getElementById("tic1plus").style.border="none";
-  document.getElementById("tic2plus").style.border="none";
+  document.getElementById("tl0plus").style.border="none";
+  document.getElementById("tr0plus").style.border="none";
+  document.getElementById("br0plus").style.border="none";
+  document.getElementById("bl0plus").style.border="none";
+  document.getElementById("tl1plus").style.border="none";
+  document.getElementById("tr1plus").style.border="none";
+  document.getElementById("br1plus").style.border="none";
+  document.getElementById("bl1plus").style.border="none";
+  document.getElementById("tic10plus").style.border="none";
+  document.getElementById("tic20plus").style.border="none";
   document.getElementById("gridtic1plus").style.border="none";
   document.getElementById("gridtic2plus").style.border="none";
 
@@ -634,17 +645,38 @@ function deactivate_all_click() {
     if(typeof(click_to_create)!='undefined') click_to_create.deactivate();
 }
 
-function update_selected_layer(layer_id, serverpath) {
-  ourlayer=map.getLayersByName("selected sheet");
-  if (ourlayer.length>0) {
-    map.removeLayer(ourlayer[0]);
+function zoom_to_mapsheet() {
+  layername=map.baseLayer.name;
+  if (layername=="selected sheet") {
+    var sheetBounds = new OpenLayers.Bounds(
+         document.extentform.xleft.value, 
+         document.extentform.ybottom.value, 
+         document.extentform.xright.value, 
+         document.extentform.ytop.value);
+    sheetProjection =new OpenLayers.Projection("EPSG:"+document.extentform.srid.value);
+    map.zoomToExtent(sheetBounds.transform(sheetProjection, map.projection));
+  } else {
+    map.zoomToExtent(preferredExtent.transform(map.displayProjection, map.projection));
   }
+}
 
-  create_selected_layer(layer_id, serverpath);
-  ourlayer=map.getLayersByName("selected sheet");
-  if (ourlayer.length>0) {
-    map.setBaseLayer(ourlayer[0]);
+function update_selected_layer(layer_id, serverpath, xleft, xright, ytop, ybottom, srid) {
+  if (typeof(map)!='undefined') { 
+    ourlayer=map.getLayersByName("selected sheet");
+    if (ourlayer.length>0) {
+      map.removeLayer(ourlayer[0]);
+    }
+    create_selected_layer(layer_id, serverpath);
+    ourlayer=map.getLayersByName("selected sheet");
+    if (ourlayer.length>0) {
+      map.setBaseLayer(ourlayer[0]);
+    }
   }
+  document.extentform.xleft.value=xleft;
+  document.extentform.xright.value=xright;
+  document.extentform.ytop.value=ytop;
+  document.extentform.ybottom.value=ybottom;
+  document.extentform.srid.value=srid;
 }
 
 function create_selected_layer(layer_id, serverpath) {
@@ -661,3 +693,33 @@ function create_selected_layer(layer_id, serverpath) {
 
   map.addLayer(sheetLayer);
 }
+
+
+function pollStatus() {
+    setTimeout(function() {
+         document.getElementById("page_status").innerHTML = 'Processing ...'
+        $.ajax({
+            url: "/mapsheet/"+document.selectform.mapid.value+"/status",
+            type: "GET",
+            success: function(data) {
+              var mapStatus=data.mapStatus;
+              if(mapStatus.substr(mapStatus.length-3)!='...') {    
+//                alert("Please refresh your browser");
+                thisUrl=window.location.href;
+                if(thisUrl.substr(thisUrl.length-4)!='edit') {  
+                     thisUrl=thisUrl+'/edit'; 
+                }  
+                window.location=thisUrl;
+              } else {
+                ms=mapStatus.substr(0,mapStatus.length-3);
+                if (dots=="...") { dots="."; } else { dots=dots+"."; }
+                document.getElementById("mapstatus").innerHTML=ms+dots; 
+                pollStatus();
+              };
+            },
+            dataType: "json",
+            always: pollStatus,
+            timeout: 2000
+        })
+    }, 2000);
+};

@@ -4,7 +4,7 @@
 
 <script> 
    update_title('<%=@title%>'); 
-   document.getElementById("page_status").innerHTML = '';
+   if (document.readyState==="completed") document.getElementById("page_status").innerHTML = '';
 </script>
 
  <div class="erow">

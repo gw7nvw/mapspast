@@ -12,28 +12,38 @@
     </div>
   <% end %>
 <% end %>
-<% if @place %>
-  <% if @place.errors.any? %>
+<% if @map %>
+  <% if @map.errors.any? or (@map.errortext and @map.errortext.length>0)%>
     <div id="error_explanation" class="erow">
-      <div class="alert alert-error">
-        The form contains <%= pluralize(@place.errors.count, "error") %>.
-      </div>
-      <ul>
-      <% @place.errors.full_messages.each do |msg| %>
-        <li>* <%= msg %></li>
+      <% if @map.errortext and @map.errortext.length>0 %>
+        <div class="alert alert-error">
+          <%=@map.errortext %>
+        </div>
       <% end %>
-      </ul>
+      <% if @map.errors.any? %>
+        <div class="alert alert-error">
+          The form contains <%= pluralize(@map.errors.count, "error") %>.
+        </div>
+        <% end %>
+      </div>
+      <% if @map.errors.any? %>
+        <ul>
+        <% @map.errors.full_messages.each do |msg| %>
+          <li>* <%= msg %></li>
+        <% end %>
+        </ul>
+      <% end %>
     </div>
   <% end %>
 <% end %>
-<% if @route %>
-  <% if @route.errors.any? %>
+<% if @message %>
+  <% if @message.errors.any? %>
     <div id="error_explanation" class="erow">
       <div class="alert alert-error">
-        The form contains <%= pluralize(@route.errors.count, "error") %>.
+        The form contains <%= pluralize(@message.errors.count, "error") %>.
       </div>
       <ul>
-      <% @route.errors.full_messages.each do |msg| %>
+      <% @message.errors.full_messages.each do |msg| %>
         <li>* <%= msg %></li>
       <% end %>
       </ul>

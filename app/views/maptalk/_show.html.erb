@@ -5,7 +5,7 @@
 
 <script>
    update_title('<%=@title%>');
-   document.getElementById("page_status").innerHTML = '';
+   if (document.readyState==="completed") document.getElementById("page_status").innerHTML = '';
 
 $(function () {
   $('#left_panel .pagination a').on('click', function () {
@@ -16,7 +16,11 @@ $(function () {
 
 </script>
 
+<% if @id==0 %>
+  <div class="erow-10px"><b><%= link_to "News ", '/maptalk/'+@id.to_s, remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %></b></div>
+<% else %>
   <div class="erow-10px"><b><%= link_to "All topics ", '/maptalk/'+@id.to_s, remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %></b></div>
+<% end %>
 
   <% if @threads %>
   <div class="name_pagination"> <%= will_paginate(@threads) %></div>

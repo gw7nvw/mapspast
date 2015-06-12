@@ -1,6 +1,10 @@
 class MapsheetController < ApplicationController
  before_action :signed_in_user, only: [:create, :update, :edit, :destroy]
 
+def status
+  @map=Uploadedmap.find_by_id(params[:id])
+
+end
 
 def show
   @map=Uploadedmap.find_by_id(params[:id])
@@ -77,7 +81,7 @@ end
 def update
  @map=Uploadedmap.find_by_id(params[:id])
  if signed_in? and (@map.createdby_id==@current_user.id or @current_user.role_id==1) 
-
+   success=true
   if params[:describe]
     @map.name=params[:uploadedmap][:name]
     @map.series=params[:uploadedmap][:series]
@@ -98,16 +102,19 @@ def update
      if params[:uploadedmap][:image] then 
        @map.image=params[:uploadedmap][:image]
        @map.url=nil
-       @map.save
+       success=@map.save
+       Resque.enqueue(Do_upload, @map.id) 
      else
        if params[:uploadedmap][:url] and params[:uploadedmap][:url].length>0 then 
          @map.url=params[:uploadedmap][:url] 
          @map.mapstatus=Mapstatus.find_by(:name=> "uploading ...")
-         @map.save
+         success=@map.save
          Resque.enqueue(Do_upload, @map.id) 
+       else
+         success=true
+         flash[:error]="Please specify either a URL or filename"
        end
      end
-     Resque.enqueue(Do_upload, @map.id) 
 
   end
 
@@ -129,7 +136,7 @@ def update
     @map.grid_ytop=(pix_ytl+pix_ytr)/2
     @map.grid_ybottom=(pix_ybl+pix_ybr)/2
 
-    @map.save
+    success=@map.save
     Resque.enqueue(Do_cropgeo, @map.id)
   end
 
@@ -161,7 +168,7 @@ def update
     @map.pix_rotation=-1.0*(rottop+rotbottom+(rotright+rotleft)*cutwidth/cutheight)/4
     @map.deg_rotation=Math.atan(@map.pix_rotation.to_f/cutwidth)*180/3.14159
     
-    @map.save
+    success=@map.save
 
   end
 
@@ -173,7 +180,7 @@ def update
     @map.mapstatus=Mapstatus.find_by(:name=> "rotating ...")
     @map.rotate_done=true
 
-    @map.save
+    success=@map.save
     Resque.enqueue(Do_rotate, @map.id)
   end
 
@@ -183,16 +190,22 @@ def update
     @map.mapstatus=Mapstatus.find_by(:name=> "cropping ...")
     @map.crop_done=true
 
-    @map.save
+    success=@map.save
     Resque.enqueue(Do_crop, @map.id)
   end
 
  if params[:skiprotate]
      puts "skiprotate"
+    @map.mapstatus=Mapstatus.find_by(:name=> "rotated")
+    @map.rotate_done=true
+    success=@map.save
+  end
+
+ if params[:skipcrop]
+     puts "skipcrop"
     @map.mapstatus=Mapstatus.find_by(:name=> "cropped")
     @map.crop_done=true
-    @map.rotate_done=true
-    @map.save
+    success=@map.save
   end
 
  if params[:georeference]
@@ -225,17 +238,21 @@ def update
 
     @map.projection_name=Projection.find_by_id(@map.source_srid).name
 
-    @map.save
 
     @map.do_georeference
     @map.mapstatus=Mapstatus.find_by(:name=> "georeferenced")
+    success=@map.save
   end
 
   if params[:create]
     puts "create"
-
+    @map.mapstatus=Mapstatus.find_by(:name=> "nearwhite ...")
+    @map.save
     Resque.enqueue(Do_create, @map.id)
 
+  end
+  if !success then
+    flash[:error]="Error saving changes"
   end
  else
   flash[:error]="Only the creating user can edit a mapsheet"

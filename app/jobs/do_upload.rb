@@ -17,36 +17,47 @@ class Do_upload
         map.save
      end
 
-     if success then map.mapstatus=Mapstatus.find_by(:name => "uploaded")
-     else map.mapstatus=Mapstatus.find_by(:name => "new")
+     if !success then 
+        puts "Upload failed"
+        map.mapstatus=Mapstatus.find_by(:name => "new")
+        map.errortext="Failed to upload file from the specified URL"
+        map.save
      end
-     map.save
 
-     puts "uploaded"
 
-     if !map.is_tiff? then
-       map.mapstatus=Mapstatus.find_by(:name => "converting ...")
-       map.save
-       success=map.do_convert_to_tiff
-       if success then map.mapstatus=Mapstatus.find_by(:name => "converted")
-       else map.mapstatus=Mapstatus.find_by(:name => "new")
+     if success 
+       puts "uploaded"
+       if !map.is_tiff? then
+         map.mapstatus=Mapstatus.find_by(:name => "converting ...")
+         map.save
+         success=map.do_convert_to_tiff
+         if success then map.mapstatus=Mapstatus.find_by(:name => "converted")
+         end
+       else
+         map.mapstatus=Mapstatus.find_by(:name => "converted")
        end
-     else
-       map.mapstatus=Mapstatus.find_by(:name => "converted")
+       map.save
      end
-     map.save
 
-     puts "converted"
+     if !success
+        puts "convert failed"
+        map.mapstatus=Mapstatus.find_by(:name => "new")
+        map.errortext="Specified file could not be converted to a TIFF. Is it an image?"
+        map.save
+     end
 
-     if map.is_geotiff? then
+     if success then 
+       puts "converted"
+       if map.is_geotiff? then
         map.get_all_from_gtiff
-     else
+       else
         map.get_size_from_gtiff
+       end
+       puts "queried"
+       map.save
      end
-     puts "queried"
-     map.save
 
-     map.do_write_mapfile
+     if success then map.do_write_mapfile end
   end
 end
 

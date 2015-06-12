@@ -5,7 +5,15 @@ has_attached_file :image,
 
 validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/tif", "image/jp2"]
 
+validates :name, presence: true
+validates :year_printed, presence: true
+
 belongs_to :mapstatus
+before_save :check_errortext
+
+def check_errortext
+  if !self.errortext_changed? then self.errortext="" end
+end
 
 def destroy_files
   if (self.filename and self.filename.length>0)
@@ -207,6 +215,8 @@ end
 
 def do_upload
   if self.url
+     self.destroy_files
+     
      cmd="wget "+self.url+" -O /var/www/html/maps/"+self.filename+" --no-check-certificate"
      puts "Running "+cmd
      success = system( cmd )
@@ -259,11 +269,12 @@ def do_convert_to_tiff
 
   if success
     cmd="rm /var/www/html/maps/"+self.filename
+    self.filename=self.filename+'.tif'
     puts "Running "+cmd
     success = system( cmd )
   end
 
-  self.filename=self.filename+'.tif'
+  success
 end
 
 def do_expand_palette
@@ -358,23 +369,23 @@ end
 def do_warp
   cmd='gdalwarp -overwrite -s_srs EPSG:'+self.source_srid.to_s+' -t_srs EPSG:2193 -r bilinear -dstnodata 255 -of Gtiff /var/www/html/maps/'+self.filename+' /var/www/html/maps/'+self.filename+'_warp.tif'
   puts "Running "+cmd
-  success = system( cmd )
+  success2 = system( cmd )
 
-  if success
+  if success2
     cmd="rm /var/www/html/maps/"+self.filename
     puts "Running "+cmd
-    success = system( cmd )
+    success2 = system( cmd )
   end
 
-  if success
+  if success2
     cmd="mv /var/www/html/maps/"+self.filename+"_warp.tif /var/www/html/maps/"+self.filename
     puts "Running "+cmd
-    success = system( cmd )
+    success2 = system( cmd )
   end
 
   self.get_all_from_gtiff
 
-  success
+  success2
 end
 
 def do_to_rgb
