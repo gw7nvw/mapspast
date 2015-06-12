@@ -17,6 +17,16 @@
     <%= render 'layouts/shim' %>
   </head>
   <body onload='init()' style="cursor: auto;"> 
+  <div style="position:absolute;">
+  <%= form_tag '/redisplay', :remote=> true, :id => "thelink", :name=> 'extentform', :method=> 'post'%>
+     <input type="hidden" name="xleft"/>
+     <input type="hidden" name="xright"/>
+     <input type="hidden" name="ytop"/>
+     <input type="hidden" name="ybottom"/>
+     <input type="hidden" name="srid"/>
+  </form>
+  </div>
+
     <%= render 'layouts/header' %>
 
     <div id="main_page">

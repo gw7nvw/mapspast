@@ -5,8 +5,7 @@
 
 <script>
    update_title('<%=@title%>');
-   reset_map_controllers();
-   document.getElementById("page_status").innerHTML = '';
+   if (document.readyState==="completed") document.getElementById("page_status").innerHTML = '';
 </script>
 
   <ul class="places">

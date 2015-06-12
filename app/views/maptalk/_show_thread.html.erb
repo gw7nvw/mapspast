@@ -5,7 +5,11 @@
 <script>
    update_title('<%=@title%>');
 </script>
-<div class="erow-10px"><%= link_to "All topics-> ", '/maptalk/'+@id.to_s, remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %>
+<% if @id==0 %>
+  <div class="erow-10px"><%= link_to "News-> ", '/maptalk/'+@id.to_s, remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %>
+<% else %>
+  <div class="erow-10px"><%= link_to "All topics-> ", '/maptalk/'+@id.to_s, remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %>
+<% end %>
   <% if @messages and @messages.count>0 %>
     <b><%=link_to @messages.first.subject.capitalize, '/maptalk/'+@id.to_s+'/?thread='+URI.escape(@messages.first.subject), remote: true, :id => 'thread_link', :onclick => "linkHandler('thread_link')" %> </b></div>
 
