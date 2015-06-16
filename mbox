@@ -1,0 +1,32 @@
+From noreply@wharncliffe.co.nz  Sat Nov 22 00:01:23 2014
+Return-Path: <noreply@wharncliffe.co.nz>
+X-Original-To: mbriggs@wharncliffe.co.nz
+Delivered-To: mbriggs@wharncliffe.co.nz
+Received: from wharncliffe.co.nz (localhost [127.0.0.1])
+	by mail.wharncliffe.co.nz (Postfix) with ESMTPS id 1C1AC12119C
+	for <mbriggs@wharncliffe.co.nz>; Sat, 22 Nov 2014 00:01:23 -0500 (EST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=wharncliffe.co.nz;
+	s=mail; t=1416632483;
+	bh=IJjp4cCIvVQni7X4vIwW2FK5LWRz2GajK/mxx4NqGqQ=;
+	h=Date:From:To:Subject:From;
+	b=W1VnxL0F2QXeGzYwgI0Sv/R5uDfacUq32ImQvEs41fC+ySVghOSIX435oYYNmV6uG
+	 OeowmJiBZXAPinChMGWXntnV0pRuAKsxRqQKhPqSMzasgdFreSHrSKLVCKEZf8i9Em
+	 2eN5NIbMfS5WOJaO+rFVQXz0vq32DWnpECNwE8Qo=
+Date: Sat, 22 Nov 2014 00:01:23 -0500
+From: noreply@wharncliffe.co.nz
+To: mbriggs@wharncliffe.co.nz
+Message-ID: <547018a3dbfd_5f3c25dcecc224b0@mail.wharncliffe.co.nz.mail>
+Subject: Account activation
+Mime-Version: 1.0
+Content-Type: text/plain;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-UID: 19                                                  
+Status: O
+
+Hello test2
+
+Welcome to routeguides.co.nz. Click on the link below to activate your account:
+
+http://routeguides.co.nz:3000/account_activations/SxprQAHeYcevvcYASZ8UwA/edit?email=mbriggs%40wharncliffe.co.nz
+

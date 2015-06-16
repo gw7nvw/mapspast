@@ -4,7 +4,6 @@ class MaptalkController < ApplicationController
   def index
    @id=1
    show()
-   render 'show'
   end
 
   def show
@@ -50,11 +49,15 @@ class MaptalkController < ApplicationController
      @edit=true
      @message=Message.new()
      @message.forum_id=@id
+     render 'show'
    end
 
   end
 
 def show_thread
+   if !@id then @id=params[:id].to_i end
+   if @id==0 then @mtitle="Mapnews" else @mtitle="Maptalk" end
+   if @id==0 then @ptitle="mapnews" else @ptitle="maptalk" end
 
    if (signed_in? and @current_user.role_id==1)
         @messages=Message.find_by_sql [%q[select * from messages where ("subject"=? and "toUser_id" is null and forum_id = ?)  order by created_at], @subject, @id]
@@ -70,7 +73,6 @@ def show_thread
      @subject=nil
      params[:thread]=nil
      show()
-     render 'show'
    end
 end
 
@@ -93,7 +95,7 @@ def update
       auth=@message.checkAuth
       case auth
       when "error"
-        flash[:error] = "Invald name / email combination"
+        flash[:error] = "This name has been used with a different email (or the email has been used with a different name)"
         errr=true
       when "true"
         @message.approved=true
@@ -133,13 +135,13 @@ def update
          @messages=Message.where(:forum_id=>@message.forum_id)
          @forum=true
          @edit=true
-         render 'show'
+         show()
      end
    else
      @messages=Message.where(:forum_id=>@message.forum_id)
      @forum=true
      @edit=true
-     render 'show'
+     show()
    end 
 
 end

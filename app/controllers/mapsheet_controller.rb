@@ -13,11 +13,10 @@ end
 
 def index
   ms1=Mapstatus.find_by(:name => "tiled")
-  ms2=Mapstatus.find_by(:name => "compressed")
   if signed_in? then
-    @mapsheets=Uploadedmap.all
+    @mapsheets=Uploadedmap.find_by_sql [ "select * from uploadedmaps order by name, year_printed" ]
   else
-    @mapsheets=Uploadedmap.find_by_sql [ "select * from uploadedmaps where mapstatus_id = ? or mapstatus_id = ?",ms1.id.to_s, ms2.id.to_s ]
+    @mapsheets=Uploadedmap.find_by_sql [ "select * from uploadedmaps where mapstatus_id >= ? order by name, year_printed",ms1.id.to_s ]
   end
 
 end
@@ -212,7 +211,7 @@ def update
      puts "georeference"
 
     @map.mapstatus=Mapstatus.find_by(:name=> "georeferencing ...")
-    @map.source_srid=params[:map][:source_srid]
+    @map.map_srid=params[:map][:map_srid]
     @map.pix_xtic1=params[:uploadedmap][:pix_xtic1]
     @map.pix_ytic1=params[:uploadedmap][:pix_ytic1]
     @map.pix_xtic2=params[:uploadedmap][:pix_xtic2]
@@ -236,7 +235,7 @@ def update
     @map.grid_xright=@map.grid_width+@map.grid_xleft
     @map.grid_ybottom=@map.grid_height+@map.grid_ytop
 
-    @map.projection_name=Projection.find_by_id(@map.source_srid).name
+    @map.projection_name=Projection.find_by_id(@map.map_srid).name
 
 
     @map.do_georeference
@@ -249,15 +248,31 @@ def update
     @map.mapstatus=Mapstatus.find_by(:name=> "nearwhite ...")
     @map.save
     Resque.enqueue(Do_create, @map.id)
-
   end
+
+  if params[:publish]
+    puts "publish"
+    @map.mapstatus=Mapstatus.find_by(:name=> "publishing ...")
+    @map.save
+    Resque.enqueue(Do_publish, @map.id)
+  end
+
+  if params[:_publish]
+    puts "publish"
+    @map.mapstatus=Mapstatus.find_by(:name=> "publishing ...")
+    @map.save
+    Resque.enqueue(Do_publish, @map.id)
+    render 'show'
+    redir=true
+  end
+
   if !success then
     flash[:error]="Error saving changes"
   end
  else
   flash[:error]="Only the creating user can edit a mapsheet"
  end
- render 'mapsheet/edit'
+ if !redir then render 'mapsheet/edit' end
 end
 
 end

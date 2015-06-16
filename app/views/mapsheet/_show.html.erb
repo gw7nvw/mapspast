@@ -8,11 +8,12 @@
   <%= render 'flash' %>
   <script>
      update_title('<%=@title%>');
+     hide_uploaded_map();
      var readyStateCheckInterval = setInterval(function() {
          if (document.readyState === "complete") {
              clearInterval(readyStateCheckInterval);
              document.getElementById("page_status").innerHTML = '';
-             update_selected_layer(<%=@map.id%>, '<%=@map.serverpath%>', <%=@map.grid_xleft%>, <%=@map.grid_xright%>, <%=@map.grid_ytop%>, <%=@map.grid_ybottom%>, <%=@map.source_srid%>);
+             update_selected_layer(<%=@map.id%>, '<%=@map.serverpath%>', <%=@map.grid_xleft%>, <%=@map.grid_xright%>, <%=@map.grid_ytop%>, <%=@map.grid_ybottom%>, <%=@map.source_srid%>, <%=@map.maxzoom%>);
          }
      }, 10);
   </script>
@@ -22,6 +23,13 @@
         <%=  link_to image_tag("/assets/pencil_edit.png", :border=>0, :class => 'dock-item'), '/mapsheet/'+@map.id.to_s+'/edit', remote: true, onclick: "linkHandler('editbutton')", id:  "editbutton"  %>
       </span>
     </div>
+    <% if @current_user.role_id==1 %>
+      <% if @map.mapstatus.name=="compressed" then %>
+        <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
+           <%= submit_tag "Publish", class: "btn btn-small btn-primary", :style => 'margin-left:17px;', name: "_publish", onclick: "linkHandler('_publish')", id:  "_publish" %>  
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
 
   <p><b>Sheet Name</b></br>
@@ -52,7 +60,11 @@
   <%= @map.year_revised %></p>
     
   <p><b>Projection</b></br>
-  <%= @map.source_srid %></p>
+  <% p=Projection.find_by_id(@map.map_srid) %>
+  <% if p %>
+    <%=p.name%>
+  <% end %>
+  </p>
 
 
   <p><b>Description</b></br>
