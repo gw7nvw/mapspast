@@ -22,7 +22,7 @@ var preferredExtent = new OpenLayers.Bounds(1078269,4639780, 2098245,  6268806);
 var tiffBounds = new OpenLayers.Bounds( -20037508.34,-20037508.34,20037508.34,20037508.34)
 var tiffProj="900913";
 var mapMinZoom = 5;
-var mapMaxZoom = 14;
+var mapMaxZoom = 15;
 var emptyTileURL = "http://www.maptiler.org/img/none.png";
 OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
 
@@ -62,11 +62,16 @@ function init(){
 
   //Projections
   Proj4js.defs["EPSG:2193"] = "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
+  Proj4js.defs["EPSG:999999"] = "+proj=tmerc +lat_0=0 +lon_0=167.5 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
+  Proj4js.defs["EPSG:999998"] = "+proj=tmerc +lat_0=0 +lon_0=170 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
   Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
   Proj4js.defs["EPSG:27200"] = "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +ellps=intl +datum=nzgd49 +units=m +no_defs";
   Proj4js.defs["EPSG:27291"] = "+proj=tmerc +lat_0=-39 +lon_0=175.5 +k=1 +x_0=274319.5243848086 +y_0=365759.3658464114 +ellps=intl +datum=nzgd49 +to_meter=0.9143984146160287 +no_defs";
   Proj4js.defs["EPSG:27292"] = "+proj=tmerc +lat_0=-44 +lon_0=171.5 +k=1 +x_0=457199.2073080143 +y_0=457199.2073080143 +ellps=intl +datum=nzgd49 +to_meter=0.9143984146160287 +no_defs";
   Proj4js.defs["ESPG:4326"] = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs '
+  Proj4js.defs["ESPG:4272"] = '+proj=longlat +ellps=intl +datum=nzgd49 +no_defs'
+  Proj4js.defs["ESPG:4167"] = '+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs'
+
   init_resize();
   // update map size and start 'don't do again until' timer
   window.onresize = function()
@@ -90,6 +95,7 @@ function init(){
   map = new OpenLayers.Map(options);
   
 
+  map.events.register("moveend", map, check_zoomend);
   // layers
   var nztm2009 = new OpenLayers.Layer.TMS("Topo50 2009", "http://au.mapspast.org.nz/topo50/",
   {
@@ -218,11 +224,15 @@ title: 'Zoom to extent of current mapsheet/series'
 }
 
 function hide_uploaded_map(event) {
+   if(typeof(tiff_map)!="undefined") {
      tiff_map.destroy();
      map_map.innerHTML="";
      init();
-     document.getElementById("showupload").style.display="block";
-     document.getElementById("hideupload").style.display="none";
+      if(typeof(document.getElementById("showupload"))!="undefined") {
+       document.getElementById("showupload").style.display="block";
+       document.getElementById("hideupload").style.display="none";
+     }
+   }
 }
 function show_uploaded_map() {
      map.destroy();
@@ -386,6 +396,9 @@ function linkHandler(entity_name) {
      document.getElementById('logo').innerHTML='MapsPast'+title;
      document.title = 'MapsPast'+title;
 }
+   function update_heading(title) {
+     document.getElementById('logo').innerHTML='MapsPast'+title;
+}
 
 function deactivateAllQuery() {
 
@@ -463,7 +476,7 @@ function add_click_to_query_controller() {
             xhr.setRequestHeader("Accept","text/javascript");
           },
           type: "GET",
-          timeout: 20000,
+          timeout: 10000,
           url: "/query/?x="+xy.lon+"&y="+xy.lat+"&layer="+layername,
           complete: function() {
               /* complete also fires when error ocurred, so only clear if no error has been shown */
@@ -505,7 +518,7 @@ function add_click_to_create_controller_grid() {
        /*convert to map projection */
 
        var mapProj =  map.projection;
-       var dstProj =  new OpenLayers.Projection("EPSG:"+document.getElementById("map_source_srid").value);
+       var dstProj =  new OpenLayers.Projection("EPSG:"+document.getElementById("map_map_srid").value);
        var thisPoint = new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat).transform(mapProj,dstProj);
 
          document.getElementById("uploadedmap_grid_x"+clickDest).value=thisPoint.x;
@@ -606,7 +619,7 @@ function selectGrid(dest) {
   } else {
     if (!map.layers) { hide_uploaded_map() };
   }
-  if(document.getElementById("map_source_srid").value=="") { 
+  if(document.getElementById("map_map_srid").value=="") { 
      alert("You must select a projection first");
   } else {
     selectNothing();
@@ -660,7 +673,7 @@ function zoom_to_mapsheet() {
   }
 }
 
-function update_selected_layer(layer_id, serverpath, xleft, xright, ytop, ybottom, srid) {
+function update_selected_layer(layer_id, serverpath, xleft, xright, ytop, ybottom, srid, maxzoom) {
   if (typeof(map)!='undefined') { 
     ourlayer=map.getLayersByName("selected sheet");
     if (ourlayer.length>0) {
@@ -677,6 +690,8 @@ function update_selected_layer(layer_id, serverpath, xleft, xright, ytop, ybotto
   document.extentform.ytop.value=ytop;
   document.extentform.ybottom.value=ybottom;
   document.extentform.srid.value=srid;
+  document.extentform.maxzoom.value=maxzoom;
+  check_zoomend();
 }
 
 function create_selected_layer(layer_id, serverpath) {
@@ -714,12 +729,33 @@ function pollStatus() {
                 ms=mapStatus.substr(0,mapStatus.length-3);
                 if (dots=="...") { dots="."; } else { dots=dots+"."; }
                 document.getElementById("mapstatus").innerHTML=ms+dots; 
-                pollStatus();
+//                pollStatus();
               };
             },
             dataType: "json",
-            always: pollStatus,
-            timeout: 2000
+            always: pollStatus(),
+            timeout: 5000
         })
-    }, 2000);
+    }, 5000);
 };
+
+function check_zoomend() {
+  var layername=map.baseLayer.name;
+  var maxzoom;
+
+  if(layername=='selected sheet') {
+     maxzoom=document.extentform.maxzoom.value;
+  } else {
+     maxzoom=14;
+  }
+
+  if(layername=='Topo50 2009') {
+     maxzoom=15;
+  }
+  var z = map.getZoom()+5;
+  //zoom back out (on a timer so current zoom envent can exit)
+  if( z>maxzoom) {
+          setTimeout( function() { map.zoomTo(maxzoom-5);}, 100);
+  }
+}
+        

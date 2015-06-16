@@ -4,7 +4,8 @@
 <%= render 'flash' %>
 
 <script>
-   update_title('<%=@title%>');
+   update_heading('<%=@title%>');
+   hide_uploaded_map();
    if (document.readyState==="completed") document.getElementById("page_status").innerHTML = '';
 
 $(function () {

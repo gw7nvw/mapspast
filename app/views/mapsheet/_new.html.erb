@@ -1,3 +1,11 @@
+<% provide(:title, 'Mapsheet | New' ) %>
+<% @title=" | Mapsheet | New" %>
+<%= render 'flash' %>
+<script>
+   update_title('<%=@title%>');
+   hide_uploaded_map();
+</script>
+
 <div class="erow">
   <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
     <%= render 'shared/error_messages' %>

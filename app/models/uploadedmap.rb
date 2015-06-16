@@ -13,6 +13,7 @@ before_save :check_errortext
 
 def check_errortext
   if !self.errortext_changed? then self.errortext="" end
+  if !self.source_srid then self.source_srid=self.map_srid end
 end
 
 def destroy_files
@@ -25,7 +26,11 @@ def destroy_files
     puts "Running "+cmd
     success = system( cmd )
 
-    cmd="rm -r /var/www/html/mapspast/public/tiles/tiles-"+self.id.to_s
+    cmd="rm -r /var/www/html/maps/tiles-"+self.id.to_s
+    puts "Running "+cmd
+    success2 = system( cmd )
+
+    cmd="aws s3 rm --recursive s3://au.mapspast.org.nz/tiles-"+self.id.to_s
     puts "Running "+cmd
     success2 = system( cmd )
   end
@@ -200,9 +205,15 @@ def calc_max_zoom
        zoom+=1
      end
    end    
-   self.maxzoom=zoom
 
+   #check the zoomlevel makes sense
+   maxzoombyscale=14.0/100000
+   if self.scale and self.scale>0
+     if (self.scale*maxzoombyscale).round<zoom then zoom=(self.scale*maxzoombyscale).round end
+   end
+   self.maxzoom=zoom
 end
+
 def calc_resolution
  if (self.grid_width and self.grid_height and self.pix_width and self.pix_height)
    self.xresolution=self.grid_width/self.pix_width
@@ -367,14 +378,20 @@ end
  
 
 def do_warp
-  cmd='gdalwarp -overwrite -s_srs EPSG:'+self.source_srid.to_s+' -t_srs EPSG:2193 -r bilinear -dstnodata 255 -of Gtiff /var/www/html/maps/'+self.filename+' /var/www/html/maps/'+self.filename+'_warp.tif'
+  if self.source_srid>100000 then
+    proj4txt=Projection.find_by_id(self.source_srid).proj4
+    cmd='gdalwarp -overwrite -s_srs "'+proj4txt+'" -t_srs EPSG:2193 -r bilinear -dstnodata 255 -of Gtiff /var/www/html/maps/'+self.filename+' /var/www/html/maps/'+self.filename+'_warp.tif'
+
+  else
+    cmd='gdalwarp -overwrite -s_srs EPSG:'+self.source_srid.to_s+' -t_srs EPSG:2193 -r bilinear -dstnodata 255 -of Gtiff /var/www/html/maps/'+self.filename+' /var/www/html/maps/'+self.filename+'_warp.tif'
+  end
   puts "Running "+cmd
   success2 = system( cmd )
 
   if success2
-    cmd="rm /var/www/html/maps/"+self.filename
+    cmd="rm /var/www/html/maps/"+self.filename+" "+self.id.to_s+".tfw"
     puts "Running "+cmd
-    success2 = system( cmd )
+    success3 = system( cmd )
   end
 
   if success2
@@ -414,6 +431,11 @@ def do_tile
   puts "Running "+cmd
   success = system( cmd )
 
+  if success
+    cmd="rm /var/www/html/maps/"+self.filename
+    puts "Running "+cmd
+    success = system( cmd )
+  end
   success
 end
 
@@ -488,6 +510,43 @@ def unpublish
       m.destroy
     end
   end
+end
+
+def push_to_storage
+  cmd ="mkdir /var/www/html/maps/temp"
+  puts "Running "+cmd
+  success = system( cmd )
+
+  cmd ="rm -r /var/www/html/maps/temp/*"
+  puts "Running "+cmd
+  success = system( cmd )
+
+  cmd ="cp -r /var/www/html/maps/tiles-"+self.id.to_s+" /var/www/html/maps/temp"
+  puts "Running "+cmd
+  success = system( cmd )
+
+  if success then
+    cmd ="aws s3 mv --recursive /var/www/html/maps/temp s3://au.mapspast.org.nz/"
+    puts "Running "+cmd
+    system( cmd )
+  end
+
+
+   cmd="find /var/www/html/maps/temp -name '*.png' -print | wc -l"
+   str=`#{cmd}`
+   if str[0]=="0" then success=true else success=false end
+   puts ":"+str+":"
+   puts success
+
+  if success then 
+    cmd ="rm -r /var/www/html/maps/temp/ /var/www/html/maps/tiles-"+self.id.to_s
+    puts "Running "+cmd
+    system( cmd )
+  end
+
+  if success then
+    self.serverpath="http://au.mapspast.org.nz/"
+  end 
 end
 
 #helpers

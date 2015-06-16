@@ -4,16 +4,25 @@
   <%= render 'flash' %>
   <script>
      update_title('<%=@title%>');
+     hide_uploaded_map();
      if (document.readyState==="completed") document.getElementById("page_status").innerHTML = '';
   </script>
   <% if @mapsheets %>
     <ul>
       <% @mapsheets.each do |ms| %>
-        <%if ms.year_printed%>
-         <li><%=link_to ms.name+" ("+ms.year_printed.to_s+")", '/mapsheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %></li>
-        <% else %>
-          <li><%=link_to ms.name, '/mapsheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %></li>
-        <% end %>
+        <li>
+          <% if ms.mapstatus.name=="tiled" or ms.mapstatus.name=="compressed" %>
+             <%="*"%>
+          <% end %>
+          <% if ms.mapstatus_id<Mapstatus.find_by(:name => "tiled").id %>
+             <%="(dr)" %>
+          <% end %>
+          <%if ms.year_printed%>
+            <%=link_to ms.name+" ("+ms.year_printed.to_s+")", '/mapsheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
+          <% else %>
+            <%=link_to ms.name, '/mapsheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
+          <% end %>
+        </li>
   
       <% end %>
     </ul>
