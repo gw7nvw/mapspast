@@ -14,7 +14,8 @@
 #Mapseries.create(name: "Topo50 2009", year_of_snapshot: 2009, series: "Topo50", edition: nil, scale:50000, details: "Snapshot of the first editions of the Topo50 series in 1999", createdBy_id: 1)
 #Mapseries.create(name: "selected sheet", year_of_snapshot: nil, series: nil, edition: nil, scale:nil, details: nil, createdBy_id: 1)
 #Projection.create(id: 999999, name: "Trans Mercator 167.5 (meter grid)", proj4: "+proj=tmerc +lat_0=0 +lon_0=167.5 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=intl ", wkt: "", epsg: 999999)
-#Projection.create(id: 999998, name: "Trans Mercator 170.0 (meter grid)", proj4: "+proj=tmerc +lat_0=0 +lon_0=170 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs ", wkt: "", epsg: 999999)
+#Projection.create(id: 999998, name: "Trans Mercator 170.0 (meter grid)", proj4: "+proj=tmerc +lat_0=0 +lon_0=170 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs ", wkt: "", epsg: 999998)
+#Projection.create(id: 999997, name: "Trans Mercator 167.625 (meter grid)", proj4: "+proj=tmerc +lat_0=0 +lon_0=167.625 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs ", wkt: "", epsg: 999997)
 #Projection.create(id: 2193, name: "NZTM2000 (meter grid)", proj4: "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84 0,0,0,0,0,0,0 +no_defs", wkt: "", epsg: 2193)
 #Projection.create(id: 4326, name: "WGS84 (lat/long)", proj4: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", wkt: "", epsg: 4326)
 #Projection.create(id: 27200, name: "NZMG49 (meter grid)", proj4: "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +ellps=intl +datum=nzgd49 +units=m +no_defs", wkt: "", epsg: 27200)
@@ -45,7 +46,16 @@
 #Mapstatus.create(id: 19, name: "tiled")
 #Mapstatus.create(id: 20, name: "compressing ...")
 #Mapstatus.create(id: 21, name: "compressed")
-Mapstatus.create(id: 22, name: "publishing ...")
-Mapstatus.create(id: 23, name: "published")
+#Mapstatus.create(id: 22, name: "publishing ...")
+#Mapstatus.create(id: 23, name: "published")
 #
+Papersize.create(name: "A4 portrait 96dpi", width: 793, height: 1122)
+Papersize.create(name: "A4 landscape 96dpi", width: 1122, height: 793)
+Papersize.create(name: "A3 portrait  96dpi", width: 1122, height: 1587)
+Papersize.create(name: "A3 landscape 96dpi", width: 1587, height: 1122)
+Papersize.create(name: "A4 portrait 300dpi", width: 2480, height: 3508)
+Papersize.create(name: "A4 landscape 300dpi", width: 3508, height: 2480)
+Papersize.create(name: "A3 portrait  300dpi", width: 3508, height: 4961)
+Papersize.create(name: "A3 landscape 300dpi", width: 4961, height: 3508)
+
 ##

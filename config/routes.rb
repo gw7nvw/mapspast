@@ -8,10 +8,13 @@ resources :maptalk, only: [:index, :show, :update, :approve, :destroy]
 resources :address_auths, only: [:edit]
 resources :account_activations, only: [:edit]
 resources :mapsheet
+resources :help, only: [:show]
+resources :query, only: [:show]
 
 
 root 'maptalk#show'
   get "about" => "viewer#home"
+  get "print" => "viewer#print"
   get "sessions" => 'maptalk#show'
   get "mapsheetinfo" => "mapsheet#new_info"
   match "mapsheet/:id/status" => "mapsheet#status",

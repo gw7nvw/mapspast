@@ -35,7 +35,11 @@
 
                 </ul>
               </li>
-            </ul>
+  
+              <li>
+                <%= link_to image_tag("/assets/download.png",   :class => 'dock-item'), '/print/', remote: true, onclick: "linkHandler('print')", id:  "print"  %>
+              </li>
+          </ul>
           </nav>
         </div>
       </header>

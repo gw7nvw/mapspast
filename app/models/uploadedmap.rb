@@ -205,11 +205,16 @@ def calc_max_zoom
        zoom+=1
      end
    end    
-
+   puts "zoom by res:"+zoom.to_s
    #check the zoomlevel makes sense
-   maxzoombyscale=14.0/100000
    if self.scale and self.scale>0
-     if (self.scale*maxzoombyscale).round<zoom then zoom=(self.scale*maxzoombyscale).round end
+     maxzoom=15
+     maxscale=50000.0
+     while self.scale>=maxscale
+       maxscale=maxscale*2
+       maxzoom=maxzoom-1
+     end 
+     if (maxzoom<zoom) then zoom=maxzoom end
    end
    self.maxzoom=zoom
 end

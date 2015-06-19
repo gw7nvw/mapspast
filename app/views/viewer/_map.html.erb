@@ -1,5 +1,9 @@
-<div id="map_map" style="z-index:;position:absolute;0;width:75%;">
-</div>
-<div id="page_status" style="z-index:9999;position:absolute;right:0;">
-</div>
-
+<% if @print %>
+  <div id="map_map" style="width:<%=@wwidth%>px;height:<%=@wheight%>px"></div>
+  <script>
+    var print_mode=true;
+  </script>
+<% else %>
+  <div id="map_map" style="z-index:1;position:absolute;0;width:75%;"> </div>
+  <div id="page_status" style="z-index:9999;position:absolute;right:0;"> </div>
+<% end %>
