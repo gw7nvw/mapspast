@@ -9,6 +9,7 @@ var tiff_map;
 var dots="";
 var map;
 var vectorLayer;
+var ourcanvas;
 var searchMode;
 var cross_red;
 var click_to_create;
@@ -253,7 +254,8 @@ function init(){
       map.baseLayer.events.destroy("loadend");
       html2canvas(document.getElementById("map_map"),  
        {
-         allowTaint:true, onrendered: function(canvas) {
+         allowTaint: true, onrendered: function(canvas) {
+           ourcanvas=canvas;
            document.body.appendChild(canvas);
            document.getElementById("map_map").style.display="none";
            canvas.toBlob(function(blob) {
@@ -410,8 +412,8 @@ function linkHandler(entity_name) {
     $(function() {
      $.rails.ajax = function (options) {
        options.tryCount= (!options.tryCount) ? 0 : options.tryCount;0;
-       options.timeout = 15000*(options.tryCount+1);
-       options.retryLimit=3;
+       options.timeout = 5000*(options.tryCount+1);
+       options.retryLimit=1;
        options.complete = function(jqXHR, thrownError) {
          /* complete also fires when error ocurred, so only clear if no error has been shown */
          if(thrownError=="timeout") {
@@ -845,7 +847,8 @@ function printmap() {
   var height=document.selectform.pix_height.value;
   var sheetid=map.baseLayer.name;
   var layerid=document.extentform.layerid.value;
-  window.open('http://mapspast.org.nz/viewer/map/?print=true&left='+xl+'&right='+xr+'&top='+yt+'&bottom='+yb+'&sheetid='+sheetid+'&layerid='+layerid+'&wwidth='+width+'&wheight='+height, 'printwindow');
+  var maxzoom=document.extentform.maxzoom.value;
+  window.open('http://au.mapspast.org.nz/print.html?print=true&left='+xl+'&right='+xr+'&top='+yt+'&bottom='+yb+'&sheetid='+sheetid+'&layerid='+layerid+'&wwidth='+width+'&wheight='+height+'&maxzoom='+maxzoom, 'printwindow');
 }
 
 function updateDimensions() {
