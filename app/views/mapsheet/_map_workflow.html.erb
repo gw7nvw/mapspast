@@ -44,6 +44,11 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion" href="#collapseZero">1. Describe <%='(done)' if @map.name and @map.name.length>0%></a>
+              <div class="rightbuttons">
+                <span title="Help"%>
+                  <%=image_tag("/assets/help-16.png", :border=>0, :class => 'dock-item', onclick: "showInfo('Describe', '/help/describe')", id:  "help_describe")  %>
+                </span>
+              </div>
             </h4>
           </div>
           <div id="collapseZero" class="panel-collapse collapse <%='in' if !(@map.name and @map.name.length>0)%>">
@@ -90,6 +95,11 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">2. Upload <%='(done)' if @map.is_image? or @map.mapstatus_id >= Mapstatus.find_by(:name => "tiled").id%></a>
+                      <div class="rightbuttons">
+                        <span title="Help"%>
+                          <%=image_tag("/assets/help-16.png", :border=>0, :class => 'dock-item', onclick: "showInfo('Upload', '/help/upload')", id:  "help_upload")  %>
+                        </span>
+                      </div>
                 </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse <%='in' if !@map.is_image? and @map.mapstatus_id < Mapstatus.find_by(:name => "tiled").id%>">
@@ -118,6 +128,11 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">3. Check twist & skew <%='(done)' if @map.rotate_done or is_geotiff%></a>
+                      <div class="rightbuttons">
+                        <span title="Help"%>
+                          <%=image_tag("/assets/help-16.png", :border=>0, :class => 'dock-item', onclick: "showInfo('Check Twist and Skew', '/help/rotate')", id:  "help_rotate")  %>
+                        </span>
+                      </div>
                 </h4>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse <%='in' if @map.mapstatus.compare("converted")=="=" and !is_geotiff%>">
@@ -197,6 +212,11 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">4. Crop <%='(done)' if @map.crop_done%></a>
+                      <div class="rightbuttons">
+                        <span title="Help"%>
+                          <%=image_tag("/assets/help-16.png", :border=>0, :class => 'dock-item', onclick: "showInfo('Crop', '/help/crop')", id:  "help_crop")  %>
+                        </span>
+                      </div>
                 </h4>
             </div>
             <div id="collapseThree" class="panel-collapse collapse <%='in' if (@map.mapstatus.compare("converted")=="=" and is_geotiff) or (@map.rotate_done and !@map.crop_done)%>">
@@ -264,6 +284,11 @@
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">5. Georeference <%='(done)' if is_geotiff%></a>
+                      <div class="rightbuttons">
+                        <span title="Help"%>
+                          <%=image_tag("/assets/help-16.png", :border=>0, :class => 'dock-item', onclick: "showInfo('Georeference', '/help/georeference')", id:  "help_georeference")  %>
+                        </span>
+                      </div>
               </h4>
             </div>
 
@@ -324,10 +349,15 @@
           </div>
           </div>
         </div>
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="width:100%">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">6. Create tiles <%='(done)' if @map.mapstatus.compare('tiling ...')=='>' %></a>
+                      <div class="rightbuttons">
+                        <span title="Help"%>
+                          <%=image_tag("/assets/help-16.png", :border=>0, :class => 'dock-item', onclick: "showInfo('Create', '/help/create')", id:  "help_create")  %>
+                        </span>
+                      </div>
                 </h4>
             </div>
             <div id="collapseFive" class="panel-collapse collapse <%='in' if @map.rotate_done and @map.crop_done and is_geotiff and @map.mapstatus.compare('tiled')=='<' %>">

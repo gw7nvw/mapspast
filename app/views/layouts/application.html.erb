@@ -9,24 +9,38 @@
 
     <title>MapsPast | Current and historical topographic maps (topomaps) of New Zealand</title>
     <script src="/assets/OpenLayers.js"></script>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+<% if @print %>
+   <link rel="stylesheet" type="text/css" href="/assets/print.css" />
+   <script src="/assets/html2canvas.js"></script>
+   <script src="/assets/canvas-toBlob.js"></script>
+   <script src="/assets/FileSaver.js"></script>
+<% else %>
     <%= stylesheet_link_tag "application", media: "all", "jquery-ui.min" => true %>
-
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
+<% end %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   </head>
   <body onload='init()' style="cursor: auto;"> 
-  <div style="position:absolute;">
-  <%= form_tag '/redisplay', :remote=> true, :id => "thelink", :name=> 'extentform', :method=> 'post'%>
-     <input type="hidden" name="xleft"/>
-     <input type="hidden" name="xright"/>
-     <input type="hidden" name="ytop"/>
-     <input type="hidden" name="ybottom"/>
-     <input type="hidden" name="srid"/>
-     <input type="hidden" name="maxzoom"/>
-  </form>
-  </div>
+    <div style="position:absolute;">
+      <%= form_tag '/redisplay', :remote=> true, :id => "thelink", :name=> 'extentform', :method=> 'post'%>
+         <input type="hidden" name="xleft"/>
+         <input type="hidden" name="xright"/>
+         <input type="hidden" name="ytop"/>
+         <input type="hidden" name="ybottom"/>
+         <input type="hidden" name="srid"/>
+         <input type="hidden" name="layerid" <%='value='+@selectedlayer.id.to_s if @selectedlayer%> />
+         <input type="hidden" name="maxzoom"/>
+         <input type="hidden" name="serverpath" <%='value='+@selectedlayer.serverpath if @selectedlayer%> />
+         <input type="hidden" name="dxleft" <%='value='+@dleft if @dleft%> />
+         <input type="hidden" name="dxright"<%='value='+@dright if @dright%> />
+         <input type="hidden" name="dytop" <%='value='+@dtop if @dtop%> />
+         <input type="hidden" name="dybottom" <%='value='+@dbottom if @dbottom%> />
+         <input type="hidden" name="dsheetid" value="<%=@dsheetid%>" />
+      </form>
+    </div>
+<%if !@print %>
 
     <%= render 'layouts/header' %>
 
@@ -44,5 +58,8 @@
        <div class="clear"></div> 
     </div>
 
+<% else %>
+         <%=render 'viewer/map' %>
+<% end %>
   </body>
 </html>
