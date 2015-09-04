@@ -9,9 +9,12 @@
       var mbottom=(location.search.split('top=')[1]||'').split('&')[0];
       var mleft=(location.search.split('left=')[1]||'').split('&')[0];
       var mright=(location.search.split('right=')[1]||'').split('&')[0];
-      var layerid=(location.search.split('layerid=')[1]||'').split('&')[0];
-      var sheetid=decodeURI((location.search.split('sheetid=')[1]||'').split('&')[0]);
+      var sheetid=(location.search.split('sheetid=')[1]||'').split('&')[0];
+      var layerid=decodeURI((location.search.split('layerid=')[1]||'').split('&')[0]);
       var maxzoom=(location.search.split('maxzoom=')[1]||'').split('&')[0];
+      var filetype=(location.search.split('filetype=')[1]||'').split('&')[0];
+      var filename=(location.search.split('filename=')[1]||'').split('&')[0];
+      if (typeof(filename)=='undefined' || filename.length<1) {filename="map";}
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="content-language" content="en-uk">
@@ -26,6 +29,7 @@
    <script src="http://mapspast.org.nz/assets/FileSaver.js"></script>
   </head>
   <body onload='init()' style="cursor: auto;"> 
+  <div id="map_status">Loading ...</div>
   <div id="map_map"></div>
   </body>
 </html>

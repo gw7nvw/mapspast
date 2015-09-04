@@ -34,6 +34,9 @@ root 'maptalk#show'
   delete 'logout' => "sessions#destroy"
   match '/maptalk', to: 'maptalk#update',    via:'post'
   get "query" => "query#show" 
+  match '/layerswitcher', to: "viewer#layerswitcher", via: 'get'
+  match '/legend', to: "viewer#legend", via: 'get'
+
 
   
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150617051930) do
+ActiveRecord::Schema.define(version: 20150903201907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(version: 20150617051930) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "auth_digest"
+  end
+
+  create_table "maplayers", force: true do |t|
+    t.string   "name"
+    t.string   "baseurl"
+    t.string   "basemap"
+    t.integer  "maxzoom"
+    t.integer  "minzoom"
+    t.string   "imagetype"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "mapseries", force: true do |t|
@@ -49,7 +60,7 @@ ActiveRecord::Schema.define(version: 20150617051930) do
     t.string   "series"
     t.string   "sheet"
     t.string   "edition"
-    t.string   "details"
+    t.text     "details"
     t.integer  "source_srid"
     t.decimal  "xleft"
     t.decimal  "xright"
@@ -111,7 +122,7 @@ ActiveRecord::Schema.define(version: 20150617051930) do
     t.integer  "scale"
     t.string   "sheet"
     t.string   "source"
-    t.string   "attribution"
+    t.text     "attribution"
     t.integer  "year_printed"
     t.integer  "year_revised"
     t.text     "description"

@@ -49,13 +49,24 @@
 #Mapstatus.create(id: 22, name: "publishing ...")
 #Mapstatus.create(id: 23, name: "published")
 #
-Papersize.create(name: "A4 portrait 96dpi", width: 793, height: 1122)
-Papersize.create(name: "A4 landscape 96dpi", width: 1122, height: 793)
-Papersize.create(name: "A3 portrait  96dpi", width: 1122, height: 1587)
-Papersize.create(name: "A3 landscape 96dpi", width: 1587, height: 1122)
-Papersize.create(name: "A4 portrait 300dpi", width: 2480, height: 3508)
-Papersize.create(name: "A4 landscape 300dpi", width: 3508, height: 2480)
-Papersize.create(name: "A3 portrait  300dpi", width: 3508, height: 4961)
-Papersize.create(name: "A3 landscape 300dpi", width: 4961, height: 3508)
+#Papersize.create(name: "A4 portrait 96dpi", width: 793, height: 1122)
+#Papersize.create(name: "A4 landscape 96dpi", width: 1122, height: 793)
+#Papersize.create(name: "A3 portrait  96dpi", width: 1122, height: 1587)
+#Papersize.create(name: "A3 landscape 96dpi", width: 1587, height: 1122)
+#Papersize.create(name: "A4 portrait 300dpi", width: 2480, height: 3508)
+#Papersize.create(name: "A4 landscape 300dpi", width: 3508, height: 2480)
+#Papersize.create(name: "A3 portrait  300dpi", width: 3508, height: 4961)
+#Papersize.create(name: "A3 landscape 300dpi", width: 4961, height: 3508)
+
+#Maplayer.create(name: "NZTM Topo 2009", baseurl: "http://au.mapspast.org.nz/topo50/", basemap: "mapspast", minzoom: 0, maxzoom: 10, imagetype: "png")
+#Maplayer.create(name: "NZMS260 1999", baseurl: "http://au.mapspast.org.nz/nzms260-1999/", basemap: "mapspast", minzoom: 0, maxzoom: 9, imagetype: "png")
+#Maplayer.create(name: "NZMS1/260 1989", baseurl: "http://au.mapspast.org.nz/nzms-1989/", basemap: "mapspast", minzoom: 0, maxzoom: 9, imagetype: "png")
+#Maplayer.create(name: "NZMS1 1979", baseurl: "http://au.mapspast.org.nz/nzms-1979/", basemap: "mapspast", minzoom: 0, maxzoom: 9, imagetype: "png")
+#Maplayer.create(name: "NZMS1 1969", baseurl: "http://au.mapspast.org.nz/nzms-1969/", basemap: "mapspast", minzoom: 0, maxzoom: 9, imagetype: "png")
+#Maplayer.create(name: "NZMS1 1959", baseurl: "http://au.mapspast.org.nz/nzms-1959/", basemap: "mapspast", minzoom: 0, maxzoom: 9, imagetype: "png")
+#Maplayer.create(name: "(LINZ) Topo50 latest", baseurl: "http://tiles-a.data-cdn.linz.govt.nz/services;key=d8c83efc690a4de4ab067eadb6ae95e4/tiles/v4/layer=767/EPSG:2193/", basemap: "linz", minzoom: 0, maxzoom: 16, imagetype: "png")
+#Maplayer.create(name: "(LINZ) Airphoto latest", baseurl: "http://tiles-a.data-cdn.linz.govt.nz/services;key=d8c83efc690a4de4ab067eadb6ae95e4/tiles/v4/set=2/EPSG:2193/", basemap: "linz", minzoom: 0, maxzoom: 16, imagetype: "png")
+Maplayer.create(name: "selected sheet", baseurl: "", basemap: "mapspast", minzoom: 0, maxzoom: 0, imagetype: "png")
+
 
 ##

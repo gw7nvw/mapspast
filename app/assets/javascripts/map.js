@@ -22,10 +22,17 @@ var mapBounds = new OpenLayers.Bounds(748961,3808210, 2940563,  6836339);
 var preferredExtent = new OpenLayers.Bounds(1078269,4639780, 2098245,  6268806);
 var tiffBounds = new OpenLayers.Bounds( -20037508.34,-20037508.34,20037508.34,20037508.34)
 var tiffProj="900913";
-var mapMinZoom = 5;
-var mapMaxZoom = 15;
+var mapMinZoom = 0;
+var mapMaxZoom = 10;
 var emptyTileURL = "http://au.mapspast.org.nz/none.png";
 var renderer;
+var sheetid;
+var layerid;
+var mapset="mapspast";
+var current_proj="2193"
+var current_projname="NZTM2000"
+var current_projdp=0;
+
 OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
 
   
@@ -60,7 +67,44 @@ function init_resize() {
   cross_red.rotation = 0;
   cross_red.strokeLinecap = "butt";
 
+function init_mapspast() {
+  mapset="mapspast";
+  currentextent=mapBounds;
+  if(typeof(map)!='undefined') {
+     var currentextent=map.getExtent()
+     map.destroy();
+  }
+  do_init();
+  map.zoomToExtent(currentextent);
+}
+
+function init_linz() {
+  mapset="linz";
+  currentextent=mapBounds;
+  if(typeof(map)!='undefined') {
+     currentextent=map.getExtent()
+     map.destroy();
+  }
+  do_init();
+  map.zoomToExtent(currentextent);
+  map.zoomIn();
+}
 function init(){
+  if(typeof(map)=='undefined') {
+    do_init();
+  {
+    setTimeout( function() { mapLayers();}, 500);
+  }
+
+  }
+}
+
+function do_init(){
+
+  var centrex=(location.search.split('x=')[1]||'').split('&')[0];
+  var centrey=(location.search.split('y=')[1]||'').split('&')[0];
+  layerid=decodeURI((location.search.split('layerid=')[1]||'').split('&')[0]);
+  var zoom=(location.search.split('zoom=')[1]||'').split('&')[0];
 
   //Projections
   Proj4js.defs["EPSG:2193"] = "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";
@@ -75,172 +119,228 @@ function init(){
   Proj4js.defs["ESPG:4272"] = '+proj=longlat +ellps=intl +datum=nzgd49 +no_defs'
   Proj4js.defs["ESPG:4167"] = '+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs'
 
-  if(typeof(print_mode)=='undefined') {
-    init_resize();
-  }
+  init_resize();
   // update map size and start 'don't do again until' timer
   window.onresize = function()
   {
     setTimeout( function() { map.updateSize();}, 1000);
   }
 
-
-
   // map 
-  var options = {
+     var mapspast_options = {
+            projection: new OpenLayers.Projection("EPSG:2193"),
+            displayProjection: new OpenLayers.Projection("EPSG:"+current_proj),
+            units: "m",
       maxResolution: 4891.969809375,
       numZoomLevels: 11,
-      maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34),
-      div: "map_map",
-      controls: [],
+      maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508.34)
+    };
+    var linz_options = {
       projection: new OpenLayers.Projection("EPSG:2193"),
-      units: "m",
-      displayProjection: new OpenLayers.Projection("EPSG:2193"),
-  };
-  map = new OpenLayers.Map(options);
-  
+            displayProjection: new OpenLayers.Projection("EPSG:"+current_proj),
+            units: "m",
+      resolutions: [8960, 4480, 2240, 1120, 560, 280, 140, 70, 28, 14, 7, 2.8, 1.4, 0.7, 0.28, 0.14, 0.07],
+      numZoomLevels: 11,
+      maxExtent:  new OpenLayers.Bounds(827933.23, 3729820.29, 3195373.59, 7039943.58)
+    };
+
+    if (mapset=="mapspast") {
+      map = new OpenLayers.Map('map_map', mapspast_options);
+    } else {
+      map = new OpenLayers.Map('map_map', linz_options);
+    }
+ 
     renderer = OpenLayers.Util.getParameters(window.location.href).renderer;
     renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;
 
   map.events.register("moveend", map, check_zoomend);
   // layers
-  var nztm2009 = new OpenLayers.Layer.TMS("Topo50 2009", "http://au.mapspast.org.nz/topo50/",
-  {
-      serviceVersion: '.',
-      layername: '.',
-      alpha: true,
-      type: 'png',
-      isBaseLayer: true,
-      tileOptions: {crossOriginKeyword: 'anonymous'},
-      getURL: getURL
-  });
+  if (mapset=="mapspast") {
 
-  var nzms1999 = new OpenLayers.Layer.TMS("NZMS260 1999", "http://au.mapspast.org.nz/nzms260-1999/",
-  {
-      serviceVersion: '.',
-      layername: '.',
-      alpha: true,
-      type: 'png',
-      isBaseLayer: true,
-      tileOptions: {crossOriginKeyword: 'anonymous'},
-      getURL: getURL
-  });
+    var nztm2009 = new OpenLayers.Layer.TMS("NZTM Topo 2009", "http://au.mapspast.org.nz/topo50/",
+    {
+        serviceVersion: '.',
+        layername: '.',
+        alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+        getURL: getURL
+    });
+  
+    var nzms1999 = new OpenLayers.Layer.TMS("NZMS260 1999", "http://au.mapspast.org.nz/nzms260-1999/",
+    {
+        serviceVersion: '.',
+          layername: '.',
+        alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+        getURL: getURL
+    });
+  
+      var nzms1989 = new OpenLayers.Layer.TMS("NZMS1/260 1989", "http://au.mapspast.org.nz/nzms-1989/",
+    {
+        serviceVersion: '.',
+        layername: '.',
+        alpha: true,
+        type: 'png',
+          isBaseLayer: true,
+        getURL: getURL
+    });
+  
+      var nzms1979 = new OpenLayers.Layer.TMS("NZMS1 1979", "http://au.mapspast.org.nz/nzms-1979/",
+    {
+        serviceVersion: '.',
+        layername: '.',
+          alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+          getURL: getURL
+    });
+  
+    var nzms1969 = new OpenLayers.Layer.TMS("NZMS1 1969", "http://au.mapspast.org.nz/nzms-1969/",
+      {
+        serviceVersion: '.',
+        layername: '.',
+          alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+          getURL: getURL
+    });
+  
+    var nzms1959 = new OpenLayers.Layer.TMS("NZMS1 1959", "http://au.mapspast.org.nz/nzms-1959/",
+    {
+        serviceVersion: '.',
+        layername: '.',
+        alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+        getURL: getURL
+    });
+  
+    map.addLayers([nztm2009,nzms1999,nzms1989, nzms1979,nzms1969, nzms1959]);
 
-  var nzms1989 = new OpenLayers.Layer.TMS("NZMS1/260 1989", "http://au.mapspast.org.nz/nzms-1989/",
-  {
-      serviceVersion: '.',
-      layername: '.',
-      alpha: true,
-      type: 'png',
-      isBaseLayer: true,
-      tileOptions: {crossOriginKeyword: 'anonymous'},
-      getURL: getURL
-  });
+    if (document.extentform.layerid.value!="") {
+      create_selected_layer(document.extentform.layerid.value, document.extentform.serverpath.value);
+    }
 
-  var nzms1979 = new OpenLayers.Layer.TMS("NZMS1 1979", "http://au.mapspast.org.nz/nzms-1979/",
-  {
-      serviceVersion: '.',
-      layername: '.',
-      alpha: true,
-      type: 'png',
-      isBaseLayer: true,
-      tileOptions: {crossOriginKeyword: 'anonymous'},
-      getURL: getURL
-  });
+  } else {
+    var linztopo_layer =  new OpenLayers.Layer.TMS( "(LINZ) Topo50 latest", "http://tiles-a.data-cdn.linz.govt.nz/services;key=d8c83efc690a4de4ab067eadb6ae95e4/tiles/v4/layer=767/EPSG:2193/",
+      {
+           type: 'png',
+           getURL: overlay_getLinzTileURL,
+           isBaseLayer: true,
+           tileOrigin: new OpenLayers.LonLat(-1000000,10000000),
+           rowSign: 1
+       });
+    var air_layer =  new OpenLayers.Layer.TMS( "(LINZ) Airphoto latest", "http://tiles-a.data-cdn.linz.govt.nz/services;key=d8c83efc690a4de4ab067eadb6ae95e4/tiles/v4/set=2/EPSG:2193/",
+      { 
+           type: 'png',
+           getURL: overlay_getLinzTileURL,
+           isBaseLayer: true,
+           tileOrigin: new OpenLayers.LonLat(-1000000,10000000),
+           rowSign: 1
+      });
 
-  var nzms1969 = new OpenLayers.Layer.TMS("NZMS1 1969", "http://au.mapspast.org.nz/nzms-1969/",
-  {
-      serviceVersion: '.',
-      layername: '.',
-      alpha: true,
-      type: 'png',
-      isBaseLayer: true,
-      tileOptions: {crossOriginKeyword: 'anonymous'},
-      getURL: getURL
-  });
-
-  var nzms1959 = new OpenLayers.Layer.TMS("NZMS1 1959", "http://au.mapspast.org.nz/nzms-1959/",
-  {
-      serviceVersion: '.',
-      layername: '.',
-      alpha: true,
-      type: 'png',
-      isBaseLayer: true,
-      tileOptions: {crossOriginKeyword: 'anonymous'},
-      getURL: getURL
-  });
-
+    map.addLayers([linztopo_layer,air_layer]);
+  }
 
   vectorLayer = new OpenLayers.Layer.Vector("Current feature", {
               //renderers: renderer,
               displayInLayerSwitcher:false
           });
 
-  if(typeof(print_mode)=='undefined') {
-    /* create click controllers*/
-    add_click_to_query_controller();
-    click_to_query = new OpenLayers.Control.Click();
-    map.addControl(click_to_query);
+  /* create click controllers*/
+  add_click_to_query_controller();
+  click_to_query = new OpenLayers.Control.Click();
+  map.addControl(click_to_query);
 
-    add_click_to_create_controller_grid();
-    click_to_create_grid = new OpenLayers.Control.Click();
-    map.addControl(click_to_create_grid);
+  add_click_to_create_controller_grid();
+  click_to_create_grid = new OpenLayers.Control.Click();
+  map.addControl(click_to_create_grid);
   
   var my_button = new OpenLayers.Control.Button({
-  displayClass: 'olControlInfo',
-  trigger: mapInfo,
-  title: 'Show mapsheet details for current series when you click on the map'
+    displayClass: 'olControlInfo',
+    trigger: mapInfo,
+    title: 'Show mapsheet details for current series when you click on the map'
   });
   var search_button = new OpenLayers.Control.Button({
-  displayClass: 'olControlSearch',
-  trigger: mapSearch,
-  title: 'List all available mapsheets at point you click on the map'
+    displayClass: 'olControlSearch',
+    trigger: mapSearch,
+    title: 'List all available mapsheets at point you click on the map'
   });
   var maxextent_button = new OpenLayers.Control.Button({
-  displayClass: 'olControlMaxExtent',
-  trigger: zoom_to_mapsheet,
-  title: 'Zoom to extent of current mapsheet/series'
+    displayClass: 'olControlMaxExtent',
+    trigger: zoom_to_mapsheet,
+    title: 'Zoom to extent of current mapsheet/series'
+  });
+  var url_button = new OpenLayers.Control.Button({
+    displayClass: 'olControlUrl',
+    trigger: showUrl,
+    title: 'Show URL of currently displayed map'
+  });
+  var layer_button = new OpenLayers.Control.Button({
+    displayClass: 'olControlLayers',
+    trigger: mapLayers,
+    title: 'Select basemap'
+  });
+  var key_button = new OpenLayers.Control.Button({
+    displayClass: 'olControlKey',
+    trigger: mapKey,
+    title: 'Configure map'
+  });
+ 
+  var panel = new OpenLayers.Control.Panel({
+  //        defaultControl: my_button,
+      createControlMarkup: function(control) {
+          var button = document.createElement('button'),
+              iconSpan = document.createElement('span'),
+              textSpan = document.createElement('span');
+          iconSpan.innerHTML = '&nbsp;';
+          button.appendChild(iconSpan);
+          if (control.text) {
+              textSpan.innerHTML = control.text;
+          }
+          button.appendChild(textSpan);
+          return button;
+     }
   });
   
-      var panel = new OpenLayers.Control.Panel({
-  //        defaultControl: my_button,
-          createControlMarkup: function(control) {
-              var button = document.createElement('button'),
-                  iconSpan = document.createElement('span'),
-                  textSpan = document.createElement('span');
-              iconSpan.innerHTML = '&nbsp;';
-              button.appendChild(iconSpan);
-              if (control.text) {
-                  textSpan.innerHTML = control.text;
-              }
-              button.appendChild(textSpan);
-              return button;
-         }
-      });
-  
-      panel.addControls([my_button, search_button, maxextent_button]);
+  panel.addControls([layer_button, key_button, my_button, search_button, maxextent_button, url_button]);
     
-    // controllers
-    var switcherControl = new OpenLayers.Control.LayerSwitcher();
-    map.addControl(switcherControl);
-    switcherControl.maximizeControl();
-          
-    map.addControls([new OpenLayers.Control.Zoom(),
+  map.addControls([new OpenLayers.Control.Zoom(),
                    new OpenLayers.Control.Navigation(),
-                   new OpenLayers.Control.MousePosition(),
                    new OpenLayers.Control.Scale(),
                    panel
                    ]);
-  }
+
+  map.addControl(new OpenLayers.Control.MousePosition({
+        prefix: current_projname+": ",
+        numDigits: current_projdp}));
+
   if (document.extentform.dsheetid.value=='selected sheet') {
     create_selected_layer(document.extentform.layerid.value, document.extentform.serverpath.value);   
-  } else { 
-    map.addLayers([ nztm2009, nzms1999, nzms1989, nzms1979, nzms1969, nzms1959, vectorLayer]);
-  }
+  } 
+  map.addLayers([vectorLayer]);
+  
   if (document.extentform.dxleft.value!='' && document.extentform.dxright.value!='' && document.extentform.dytop.value!='' && document.extentform.dybottom.value!='')  {
     preferredExtent = new OpenLayers.Bounds(document.extentform.dxleft.value,document.extentform.dybottom.value, document.extentform.dxright.value,  document.extentform.dytop.value);
   }
-  map.zoomToExtent(preferredExtent.transform(map.displayProjection, map.projection));
+    map.zoomToExtent(preferredExtent.transform(map.displayProjection, map.projection));
+  if (typeof(zoom)!='undefined' && zoom>="0") {
+    map.zoomTo(zoom-5);
+  }
+
+  if (typeof(centrex)!='undefined' && typeof(centrey)!='undefined') {
+    map.panTo([centrex, centrey]);
+  }
+
+  if (layerid!='') {
+    ourlayer=map.getLayersByName(layerid);
+    if (ourlayer.length>0) {
+      map.setBaseLayer(ourlayer[0]);
+    }
+  }
+
   
   if (document.extentform.dsheetid.value!='') {
     ourlayer=map.getLayersByName(document.extentform.dsheetid.value);
@@ -248,30 +348,13 @@ function init(){
       map.setBaseLayer(ourlayer[0]);
     }
   }
-
-  if(typeof(print_mode)!='undefined') {
-    map.baseLayer.events.register("loadend", map.baseLayer, function() {
-      map.baseLayer.events.destroy("loadend");
-      html2canvas(document.getElementById("map_map"),  
-       {
-         allowTaint: true, onrendered: function(canvas) {
-           ourcanvas=canvas;
-           document.body.appendChild(canvas);
-           document.getElementById("map_map").style.display="none";
-           canvas.toBlob(function(blob) {
-             saveAs(blob, "map.tif");
-           });          
-         }
-       });
-    });
-  }
 }
 
 function hide_uploaded_map(event) {
    if(typeof(tiff_map)!="undefined") {
      tiff_map.destroy();
      map_map.innerHTML="";
-     init();
+     do_init();
       if(typeof(document.getElementById("showupload"))!="undefined") {
        document.getElementById("showupload").style.display="block";
        document.getElementById("hideupload").style.display="none";
@@ -334,6 +417,15 @@ function init_tiff_map() {
 } 
 function getURL(bounds) {
   bounds = this.adjustBounds(bounds);
+  var layername=map.baseLayer.name;
+  var maxzoom;
+
+  if(layername=='selected sheet') {
+     maxzoom=document.extentform.maxzoom.value-5;
+  } else {
+     maxzoom=mapMaxZoom;
+  }
+
   var res = this.getServerResolution();
   var x = Math.round((bounds.left - this.tileOrigin.lon) / (res * this.tileSize.w));
   var y = Math.round((bounds.bottom - this.tileOrigin.lat) / (res * this.tileSize.h));
@@ -343,16 +435,26 @@ function getURL(bounds) {
   if (OpenLayers.Util.isArray(url)) {
       url = this.selectUrl(path, url);
   }
-  if (mapBounds.intersectsBounds(bounds) && (z >= mapMinZoom) && (z <= mapMaxZoom)) {
-    if(typeof(print_mode)=='undefined') {
-      return url + path + '?v=2';
-    } else {
-      return url + path + '?time='+ new Date().getTime();
-    }
+  if (mapBounds.intersectsBounds(bounds) && (z >= mapMinZoom+5) && (z <= maxzoom+5)) {
+      return url + path;
   } else {
       return emptyTileURL;
   }
 } 
+
+function overlay_getLinzTileURL(bounds,url) {
+    var res = this.map.getResolution();
+    var x = Math.round((bounds.left - this.tileOrigin.lon) / (res * this.tileSize.w));
+    var y = -Math.round((bounds.top - this.tileOrigin.lat) / (res * this.tileSize.h));
+    var z = this.map.getZoom();
+    //if (mapBounds.intersectsBounds( bounds ) && z >= mapMinZoom && z <= mapMaxZoom ) {
+       //console.log( this.url + z + "/" + x + "/" + y + "." + this.type);
+        return this.url + z + "/" + x + "/" + y + "." + this.type;
+    //} else {
+     //   return "http://www.maptiler.org/img/none.png";
+   // }
+
+}
   
            function getTiffURL(bounds) {
                   bounds = this.adjustBounds(bounds);
@@ -744,7 +846,8 @@ function update_selected_layer(layer_id, serverpath, xleft, xright, ytop, ybotto
   document.extentform.layerid.value=layer_id;
   document.extentform.maxzoom.value=maxzoom;
   document.extentform.serverpath.value=serverpath;
-  check_zoomend();
+
+  
 }
 
 function create_selected_layer(layer_id, serverpath) {
@@ -756,10 +859,10 @@ function create_selected_layer(layer_id, serverpath) {
       alpha: true,
       type: 'png',
       isBaseLayer: true,
-      tileOptions: {crossOriginKeyword: 'anonymous'},
       getURL: getURL
   });
 
+  sheetid=layer_id;
   map.addLayer(sheetLayer);
 }
 
@@ -798,25 +901,20 @@ function check_zoomend() {
   var maxzoom;
 
   if(layername=='selected sheet') {
-     maxzoom=document.extentform.maxzoom.value;
+     maxzoom=document.extentform.maxzoom.value-5;
   } else {
-     maxzoom=14;
+     maxzoom=mapMaxZoom;
   }
-
-  if(layername=='Topo50 2009') {
-     maxzoom=15;
-  }
-  var z = map.getZoom()+5;
-  //zoom back out (on a timer so current zoom envent can exit)
-  if( z>maxzoom) {
-          setTimeout( function() { map.zoomTo(maxzoom-5);}, 100);
-  }
+  var x = map.getZoom();
+  if(x>maxzoom) setTimeout( function() { map.zoomTo(maxzoom);}, 100);
+  if(x<mapMinZoom) setTimeout( function() { map.zoomTo(mapMinZoom);}, 100);
 }
         
 function showInfo(title, url) {
         BootstrapDialog.show({
             title: title,
-            message: $('<div id="info_details2">Retrieving ...</div>')
+            message: $('<div id="info_details2">Retrieving ...</div>'),
+            size: "size-normal"
         });
 
         $.ajax({
@@ -838,18 +936,51 @@ function showInfo(title, url) {
         });
 }
 
-function printmap() {
+function showUrl() {
+        var x=Math.round(map.getCenter().lon);
+        var y=Math.round(map.getCenter().lat);
+        var z=map.getZoom()+5;
+        var l=encodeURIComponent(map.baseLayer.name);
+        if (l=='selected%20sheet') { 
+           url=document.location.origin+'/mapsheet/'+document.extentform.layerid.value;
+           var l_id="";
+        } else {
+           var l_id="&layerid="+l;
+           url=document.location.origin; 
+        }
+
+        BootstrapDialog.show({
+            title: "URL of current map",
+            message: $("<input id='url' value='"+url+"/?zoom="+z+"&x="+x+"&y="+y+l_id+"' />")
+        });
+}
+
+function printmap(filetype) {
   var xl=map.getExtent().left;
   var xr=map.getExtent().right;
   var yt=map.getExtent().top;
   var yb=map.getExtent().bottom;
   var width=document.selectform.pix_width.value;
   var height=document.selectform.pix_height.value;
-  var sheetid=map.baseLayer.name;
-  var layerid=document.extentform.layerid.value;
+  layerid=map.baseLayer.name;
+  sheetid=document.extentform.layerid.value;
   var maxzoom=document.extentform.maxzoom.value;
-  window.open('http://au.mapspast.org.nz/print.html?print=true&left='+xl+'&right='+xr+'&top='+yt+'&bottom='+yb+'&sheetid='+sheetid+'&layerid='+layerid+'&wwidth='+width+'&wheight='+height+'&maxzoom='+maxzoom, 'printwindow');
+  var filename=document.selectform.filename.value;
+  if (document.extentform.serverpath.value=="http://mapspast.org.nz/") {
+    window.open('http://mapspast.org.nz/assets/print.html?print=true&left='+xl+'&right='+xr+'&top='+yt+'&bottom='+yb+'&sheetid='+sheetid+'&layerid='+layerid+'&wwidth='+width+'&wheight='+height+'&maxzoom='+maxzoom+'&filetype='+filetype+'&filename='+filename, 'printwindow');
+
+  } else {
+    window.open('http://au.mapspast.org.nz/print.html?print=true&left='+xl+'&right='+xr+'&top='+yt+'&bottom='+yb+'&sheetid='+sheetid+'&layerid='+layerid+'&wwidth='+width+'&wheight='+height+'&maxzoom='+maxzoom+'&filetype='+filetype+'&filename='+filename, 'printwindow');
+  }
+  return false;
 }
+
+function generate_prj() {
+      filename=document.selectform.filename.value;
+      var blob = new Blob(['PROJCS["NZGD_2000_New_Zealand_Transverse_Mercator",GEOGCS["GCS_NZGD_2000",DATUM["D_NZGD_2000",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Transverse_Mercator"],PARAMETER["False_Easting",1600000.0],PARAMETER["False_Northing",10000000.0],PARAMETER["Central_Meridian",173.0],PARAMETER["Scale_Factor",0.9996],PARAMETER["Latitude_Of_Origin",0.0],UNIT["Meter",1.0]]'], {type: "text/plain"});
+      saveAs(blob, filename+".prj");
+}
+
 
 function updateDimensions() {
    var papersize=document.selectform.size.value
@@ -857,3 +988,100 @@ function updateDimensions() {
    document.selectform.pix_width.value=paperwidths[papersize];
    document.selectform.pix_height.value=paperheights[papersize];
 }
+
+function mapKey() {
+        BootstrapDialog.show({
+            title: "Map options",
+            message: $('<div id="info_details2">Retrieving ...</div>'),
+            size: "size-small"
+        });
+
+        $.ajax({
+          beforeSend: function (xhr){
+            xhr.setRequestHeader("Content-Type","application/javascript");
+            xhr.setRequestHeader("Accept","text/javascript");
+          },
+          type: "GET",
+          timeout: 10000,
+          url: "/legend?projection="+current_proj,
+          error: function() {
+              document.getElementById("info_details2").innerHTML = 'Error contacting server';
+          },
+          complete: function() {
+              document.getElementById("page_status").innerHTML = '';
+          }
+        });
+}
+function mapLayers() {
+        BootstrapDialog.show({
+            title: "Select basemap",
+            message: $('<div id="info_details2">Retrieving ...</div>'),
+            size: "size-small"
+        });
+
+        $.ajax({
+          beforeSend: function (xhr){
+            xhr.setRequestHeader("Content-Type","application/javascript");
+            xhr.setRequestHeader("Accept","text/javascript");
+          },
+          type: "GET",
+          timeout: 10000,
+          url: "/layerswitcher?baselayer="+map.baseLayer.name,
+          error: function() {
+              document.getElementById("info_details2").innerHTML = 'Error contacting server';
+          },
+          complete: function() {
+              document.getElementById("page_status").innerHTML = '';
+          }
+
+        });
+
+}
+
+ function select_maplayer(name, url, basemap, minzoom, maxzoom) {
+    $.each(BootstrapDialog.dialogs, function(id, dialog){
+        dialog.close();
+    });
+      if(mapset=="mapspast" && basemap=="linz") {
+        init_linz();
+      }
+      if(mapset=="linz" && basemap=="mapspast") {
+        init_mapspast();
+      }
+      var thenewbase = map.getLayersByName(name)[0];
+      map.setBaseLayer(thenewbase);
+      map.baseLayer.setVisibility(true);
+      if (name=="selected sheet") { 
+        maxzoom=document.extentform.maxzoom.value-5; 
+      }
+      mapMinZoom=minzoom;
+      mapMaxZoom=maxzoom;
+      if (map.getZoom()>maxzoom) {
+        setTimeout( function() { check_zoomend();}, 500);
+      }
+}
+
+function updateProjection() {
+            current_proj=document.getElementById("projections").value;
+            current_projname=getSelectedText("projections");
+            //WGS 4dp, otherwise 0
+            if(current_proj=="4326" || current_proj=="4272" || current_proj=="4167") { current_projdp=4 } else { current_projdp=0 };
+            $.each(BootstrapDialog.dialogs, function(id, dialog){
+                dialog.close();
+            });
+            if (mapset=="mapspast") {
+              init_mapspast();
+            } else {
+              init_linz();
+            }
+}
+function getSelectedText(elementId) {
+    var elt = document.getElementById(elementId);
+
+    if (elt.selectedIndex == -1)
+        return null;
+
+    return elt.options[elt.selectedIndex].text;
+}
+
+

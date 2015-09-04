@@ -24,7 +24,7 @@ var tiffBounds = new OpenLayers.Bounds( -20037508.34,-20037508.34,20037508.34,20
 var tiffProj="900913";
 var mapMinZoom = 5;
 var mapMaxZoom = 15;
-var emptyTileURL = "http://au.mapspast.org.nz/none.png";
+var emptyTileURL = document.location.origin+"/none.png";
 var renderer;
 OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
 
@@ -63,7 +63,7 @@ function init(){
 
   map.events.register("moveend", map, check_zoomend);
   // layers
-  var nztm2009 = new OpenLayers.Layer.TMS("Topo50 2009", "http://au.mapspast.org.nz/topo50/",
+  var nztm2009 = new OpenLayers.Layer.TMS("LINZ Topo 2009", "http://au.mapspast.org.nz/topo50/",
   {
       serviceVersion: '.',
       layername: '.',
@@ -191,8 +191,8 @@ function init(){
                    panel
                    ]);
   }
-  if (sheetid=='selected sheet') {
-    create_selected_layer(layerid, "http://au.mapspast.org.nz/");   
+  if (layerid=='selected sheet') {
+    create_selected_layer(sheetid, document.location.origin+"/");   
   } else { 
     map.addLayers([ nztm2009, nzms1999, nzms1989, nzms1979, nzms1969, nzms1959, vectorLayer]);
   }
@@ -201,27 +201,48 @@ function init(){
   }
   map.zoomToExtent(preferredExtent.transform(map.displayProjection, map.projection));
   
-  if (sheetid!='') {
-    ourlayer=map.getLayersByName(sheetid);
+  if (layerid!='') {
+    ourlayer=map.getLayersByName(layerid);
     if (ourlayer.length>0) {
       map.setBaseLayer(ourlayer[0]);
     }
   }
 
-  map.baseLayer.events.register("loadend", map.baseLayer, function() {
-    map.baseLayer.events.destroy("loadend");
-    html2canvas(document.getElementById("map_map"),  
-     {
-       allowTaint: true, onrendered: function(canvas) {
-         ourcanvas=canvas;
-         document.body.appendChild(canvas);
-         document.getElementById("map_map").style.display="none";
-         canvas.toBlob(function(blob) {
-           saveAs(blob, "map.tif");
-         });          
-       }
-     });
-  });
+  if (filetype=='png') {
+    map.baseLayer.events.register("loadend", map.baseLayer, function() {
+      map.baseLayer.events.destroy("loadend");
+      document.getElementById("map_status").innerHTML="";
+      html2canvas(document.getElementById("map_map"),  
+       {
+         allowTaint: true, onrendered: function(canvas) {
+           ourcanvas=canvas;
+           document.body.appendChild(canvas);
+           document.getElementById("map_map").style.display="none";
+           canvas.toBlob(function(blob) {
+             saveAs(blob, filename+".png");
+           });          
+         }
+       });
+    });
+  }
+  if (filetype=='pgw') {
+    map.baseLayer.events.register("loadend", map.baseLayer, function() {
+      map.baseLayer.events.destroy("loadend");
+      document.getElementById("map_status").innerHTML="";
+      var xres=0+map.getResolution();
+      var yres=-xres;
+      var xleft=map.getExtent().left;
+      var ytop=map.getExtent().top;
+      var blob = new Blob([""+xres+"\n0\n0\n"+yres+"\n"+xleft+"\n"+ytop+"\n"], {type: "text/plain"});
+      saveAs(blob, filename+".pgw");
+      window.close();
+    });
+  }
+  if (filetype=='prj') {
+      var blob = new Blob(['PROJCS["NZGD_2000_New_Zealand_Transverse_Mercator",GEOGCS["GCS_NZGD_2000",DATUM["D_NZGD_2000",SPHEROID["GRS_1980",6378137.0,298.257222101]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Transverse_Mercator"],PARAMETER["False_Easting",1600000.0],PARAMETER["False_Northing",10000000.0],PARAMETER["Central_Meridian",173.0],PARAMETER["Scale_Factor",0.9996],PARAMETER["Latitude_Of_Origin",0.0],UNIT["Meter",1.0]]'], {type: "text/plain"});
+      saveAs(blob, filename+".prj");
+      window.close();
+  }
 }
 
 function getURL(bounds) {
@@ -235,7 +256,7 @@ function getURL(bounds) {
   if (OpenLayers.Util.isArray(url)) {
       url = this.selectUrl(path, url);
   }
-  if (mapBounds.intersectsBounds(bounds) && (z >= mapMinZoom) && (z <= mapMaxZoom)) {
+  if (filetype=='png' && mapBounds.intersectsBounds(bounds) && (z >= mapMinZoom) && (z <= mapMaxZoom)) {
       return url + path + '?time='+ new Date().getTime();
   } else {
       return emptyTileURL;
@@ -270,7 +291,7 @@ function check_zoomend() {
      maxzoom=14;
   }
 
-  if(layername=='Topo50 2009') {
+  if(layername=='LINZ Topo 2009') {
      maxzoom=15;
   }
   var z = map.getZoom()+5;
