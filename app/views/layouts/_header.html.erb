@@ -1,5 +1,5 @@
-    <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="navbar-inner" style="font-size:0.8em">
+</li><header class="navbar navbar-fixed-top navbar-inverse">
+<div class="navbar-inner" style="font-size:0.8em">
 <!--        <div class="container"> -->
         <div id="our_logo">
           <%= link_to "MapsPast", root_path, id: "logo" %>
@@ -35,10 +35,10 @@
 
                 </ul>
               </li>
-  
               <li>
-                <%= link_to image_tag("/assets/download.png",   :class => 'dock-item'), '/print/', remote: true, onclick: "linkHandler('print')", id:  "print"  %>
-              </li>
+                <%= link_to image_tag("/assets/download.png",   :class => 'dock-item'), '/print/', remote: true, onclick: "linkHandler('print')", id:  "print", title: "Download / print current map area"  %>
+               </li>
+ 
           </ul>
           </nav>
         </div>

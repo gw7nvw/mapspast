@@ -94,6 +94,18 @@ def update
     @map.description=params[:uploadedmap][:description]
     if !@map.mapstatus_id then @map.mapstatus=Mapstatus.find_by(:name => "new") end
     success=@map.save
+
+    ms=Mapsheet.find_by(:uploadedmap_id => @map.id)
+    if ms
+      ms.name=params[:uploadedmap][:name]
+      ms.series=params[:uploadedmap][:series]
+      ms.edition=params[:uploadedmap][:edition]
+      ms.scale=params[:uploadedmap][:scale]
+      ms.sheet=params[:uploadedmap][:sheet]
+      ms.year_printed=params[:uploadedmap][:year_printed]
+      ms.year_revised=params[:uploadedmap][:year_revised]
+      ms.save
+    end
   end
 
   if params[:upload]
@@ -222,6 +234,11 @@ def update
     @map.grid_ytic2=params[:uploadedmap][:grid_ytic2]
 
     @map.save
+    ms=Mapsheet.find_by(:uploadedmap_id => @map.id)
+    if ms
+      ms.source_srid=params[:uploadedmap][:map_srid]
+      ms.save
+    end
 
     #get scale
     @map.xresolution=1.0*(@map.grid_xtic2-@map.grid_xtic1)/(@map.pix_xtic2-@map.pix_xtic1);
