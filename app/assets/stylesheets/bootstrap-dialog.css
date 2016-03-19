@@ -71,5 +71,6 @@
 
 .bootstrap-dialog.size-small {
   width: 250px;
+  vertical-align: center;
 }
 

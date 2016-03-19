@@ -23,7 +23,7 @@
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   </head>
   <body onload='init()' style="cursor: auto;"> 
-    <div style="position:absolute;">
+<!--    <div style="position:absolute;"> -->
       <%= form_tag '/redisplay', :remote=> true, :id => "thelink", :name=> 'extentform', :method=> 'post'%>
          <input type="hidden" name="xleft"/>
          <input type="hidden" name="xright"/>
@@ -39,23 +39,31 @@
          <input type="hidden" name="dybottom" <%='value='+@dbottom if @dbottom%> />
          <input type="hidden" name="dsheetid" value="<%=@dsheetid%>" />
       </form>
-    </div>
+<!--    </div> -->
 <%if !@print %>
 
     <%= render 'layouts/header' %>
 
-    <div id="main_page">
-
-       <div id="left_panel_container" class="panelsize"> 
-         <div id="info_details" class="erow"></div>
-         <div id="left_panel">
-            <%=yield %>
-         </div>
+      <div class="wrapper">
+        <ul id="tab">
+            <li><%= link_to "Info ^^", "#",    :onclick => "map_bigger(); return false;" %></li>
+            <li><%= link_to "Map vv", "#",    :onclick => "map_smaller(); return false;" %></li>
+        </ul>
       </div>
-       <div id="right_panel">
-         <%=render 'viewer/map' %>
-       </div>
-       <div class="clear"></div> 
+
+    <div id="main_page" class="container-fluid">
+      <div class="row-fluid">
+         <div id="left_panel_container" class="span3"> 
+           <!--<div id="info_details" class="erow"></div> -->
+           <div id="left_panel">
+              <%=yield %>
+           </div>
+         </div>
+         <div id="right_panel" class="span9">
+           <%=render 'viewer/map' %>
+         </div>
+         <div class="clear"></div> 
+      </div>
     </div>
 
 <% else %>
