@@ -10,6 +10,13 @@ var map_size=1;
 var tiff_map;
 var dots="";
 var map;
+  
+var geometry;
+var feature;
+var geomMap;
+var bigPoly;
+
+var maximise;
 var vectorLayer;
 var ourcanvas;
 var searchMode;
@@ -85,7 +92,10 @@ function do_init(){
 
   var centrex=(location.search.split('x=')[1]||'').split('&')[0];
   var centrey=(location.search.split('y=')[1]||'').split('&')[0];
-  layerid=decodeURI((location.search.split('layerid=')[1]||'').split('&')[0]);
+  maximise=(location.search.split('maximise=')[1]||'').split('&')[0];
+  if(typeof(layerid)=='undefined') {
+    layerid=decodeURI((location.search.split('layerid=')[1]||'').split('&')[0]);
+  }
   var zoom=(location.search.split('zoom=')[1]||'').split('&')[0];
 
   //Projections
@@ -206,8 +216,37 @@ function do_init(){
         isBaseLayer: true,
         getURL: getURL
     });
+    var nzms1919 = new OpenLayers.Layer.TMS("NZMS13 1919", "http://au.mapspast.org.nz/nzms13-1919/",
+    {
+        serviceVersion: '.',
+        layername: '.',
+        alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+        getURL: getURL
+    });
+
+    var nzms1909 = new OpenLayers.Layer.TMS("NZMS13 1909", "http://au.mapspast.org.nz/nzms13-1909/",
+    {
+        serviceVersion: '.',
+        layername: '.',
+        alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+        getURL: getURL
+    });
+
+    var nzms1899 = new OpenLayers.Layer.TMS("NZMS13 1899", "http://au.mapspast.org.nz/nzms13-1899/",
+    {
+        serviceVersion: '.',
+        layername: '.',
+        alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+        getURL: getURL
+    });
   
-    map.addLayers([nztm2009,nzms1999,nzms1989, nzms1979,nzms1969, nzms1959, nzms1949]);
+    map.addLayers([nztm2009,nzms1999,nzms1989, nzms1979,nzms1969, nzms1959, nzms1949, nzms1919, nzms1909, nzms1899]);
 
     if (document.extentform.layerid.value!="") {
       create_selected_layer(document.extentform.layerid.value, document.extentform.serverpath.value);
@@ -235,9 +274,15 @@ function do_init(){
   }
 
   vectorLayer = new OpenLayers.Layer.Vector("Current feature", {
-              //renderers: renderer,
+              renderers: ['Canvas', 'VML'],
               displayInLayerSwitcher:false
           });
+  var layer_style = OpenLayers.Util.extend({},OpenLayers.Feature.Vector.style['default']);
+  layer_style.fillColor = "#ffffff";
+  layer_style.strokeColor = "#ff0000";
+  layer_style.fillOpacity = 0.7;
+   
+  vectorLayer.style = layer_style;
 
   /* create click controllers*/
   add_click_to_query_controller();
@@ -325,10 +370,14 @@ function do_init(){
   }
 
   if (layerid!='') {
-    ourlayer=map.getLayersByName(layerid);
-    if (ourlayer.length>0) {
-      map.setBaseLayer(ourlayer[0]);
-    }
+    if (layerid.substring(0,5)=='(LINZ') {
+      select_maplayer(layerid, '', 'linz', 0, 19);
+    } else {
+      ourlayer=map.getLayersByName(layerid);
+      if (ourlayer.length>0) {
+        map.setBaseLayer(ourlayer[0]);
+      }
+   }
   }
 
   
@@ -338,6 +387,7 @@ function do_init(){
       map.setBaseLayer(ourlayer[0]);
     }
   }
+  if(maximise=='1') { setTimeout( function() { zoom_to_mapsheet();}, 500);}
 }
 
 function hide_uploaded_map(event) {
@@ -351,6 +401,7 @@ function hide_uploaded_map(event) {
      }
    }
 }
+
 function show_uploaded_map() {
      map.destroy();
      map.innerHTML="";
@@ -804,20 +855,26 @@ function deactivate_all_click() {
 
 function zoom_to_mapsheet() {
   layername=map.baseLayer.name;
-  if (layername=="selected sheet") {
+//  if (layername=="selected sheet") {
+  if ((document.extentform.xleft!="Undefined") && (document.extentform.xleft.value>0)) {
     var sheetBounds = new OpenLayers.Bounds(
          document.extentform.xleft.value, 
          document.extentform.ybottom.value, 
          document.extentform.xright.value, 
          document.extentform.ytop.value);
     sheetProjection =new OpenLayers.Projection("EPSG:"+document.extentform.srid.value);
-    map.zoomToExtent(sheetBounds.transform(sheetProjection, map.projection));
+    zoomExtent=sheetBounds.transform(sheetProjection, map.projection);
   } else {
-    map.zoomToExtent(preferredExtent.transform(map.displayProjection, map.projection));
+    zoomExtent=preferredExtent.transform(map.displayProjection, map.projection);
   }
+  map.zoomToExtent(zoomExtent);
+  return(zoomExtent);
+  
 }
 
 function update_selected_layer(layer_id, serverpath, xleft, xright, ytop, ybottom, srid, maxzoom) {
+  vectorLayer.destroyFeatures();
+
   if (typeof(map)!='undefined') { 
     if (mapset!="mapspast") { init_mapspast(); }
     ourlayer=map.getLayersByName("selected sheet");
@@ -840,6 +897,33 @@ function update_selected_layer(layer_id, serverpath, xleft, xright, ytop, ybotto
   document.extentform.serverpath.value=serverpath;
   
 }
+
+function zoom_to_seriessheet(name, extent, xleft, xright, ybottom, ytop) {
+  select_maplayer(name, "", "mapspast", 0, 10) ;
+
+  document.extentform.xleft.value=xleft;
+  document.extentform.xright.value=xright;
+  document.extentform.ytop.value=ytop;
+  document.extentform.ybottom.value=ybottom;
+  document.extentform.srid.value=4326;
+  zoom_to_mapsheet();
+//  document.extentform.layerid.value=layer_id;
+
+  parser = new OpenLayers.Format.WKT();
+  geometry = parser.read(extent);
+  var srcProj =  new OpenLayers.Projection("EPSG:4326");
+  var mapProj =  new OpenLayers.Projection("EPSG:2193");
+
+  /*convert to map projectiob */
+  geomMap = geometry.geometry.transform(srcProj, mapProj);
+  bigPoly = parser.read("POLYGON((748961 3808210, 748961 6836339, 2940563 6836339, 2940563 3808210, 748961 3808210))");
+  bigPolyMap = bigPoly.geometry.transform(mapProj, mapProj);
+  bigPolyMap.addComponent(geomMap.components[0]);
+  feature = new OpenLayers.Feature.Vector(bigPolyMap);
+  vectorLayer.addFeatures(feature);
+
+}
+
 
 function create_selected_layer(layer_id, serverpath) {
 
@@ -1030,9 +1114,15 @@ function mapLayers() {
 }
 
  function select_maplayer(name, url, basemap, minzoom, maxzoom) {
+    vectorLayer.destroyFeatures();
+    document.extentform.xleft.value=null;
+    document.extentform.xright.value=null;
+    document.extentform.ytop.value=null;
+    document.extentform.ybottom.value=null;
     $.each(BootstrapDialog.dialogs, function(id, dialog){
         dialog.close();
     });
+    layerid='';
       if(mapset=="mapspast" && basemap=="linz") {
         init_linz();
       }

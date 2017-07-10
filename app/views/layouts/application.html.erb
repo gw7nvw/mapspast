@@ -25,12 +25,27 @@
   <body onload='init()' style="cursor: auto;"> 
 <!--    <div style="position:absolute;"> -->
       <%= form_tag '/redisplay', :remote=> true, :id => "thelink", :name=> 'extentform', :method=> 'post'%>
-         <input type="hidden" name="xleft"/>
-         <input type="hidden" name="xright"/>
-         <input type="hidden" name="ytop"/>
-         <input type="hidden" name="ybottom"/>
+      <%
+    if params[:id] then
+       box=Mapsheet.find_by_sql [ "select ST_Extent(extent) as name from mapsheets where id=?",params[:id] ]
+       extentstr=box.first.name
+       if extentstr.length>0 then
+         extentstr=extentstr[4..-2]
+         extentlist=extentstr.split(',')
+         @sminx=extentlist[0].split(' ')[0]
+         @sminy=extentlist[0].split(' ')[1]
+         @smaxx=extentlist[1].split(' ')[0]
+         @smaxy=extentlist[1].split(' ')[1]
+       end
+    end
+      %>
+         <input type="hidden" name="xleft" <%'value='+@sminx if @sminx%>/>
+         <input type="hidden" name="xright"<%'value='+@smaxx if @smaxx%>/>
+         <input type="hidden" name="ytop"<%'value='+@sminy if @sminy%>/>
+         <input type="hidden" name="ybottom"<%'value='+@smaxy if @smaxy%>/>
          <input type="hidden" name="srid"/>
          <input type="hidden" name="layerid" <%='value='+@selectedlayer.id.to_s if @selectedlayer%> />
+         <input type="hidden" name="maximise" <%='value="1"' if @maximise%> />
          <input type="hidden" name="maxzoom"/>
          <input type="hidden" name="serverpath" <%='value='+@selectedlayer.serverpath if @selectedlayer%> />
          <input type="hidden" name="dxleft" <%='value='+@dleft if @dleft%> />

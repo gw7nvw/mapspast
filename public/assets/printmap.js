@@ -129,6 +129,45 @@ function init(){
       getURL: getURL
   });
 
+  var nzms1949 = new OpenLayers.Layer.TMS("NZMS15 1949", "http://au.mapspast.org.nz/nzms15-1949/",
+  {
+      serviceVersion: '.',
+      layername: '.',
+      alpha: true,
+      type: 'png',
+      isBaseLayer: true,
+      tileOptions: {crossOriginKeyword: 'anonymous'},
+      getURL: getURL
+  });
+   var nzms1919 = new OpenLayers.Layer.TMS("NZMS13 1919", "http://au.mapspast.org.nz/nzms13-1919/",
+    {
+        serviceVersion: '.',
+        layername: '.',
+        alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+        getURL: getURL
+    });
+   var nzms1909 = new OpenLayers.Layer.TMS("NZMS13 1909", "http://au.mapspast.org.nz/nzms13-1909/",
+    {
+        serviceVersion: '.',
+        layername: '.',
+        alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+        getURL: getURL
+    });
+
+  var nzms1899 = new OpenLayers.Layer.TMS("NZMS13 1899", "http://au.mapspast.org.nz/nzms13-1899/",
+  {
+      serviceVersion: '.',
+      layername: '.',
+      alpha: true,
+      type: 'png',
+      isBaseLayer: true,
+      tileOptions: {crossOriginKeyword: 'anonymous'},
+      getURL: getURL
+  });
 
   vectorLayer = new OpenLayers.Layer.Vector("Current feature", {
               //renderers: renderer,
@@ -194,7 +233,7 @@ function init(){
   if (layerid=='selected sheet') {
     create_selected_layer(sheetid, document.location.origin+"/");   
   } else { 
-    map.addLayers([ nztm2009, nzms1999, nzms1989, nzms1979, nzms1969, nzms1959, vectorLayer]);
+    map.addLayers([ nztm2009, nzms1999, nzms1989, nzms1979, nzms1969, nzms1959, nzms1949, nzms1919, nzms1909, nzms1899, vectorLayer]);
   }
   if (mleft!='' && mright!='' && mtop!='' && mbottom!='')  {
     preferredExtent = new OpenLayers.Bounds(mleft,mbottom, mright,  mtop);

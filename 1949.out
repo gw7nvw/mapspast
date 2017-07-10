@@ -1,0 +1,203 @@
+  id  |            name            | year_printed |    sheet    
+------+----------------------------+--------------+-------------
+ 2162 | Coromandel                 |         1934 | 
+ 2163 | Thames                     |         1935 | 
+ 2171 | Franklin                   |         1946 | 1
+ 2164 | Ohinemuri                  |         1936 | 
+ 2165 | HaurakiPlains              |         1936 | 
+ 2166 | Tauranga                   |         1934 | 1
+ 2167 | Tauranga                   |         1934 | 2
+ 2249 | WaimateWest                |         1921 | 
+ 2168 | Whakatane                  |         1934 | 2
+ 2169 | Whakatane                  |         1919 | 3
+ 2172 | Raglan                     |         1949 | 1
+ 2173 | Raglan                     |         1949 | 2
+ 2170 | Franklin                   |         1946 | 2
+ 2189 | EdenEastern                |         1921 | 
+ 2174 | Waikato                    |         1934 | 1
+ 2264 | Featherston-WairarapaSouth |         1925 | 3
+ 2175 | Waikato                    |         1934 | 2
+ 2176 | Piako                      |         1948 | 
+ 2177 | Waipa                      |         1947 | 
+ 2191 | EdenWestern                |         1924 | 
+ 2178 | Matamata                   |         1946 | 1
+ 2179 | Rotorua                    |         1952 | 1
+ 2192 | Waitemata                  |         1933 | 2
+ 2180 | Rotorua                    |         1952 | 2
+ 2181 | Kawhia                     |         1935 | 
+ 2300 | Westland                   |         1919 | 6
+ 2182 | Kawhia                     |         1935 | 
+ 2183 | Otorohanga                 |         1936 | 2
+ 2184 | Waitomo                    |         1937 | 1
+ 2339 | Sounds                     |         1946 | 1
+ 2185 | Waitomo                    |         1937 | 2
+ 2301 | Westland                   |         1949 | 7
+ 2186 | Clifton-Whangamomona       |         1926 | 1
+ 2187 | Clifton-Whangamomona       |         1926 | 2
+ 2188 | Ohura                      |         1949 | 
+ 2190 | Manukau                    |         1934 | 
+ 2340 | Sounds                     |         1946 | 2
+ 2193 | Rodney                     |         1933 | 
+ 2194 | Hobson                     |         1935 | 1
+ 2302 | Westland                   |         1949 | 8
+ 2303 | Westland                   |         1949 | 9
+ 2195 | Otamatea                   |         1932 | 
+ 2196 | Hobson                     |         1935 | 2
+ 2197 | Whangarei                  |         1932 | 2
+ 2198 | Whangarei                  |         1932 | 1
+ 2199 | Waitemata                  |         1933 | 1
+ 2200 | Hokianga                   |         1932 | 
+ 2201 | BayOfIslands               |         1930 | 2
+ 2304 | MtHerbert-Waiwera-Akaroa   |         1921 | 
+ 2202 | BayOfIslands               |         1930 | 1
+ 2203 | Mangonui                   |         1930 | 3
+ 2204 | Mangonui                   |         1930 | 2
+ 2205 | Mangonui                   |         1930 | 1
+ 2206 | Whangaroa                  |         1921 | 
+ 2207 | GreatBarrierIsland         |         1922 | 
+ 2218 | Matakaoa                   |         1948 | 
+ 2208 | Taumarunui                 |         1937 | 1
+ 2305 | Selwyn                     |         1909 | 1
+ 2209 | Taumarunui                 |         1937 | 2
+ 2210 | Taupo                      |         1948 | 1
+ 2212 | Taupo                      |         1948 | 2
+ 2211 | Matamata                   |         1946 | 2
+ 2213 | Whakatane                  |         1921 | 1
+ 2214 | Opotiki                    |         1929 | 1
+ 2215 | Opotiki                    |         1929 | 2
+ 2216 | Opotiki                    |         1929 | 3
+ 2217 | Opotiki                    |         1929 | 4
+ 2306 | Tawera                     |         1922 | 2
+ 2219 | Waiapu                     |         1945 | 1
+ 2220 | Waiapu                     |         1945 | 2
+ 2267 | Hutt-Makara                |         1951 | 
+ 2221 | Cook                       |         1945 | 2
+ 2223 | Waikohu                    |         1924 | 2
+ 2222 | Uawa                       |         1924 | 
+ 2224 | Waikohu                    |         1924 | 1
+ 2225 | Wairoa                     |         1934 | 1
+ 2226 | Wairoa                     |         1934 | 2
+ 2231 | HawkesBay                  |         1945 | 4
+ 2227 | Cook                       |         1924 | 1
+ 2236 | Weber                      |         1931 | 
+ 2275 | Waitaki                    |         1949 | 5
+ 2228 | HawkesBay                  |         1929 | 1
+ 2276 | Waitaki                    |         1949 | 4
+ 2229 | HawkesBay                  |         1945 | 2
+ 2230 | HawkesBay                  |         1929 | 3
+ 2232 | Waipawa                    |         1934 | 
+ 2233 | Waipukurau                 |         1933 | 
+ 2277 | Waitaki                    |         1949 | 3
+ 2234 | Patangata                  |         1934 | 
+ 2307 | Tawera                     |         1922 | 1
+ 2235 | Dannevirke                 |         1938 | 
+ 2308 | Selwyn                     |         1949 | 3
+ 2237 | Rangitikei                 |         1920 | 1
+ 2280 | Waitaki                    |         1949 | 2
+ 2238 | Rangitikei                 |         1920 | 3
+ 2239 | Rangitikei                 |         1958 | 2
+ 2240 | Kiwitea                    |         1924 | 
+ 2241 | Waimarino                  |         1922 | 2
+ 2244 | Taranaki                   |         1934 | 
+ 2242 | Waimarino                  |         1922 | 1
+ 2243 | Inglewood                  |         1935 | 
+ 2248 | Egmont                     |         1949 | 
+ 2245 | Pohangina                  |         1930 | 
+ 2246 | Oroua                      |         1925 | 
+ 2247 | Stratford-Eltham           |         1925 | 
+ 2250 | Hawera                     |         1949 | 
+ 2309 | Ashburton                  |         1946 | 1
+ 2310 | Ashburton                  |         1946 | 2
+ 2251 | Patea                      |         1925 | 2
+ 2284 | Taieri                     |         1938 | 1
+ 2252 | Patea                      |         1925 | 1
+ 2253 | Waitotara                  |         1921 | 
+ 2254 | Wanganui                   |         1920 | 
+ 2311 | Ashburton                  |         1946 | 3
+ 2255 | Woodville                  |         1931 | 
+ 2294 | Waimate                    |         1949 | 2
+ 2312 | Ashburton                  |         1948 | 4
+ 2256 | Kairanga                   |         1923 | 
+ 2257 | Manawatu                   |         1930 | 
+ 2258 | Pahiatua                   |            3 | 1945
+ 2295 | Westland                   |         1948 | 1
+ 2259 | Eketahuna-Mauriceville     |         1922 | 
+ 2260 | Masterton                  |         1925 | 
+ 2261 | Featherston-WairarapaSouth |         1925 | 2
+ 2262 | Featherston-WairarapaSouth |         1925 | 4
+ 2263 | Featherston-WairarapaSouth |         1925 | 1
+ 2265 | Horowhenua                 |         1930 | 1
+ 2266 | Horowhenua                 |         1930 | 2
+ 2268 | FiordCounty                |         1920 | FiordCounty
+ 2269 | Southland-Wallace-Lake     |         1948 | 1
+ 2270 | Vincent                    |         1903 | 3
+ 2271 | Vincent                    |         1903 | 2
+ 2272 | Vincent                    |         1903 | 4
+ 2273 | Vincent                    |         1903 | 1
+ 2274 | Tuapeka                    |         1949 | 1
+ 2278 | Maniatoto                  |         1949 | 1
+ 2279 | Waitaki                    |         1949 | 1
+ 2281 | Waihemo                    |         1949 | 
+ 2282 | Waikouaiti                 |         1939 | 
+ 2283 | Maniatoto                  |         1949 | 3
+ 2285 | Tuapeka                    |         1949 | 3
+ 2313 | Ashburton                  |         1948 | 5
+ 2286 | Tuapeka                    |         1949 | 2
+ 2296 | Westland                   |         1935 | 2
+ 2287 | Clutha                     |         1939 | 1
+ 2314 | Ashburton                  |         1948 | 6
+ 2288 | Bruce                      |         1949 | 
+ 2289 | Clutha                     |         1939 | 2
+ 2297 | Westland                   |         1934 | 3
+ 2298 | Westland                   |         1934 | 4
+ 2290 | Southland-Wallace-Lake     |         1948 | 2
+ 2291 | StewartIsland              |         1949 | 
+ 2299 | Westland                   |         1919 | 5
+ 2292 | Maniatoto                  |         1949 | 2
+ 2293 | Waimate                    |         1928 | 1
+ 2319 | Mackenzie                  |         1930 | 3
+ 2315 | Geraldine                  |         1945 | 1
+ 2316 | Geraldine                  |         1945 | 2
+ 2323 | Waimate                    |         1928 | 3
+ 2317 | Levels                     |         1943 | 
+ 2318 | Mackenzie                  |         1930 | 4
+ 2320 | Mackenzie                  |         1930 | 2
+ 2321 | Mackenzie                  |         1930 | 1
+ 2322 | Waimate                    |         1949 | 4
+ 2324 | Cheviot                    |         1929 | 
+ 2325 | Waipara                    |         1922 | 3
+ 2327 | Waipara                    |         1922 | 1
+ 2326 | Waipara                    |         1922 | 2
+ 2328 | Kaikoura                   |         1930 | 1
+ 2329 | Amuri                      |         1927 | 3
+ 2331 | Amuri                      |         1927 | 1
+ 2330 | Amuri                      |         1927 | 2
+ 2332 | Kaikoura                   |         1930 | 2
+ 2333 | Marlborough                |         1935 | 4
+ 2334 | Awatere                    |         1936 | 1
+ 2335 | Awatere                    |         1936 | 3
+ 2336 | Awatere                    |         1936 | 2
+ 2337 | Amuri                      |         1927 | 4
+ 2338 | Marlborough                |         1935 | 3
+ 2341 | Marlborough                |         1935 | 1
+ 2342 | Marlborough                |         1935 | 2
+ 2343 | Grey                       |         1948 | 1
+ 2344 | Grey                       |         1920 | 2
+ 2345 | Grey                       |         1920 | 4
+ 2346 | Grey                       |         1920 | 3
+ 2347 | Inangahua                  |         1948 | 1
+ 2348 | Inangahua                  |         1927 | 2
+ 2349 | Waimea                     |         1928 | 4
+ 2350 | Murchison                  |         1926 | 1
+ 2351 | Murchison                  |         1926 | 2
+ 2352 | Waimea                     |         1928 | 3
+ 2353 | Waimea                     |         1928 | 1
+ 2356 | Buller                     |         1925 | 2
+ 2354 | Waimea                     |         1928 | 2
+ 2355 | Buller                     |         1925 | 1
+ 2357 | Buller                     |         1925 | 3
+ 2358 | Collingwood                |         1924 | 2
+ 2359 | Collingwood                |         1924 | 1
+ 2360 | Takaka                     |         1926 | 
+(199 rows)
+

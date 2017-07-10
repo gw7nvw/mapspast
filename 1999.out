@@ -1,0 +1,332 @@
+  id  |           name            | year_printed |     sheet     
+------+---------------------------+--------------+---------------
+ 1306 | West Cape                 |         1995 | A45
+ 1309 | Secretary Island          |         1995 | B42
+ 1311 | Resolution                |         1995 | B44
+ 1313 | Puysegur                  |         1996 | B46
+ 1315 | Milford                   |         1994 | C40-D40
+ 1318 | Manapouri                 |         1997 | C43
+ 1320 | Hauroko                   |         1997 | C45
+ 1322 | South Cape and Whiore     |         1999 | C50-D50
+ 1324 | Whakatipu Waitai          |         1995 | D39
+ 1326 | Eglinton                  |         1995 | D41
+ 1329 | Takitimu                  |         1986 | D44
+ 1331 | Riverton                  |         1984 | D46
+ 1333 | Bluff                     |         1987 | D48
+ 1336 | Mount Allen               |         2000 | D49
+ 1338 | Aspiring                  |         1996 | E39
+ 1340 | Queenstown                |         1996 | E41
+ 1342 | Eyre                      |         1998 | E43
+ 1345 | Invercargill              |         1983 | E46
+ 1350 | Paringa                   |         1999 | F36
+ 1352 | Wilkin                    |         1999 | F38
+ 1354 | Wanaka                    |         1991 | F40
+ 1357 | Garvie                    |         1997 | F43
+ 1359 | Gore                      |         1998 | F45
+ 1361 | Tokanui                   |         1984 | F47
+ 1364 | Paringa                   |         1999 | G36
+ 1365 | Paringa                   |         1999 | G36
+ 1368 | Lake Hawea                |         1998 | G39
+ 1370 | Cromwell                  |         1990 | G41
+ 1372 | Roxburgh                  |         1989 | G43
+ 1374 | Tapanui                   |         1998 | G45
+ 1377 |                           |         1995 | H34
+ 1379 | Tasman                    |         1994 | H37
+ 1381 | Omarama                   |         1999 | H39
+ 1384 | Waipiata                  |         1987 | H42
+ 1386 | Lawrence                  |         1987 | H44
+ 1388 | Balclutha                 |         1998 | H46
+ 1391 | Whataroa                  |         1996 | I35
+ 1393 | Lake Tekapo               |         1997 | I37
+ 1395 | Kirkliston                |         1991 | I39
+ 1398 | Dunback                   |         1996 | I42
+ 1400 | Dunedin                   |         1997 | I44-J44
+ 1402 | Greymouth                 |         1999 | J31
+ 1404 | Kaniere                   |         1991 | J33
+ 1407 | Mount Harper and Mahaanui |         1991 | J36
+ 1409 | Geraldine                 |         1998 | J38
+ 1411 | Waimate                   |         1998 | J40
+ 1414 | Palmerston                |         1997 | J43
+ 1416 | Punakaiki                 |         1984 | K30
+ 1418 | Lake Brunner              |         1997 | K32
+ 1421 | Coleridge                 |         1998 | K35
+ 1423 | Hinds                     |         1998 | K37
+ 1427 | Heaphy                    |         1984 | L26
+ 1429 | Mokihinui                 |         1998 | L28
+ 1431 | Reefton                   |         1999 | L30
+ 1433 | Lake Sumner               |         1999 | L32
+ 1436 | Waimakariri               |         1997 | L35
+ 1438 | Ashburton                 |         1998 | L37
+ 1440 | Farewell Spit             |         2000 | M24-N24-inset
+ 1442 | Collingwood               |         1998 | M25
+ 1445 | Wangapeka                 |         1998 | M28
+ 1447 | Matakitaki                |         1998 | M30
+ 1449 | Boyle                     |         1995 | M32
+ 1452 | Christchurch              |         1997 | M35
+ 1454 | Lincoln                   |         1997 | M36-37
+ 1456 | Ahipara                   |         1984 | N04
+ 1459 | Takaka                    |         1999 | N26
+ 1461 | Golden Downs              |         1987 | N28
+ 1463 | Tarndale                  |         1997 | N30
+ 1466 | Culverden                 |         1991 | N33
+ 1468 | Akaroa                    |         1998 | N36-37
+ 1470 | Kaitaia                   |         1999 | O04
+ 1473 | Aranga                    |         1987 | O07
+ 1475 | DUrville                  |         1997 | O26-P25-26
+ 1477 | Wairau                    |         1998 | O28
+ 1480 | Kaikoura                  |         1994 | O31
+ 1482 | Cheviot                   |         1990 | O33
+ 1484 | Kaikohe                   |         1998 | P05
+ 1486 | Dargaville                |         1994 | P07
+ 1489 | New Plymouth              |         1984 | P19
+ 1491 |                           |         1983 | P21
+ 1494 | Picton                    |         1995 | P27
+ 1496 | Grassmere                 |         1998 | P29-Q29
+ 1498 | Mangamaunu                |         1988 | P31
+ 1500 | Bay of Islands            |         1997 | Q05
+ 1503 | Maungaturoto              |         1997 | Q08
+ 1505 | Helensville               |         1995 | Q10
+ 1508 | Kawhia                    |         1997 | Q15-R15
+ 1510 | Waitara                   |         1988 | Q19
+ 1512 | Hawera                    |         1987 | Q21
+ 1514 |                           |         1980 | Q26
+ 1517 | Bream Head                |         1989 | R07
+ 1519 | Warkworth                 |         1998 | R09
+ 1521 | Auckland                  |         1998 | R11
+ 1523 | Raglan                    |         1996 | R14
+ 1526 | Ohura                     |         1987 | R18
+ 1528 | Matemateaonga             |         1984 | R20
+ 1530 | Wanganui                  |         1987 | R22
+ 1533 | Levin                     |         1995 | R25-S25
+ 1535 | Wellington                |         1978 | R28
+ 1537 | Barrier                   |         1983 | S08-T08
+ 1540 | Whitianga                 |         1994 | S11-T11
+ 1542 | Maramarua                 |         1994 | S12
+ 1544 | Hamilton                  |         1998 | S14
+ 1546 | Te Kuiti                  |         1987 | S16
+ 1549 | Raurimu                   |         1996 | S19
+ 1551 | Kakatahi                  |         1987 | S21
+ 1553 | Foxton                    |         1999 | S24
+ 1556 | Lake Wairarapa            |         1998 | S27
+ 1558 | Cuvier                    |         1986 | T09
+ 1560 | Thames                    |         1996 | T12
+ 1563 | Putaruru                  |         1998 | T15
+ 1565 | Whakamaru                 |         1998 | T17
+ 1567 | Tongariro                 |         1996 | T19
+ 1569 | Taihape                   |         1998 | T21
+ 1572 | Palmerston North          |         1997 | T24
+ 1574 | Masterton                 |         1997 | T26
+ 1576 | Te Wharau                 |         1997 | T27-28
+ 1579 | Waihi Beach               |         1999 | U12-13
+ 1582 | Ngongotaha                |         1996 | U15
+ 1584 | Wairakei                  |         1997 | U17
+ 1586 | Kaimanawa                 |         1999 | U19
+ 1589 | Ongaonga                  |         1996 | U22
+ 1591 | Weber                     |         1998 | U24
+ 1593 | Pongaroa and Castlepoint  |         1997 | U25-26
+ 1595 | Maketu                    |         1987 | V14
+ 1597 | Tarawera                  |         1996 | V16
+ 1600 | Te Haroto                 |         1988 | V19
+ 1602 | Napier                    |         1999 | V21
+ 1604 | Waipukurau                |         1985 | V23
+ 1607 | Whakatane                 |         1988 | W15
+ 1609 | Urewera                   |         1990 | W17
+ 1611 | Mohaka                    |         1994 | W19
+ 1613 | Kidnappers                |         1978 | W21
+ 1616 | Omaio                     |         1998 | X15
+ 1618 | Matawai                   |         1985 | X17
+ 1620 | Wairoa                    |         1996 | X19
+ 1622 | Cape Runaway              |         1997 | Y14
+ 1625 | Te Karaka                 |         1998 | Y17
+ 1627 |                           |         1999 | Y19
+ 1629 | Ruatoria                  |         1983 | Z15
+ 1632 | Kakapotahi                |         1982 | I33
+ 1305 | Five Fingers              |         1995 | A44
+ 1307 | George                    |         1994 | B41-C41
+ 1308 | George                    |         1994 | B41-C41
+ 1310 | Dagg                      |         1997 | B43
+ 1312 | Cameron                   |         1996 | B45
+ 1314 | Puysegur                  |         1996 | B47
+ 1316 | Puysegur                  |         1994 | C40
+ 1317 | Mount Irene               |         1997 | C42
+ 1319 | Hunter Mountains          |         1997 | C44
+ 1321 | Port Craig                |         1997 | C46
+ 1323 | Lake McKerrow             |         1995 | D38
+ 1325 | Whakatipu Waitai          |         1995 | D39
+ 1327 | Livingstone               |         1991 | D42
+ 1328 | Te Anau                   |         1990 | D43
+ 1330 | Ohai                      |         1985 | D45
+ 1332 | Bluff                     |         1999 | D47
+ 1334 | Halfmoon Bay              |         1999 | D48-E48
+ 1335 | Mount Allen               |         2000 | D49
+ 1337 | Cascade                   |         1997 | E37-38
+ 1339 | Earnslaw                  |         1996 | E40
+ 1341 | Walter Peak               |         1996 | E42
+ 1343 | Lumsden                   |         1985 | E44
+ 1344 | Winton                    |         1984 | E45
+ 1346 | Bluff                     |         1999 | E47
+ 1347 | Bluff                     |         1999 | E47
+ 1348 |                           |         1981 | E48-F48
+ 1349 | Port Adventure            |         1981 | E49
+ 1351 | Haast                     |         1991 | F37
+ 1353 | Matukituki                |         1993 | F39
+ 1355 | Arrowtown                 |         1996 | F41
+ 1356 | Kingston                  |         1997 | F42
+ 1358 | Waikaia                   |         1997 | F44
+ 1360 | Mataura                   |         1999 | F46
+ 1362 | Franz Josef and Waiau     |         1995 | G35-H35
+ 1363 | Franz Josef and Waiau     |         1995 | G35-H35
+ 1366 | Landsborough              |         1996 | G37
+ 1367 | Haast Pass                |         1999 | G38
+ 1369 | Lindis                    |         1991 | G40
+ 1371 | Alexandra                 |         1999 | G42
+ 1373 | Beaumont                  |         1987 | G44
+ 1375 | Clinton                   |         1999 | G46
+ 1376 | Tautuku                   |         1995 | G47
+ 1378 | Mount Cook                |         1996 | H36
+ 1380 | Ohau                      |         1991 | H38
+ 1382 | Otematata                 |         1994 | H40
+ 1383 | Ranfurly                  |         1994 | H41
+ 1385 | Middlemarch               |         1989 | H43
+ 1387 | Milton                    |         1988 | H45
+ 1389 | Hinahina                  |         1999 | H47
+ 1390 | Harihari                  |         1994 | I34
+ 1392 | Godley                    |         1998 | I36
+ 1394 | Burkes Pass               |         1994 | I38
+ 1396 | Kurow                     |         1987 | I40
+ 1397 | Danseys Pass              |         1998 | I41
+ 1399 | Waikouaiti                |         1999 | I43
+ 1401 | Taieri Mouth              |         1998 | I45
+ 1403 | Hokitika                  |         1998 | J32
+ 1405 | Whitcombe                 |         1996 | J34
+ 1406 | Arrowsmith                |         1999 | J35
+ 1408 | Mount Peel                |         1996 | J37
+ 1410 | Timaru                    |         1998 | J39-K39
+ 1412 | Oamaru                    |         1997 | J41
+ 1413 | Hampden                   |         1997 | J42
+ 1415 | Westport                  |         1994 | K29
+ 1417 | Ahaura                    |         1999 | K31
+ 1419 | Otira                     |         1997 | K33
+ 1420 | Wilberforce               |         1989 | K34
+ 1422 | Methven                   |         1998 | K36
+ 1424 | Temuka                    |         1980 | K38
+ 1425 | Three Kings               |         1984 | L01
+ 1426 | Kahurangi                 |         1984 | L25
+ 1428 | Karamea                   |         1984 | L27
+ 1430 | Inangahua                 |         1996 | L29
+ 1432 | Springs Junction          |         1998 | L31
+ 1434 | Dampier                   |         1991 | L33
+ 1617 | Motu                      |         1997 | X16
+ 1435 | Puketeraki                |         1990 | L34
+ 1437 | Rakaia                    |         1998 | L36
+ 1439 | North Cape                |         1998 | M02-N02
+ 1441 | Farewell Spit             |         2000 | M24-N24
+ 1443 | Cobb                      |         1997 | M26
+ 1444 | Mount Arthur              |         1996 | M27
+ 1446 | Murchison                 |         1987 | M29
+ 1448 | Lewis                     |         1989 | M31
+ 1450 | Waikari                   |         1989 | M33
+ 1451 | Amberley                  |         1996 | M34
+ 1453 | Lincoln                   |         1994 | M36
+ 1455 | Houhora                   |         1999 | N03
+ 1457 | Herekino                  |         1983 | N05
+ 1458 | Tarakohe                  |         1984 | N25
+ 1460 | Moutere                   |         1987 | N27
+ 1462 | St Arnaud                 |         1996 | N29
+ 1464 | Acheron                   |         1988 | N31
+ 1465 | Hanmer                    |         1998 | N32
+ 1467 | Motunau                   |         1991 | N34
+ 1469 | Karikari                  |         1983 | O03
+ 1471 | Rawene                    |         1999 | O05
+ 1472 | Waipoua                   |         1990 | O06
+ 1474 | DUrville                  |         1997 | O26-P25-26
+ 1476 | Nelson                    |         1999 | O27
+ 1478 | Waihopai                  |         1986 | O29
+ 1479 | Awatere                   |         1988 | O30
+ 1481 | Parnassus                 |         1991 | O32
+ 1483 | Whangaroa                 |         1984 | P04-Q04
+ 1485 | Mangakahia                |         1994 | P06
+ 1487 | Ruawai                    |         1998 | P08
+ 1488 | Rototuna                  |         1998 | P09
+ 1490 | Egmont                    |         1999 | P20
+ 1492 | Manaia                    |         1980 | P25
+ 1493 | Cape Jackson              |         1997 | P26-Q26
+ 1495 | Blenheim                  |         1997 | P28
+ 1497 | Clarence                  |         1990 | P30
+ 1499 |                           |         2000 | Q04
+ 1501 | Hukerenui                 |         1988 | Q06-R06
+ 1502 | Whangarei                 |         1988 | Q07-R07
+ 1504 | Kaipara                   |         1998 | Q09
+ 1506 | Waitakere                 |         1993 | Q11-R11
+ 1507 | Pukekohe                  |         1995 | Q12-R12
+ 1509 | Tongaporutu               |         1986 | Q18
+ 1511 | Stratford                 |         1987 | Q20
+ 1513 | Patea                     |         1985 | Q22
+ 1515 | Cook Strait               |         1998 | Q27
+ 1516 | Bream Head                |         1989 | R06
+ 1518 | Mangawhai                 |         1998 | R08
+ 1520 | Whangaparaoa              |         1999 | R10
+ 1522 | Port Waikato              |         1996 | R13
+ 1524 | Marokopa                  |         1987 | R16
+ 1525 | Awakino                   |         1986 | R17
+ 1527 | Whangamomona              |         1985 | R19
+ 1529 | Ngamatapouri              |         1987 | R21
+ 1531 | Marton                    |         1986 | R23-S23
+ 1532 | Paraparaumu               |         1983 | R26
+ 1534 | Wellington                |         1979 | R27
+ 1536 | Bream Head                |         1989 | S07
+ 1538 | Colville                  |         1983 | S09
+ 1539 | Hauraki Gulf              |         1995 | S10
+ 1541 | Waiheke                   |         1994 | S11
+ 1543 | Huntly                    |         1996 | S13
+ 1545 | Te Awamutu                |         1997 | S15
+ 1547 | Mangapehi                 |         1987 | S17
+ 1548 | Taumarunui                |         1987 | S18
+ 1550 | Ohakune                   |         1996 | S20
+ 1552 | Whangaehu                 |         1987 | S22
+ 1554 | Levin                     |         1985 | S25
+ 1555 | Carterton                 |         1998 | S26
+ 1557 | Palliser                  |         1999 | S28
+ 1559 | Coromandel                |         1999 | T10-U10
+ 1561 | Paeroa                    |         1998 | T13
+ 1562 | Morrinsville              |         1996 | T14
+ 1564 | Tokoroa                   |         1998 | T16
+ 1566 | Kuratau                   |         1997 | T18
+ 1568 | Ruapehu                   |         1997 | T20
+ 1570 | Mangaweka                 |         1990 | T22
+ 1571 | Kimbolton                 |         1996 | T23
+ 1573 | Eketahuna                 |         1997 | T25
+ 1575 | Te Wharau                 |         1997 | T27-28-inset
+ 1577 | Te Wharau                 |         1997 | T27-28
+ 1578 | Waihi Beach               |         1999 | U11-12
+ 1580 | Waihi Beach               |         1999 | U13
+ 1581 | Tauranga                  |         1997 | U14
+ 1583 | Rotorua                   |         1997 | U16
+ 1585 | Taupo                     |         1999 | U18
+ 1587 | Kaweka                    |         1995 | U20
+ 1588 | Kereru                    |         1996 | U21
+ 1590 | Dannevirke                |         1985 | U23
+ 1592 | Pongaroa and Castlepoint  |         1997 | U25-26-inset
+ 1594 | Pongaroa and Castlepoint  |         1997 | U25-26
+ 1596 | Edgecumbe                 |         1998 | V15
+ 1598 | Murupara                  |         1994 | V17
+ 1599 | Whirinaki                 |         1994 | V18
+ 1601 | Esk                       |         1997 | V20
+ 1603 | Waipawa                   |         1997 | V22
+ 1605 | Porangahau                |         1998 | V24
+ 1606 | Whakatane                 |         1988 | W15
+ 1608 | Waimana                   |         1990 | W16
+ 1610 | Waikaremoana              |         1999 | W18
+ 1612 | Aropaoanui                |         1978 | W20
+ 1614 | Waimarama                 |         1982 | W22
+ 1615 | Te Kaha                   |         1982 | X14
+ 1619 | Tiniroto                  |         1986 | X18
+ 1621 | Wharerata and Mahia       |         1999 | X20-Y20
+ 1623 | Hikurangi                 |         1995 | Y15
+ 1624 | Tauwhareparae             |         1999 | Y16
+ 1626 | Gisborne                  |         1998 | Y18
+ 1628 | East Cape                 |         1983 | Z14
+ 1630 | Tokomaru Bay              |         1983 | Z16
+ 1631 | Tolaga Bay                |         1983 | Z17
+(328 rows)
+

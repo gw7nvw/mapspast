@@ -1,6 +1,5 @@
 class ViewerController < ApplicationController
   def map
-    if params[:print] then @print=true end
     if params[:right] then @dright=params[:right] end
     if params[:left] then @dleft=params[:left] end
     if params[:top] then @dtop=params[:top] end
@@ -16,7 +15,7 @@ class ViewerController < ApplicationController
   end
 
 def layerswitcher
-  @maplayers=Maplayer.all
+  @maplayers=Maplayer.all.order(:order)
 end
 
 def legend

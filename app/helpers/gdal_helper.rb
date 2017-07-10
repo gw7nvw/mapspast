@@ -1,0 +1,2 @@
+module GdalHelper
+end

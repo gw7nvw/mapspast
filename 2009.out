@@ -1,0 +1,449 @@
+  id  |               name                | year_printed |         sheet         
+------+-----------------------------------+--------------+-----------------------
+ 1633 | Waipatiki Beach                   |         2009 | BJ40ptBJ39
+ 1634 | Ngawi                             |         2009 | BR33
+ 1635 | Whakaari / White Island           |         2009 | BC40ptBD40
+ 1636 | Mokohinau Islands                 |         2009 | AX33
+ 1637 | Bream Head                        |         2009 | AX31
+ 1638 | Panaki Island                     |         2009 | AU29ptAV29
+ 1639 | Taupo Bay                         |         2009 | AU28ptAV28
+ 1640 | North Cape (Otou)                 |         2009 | AT25
+ 1641 | Cape Reinga                       |         2009 | AT24
+ 1642 | Cape Brett                        |         2009 | AV30
+ 1643 | Russell                           |         2009 | AV29
+ 1644 | Whangaroa                         |         2009 | AV28
+ 1645 | Mangamuka                         |         2009 | AV27
+ 1646 | Whangarei                         |         2009 | AX30
+ 1647 | Tangowahine                       |         2009 | AX29
+ 1648 | Dargaville                        |         2009 | AX28
+ 1649 | Aranga                            |         2009 | AX27
+ 1650 | Kaitaia                           |         2009 | AV26
+ 1651 | Tauroa Peninsula                  |         2009 | AV25ptAV26
+ 1652 | Cuvier Island (Repanga Island)    |         2009 | AZ35
+ 1653 | Moehau                            |         2009 | AZ34
+ 1654 | Kawau Island                      |         2009 | AZ32
+ 1655 | Warkworth                         |         2009 | AZ31
+ 1656 | The Alderman Islands              |         2009 | BB37ptBB36
+ 1657 | Whangamata                        |         2009 | BB36
+ 1658 | Hikuai                            |         2009 | BB35
+ 1659 | Hunua                             |         2009 | BB33
+ 1660 | Papatoetoe                        |         2009 | BB32
+ 1661 | Manukau Harbour                   |         2009 | BB31
+ 1662 | Kaipara Harbour                   |         2009 | AZ30
+ 1663 | Kaipara Head                      |         2009 | AZ29
+ 1664 | Piha                              |         2009 | BB30ptBB31
+ 1665 | Te Araroa                         |         2009 | BD45
+ 1666 | Potaka                            |         2009 | BD44
+ 1667 | Raukokore                         |         2009 | BD43
+ 1668 | Marau Point                       |         2009 | BF45ptBF44
+ 1669 | Tolaga Bay                        |         2009 | BF44
+ 1670 | Te Karaka                         |         2009 | BF43
+ 1671 | Te Kaha                           |         2009 | BD42
+ 1672 | Matawai                           |         2009 | BF42
+ 1673 | Oponae                            |         2009 | BF41
+ 1674 | Matahi                            |         2009 | BF40
+ 1675 | Galatea                           |         2009 | BF39
+ 1676 | Wharerata                         |         2009 | BH43
+ 1677 | Mahia Peninsula                   |         2009 | BJ43ptsBJ42,BH42,BH43
+ 1678 | Nuhaka                            |         2009 | BH42
+ 1679 | Wairoa                            |         2009 | BH41
+ 1680 | Mohaka                            |         2009 | BH40
+ 1681 | Putorino                          |         2009 | BH39
+ 1682 | Cape Kidnappers                   |         2009 | BK40ptBK39
+ 1683 | Hastings                          |         2009 | BK39
+ 1684 | Maketu                            |         2009 | BD38
+ 1685 | Tauranga                          |         2009 | BD37
+ 1686 | Lower Kaimai                      |         2009 | BD36
+ 1687 | Matamata                          |         2009 | BD35
+ 1688 | Kaingaroa Forest                  |         2009 | BF38
+ 1689 | Waiotapu                          |         2009 | BF37
+ 1690 | Atiamuri                          |         2009 | BF36
+ 1691 | Whakamaru                         |         2009 | BF35
+ 1692 | Morrinsville                      |         2009 | BD34
+ 1693 | Hamilton                          |         2009 | BD33
+ 1694 | Raglan                            |         2009 | BD32
+ 1695 | Mount Karioi                      |         2009 | BD31ptBD32
+ 1696 | Benneydale                        |         2009 | BF34
+ 1697 | Te Kuiti                          |         2009 | BF33
+ 1698 | Piopio                            |         2009 | BF32
+ 1699 | Marokopa                          |         2009 | BF31
+ 1700 | Te Haroto                         |         2009 | BH38
+ 1701 | Rangitaiki                        |         2009 | BH37
+ 1702 | Motutere                          |         2009 | BH36
+ 1703 | Turangi                           |         2009 | BH35
+ 1704 | Raurimu                           |         2009 | BH34
+ 1705 | Retaruke                          |         2009 | BH33
+ 1706 | Tokirima                          |         2009 | BH32
+ 1707 | Whangamomona                      |         2009 | BH31
+ 1708 | Maraekakaho                       |         2009 | BK38
+ 1709 | Tikokino                          |         2009 | BK37
+ 1710 | Taoroa Junction                   |         2009 | BK36
+ 1711 | Taihape                           |         2009 | BK35
+ 1712 | Pohonui                           |         2009 | BK34
+ 1713 | Matahiwi                          |         2009 | BK33
+ 1714 | Kai  Iwi                          |         2009 | BK32
+ 1715 | Waverley                          |         2009 | BK31
+ 1716 | Endeavour Inlet                   |         2009 | BP29
+ 1717 | Te Aumiti (French Pass)           |         2009 | BP28
+ 1718 | Croisilles Hill                   |         2009 | BP27
+ 1719 | Pepin Island                      |         2009 | BP26ptBP27
+ 1720 | Motueka                           |         2009 | BP25
+ 1721 | Blackhead                         |         2009 | BM39ptBM38
+ 1722 | Takaka                            |         2009 | BP24
+ 1723 | Porangahau                        |         2009 | BM38
+ 1724 | Weber                             |         2009 | BM37
+ 1725 | Dannevirke                        |         2009 | BM36
+ 1726 | Woodville                         |         2009 | BM35
+ 1727 | Castlepoint                       |         2009 | BP36
+ 1728 | Bideford                          |         2009 | BP35
+ 1729 | Palmerston North                  |         2009 | BM34
+ 1730 | Virginia                          |         2009 | BV23
+ 1731 | Mount Patriarch                   |         2009 | BR26
+ 1732 | Mangamaunu                        |         2009 | BT28
+ 1733 | Kaikoura                          |         2009 | BT27
+ 1734 | Mount Clear                       |         2009 | BT26
+ 1735 | Cheviot                           |         2009 | BV26
+ 1736 | Duvauchelle                       |         2009 | BX25
+ 1737 | Christchurch                      |         2009 | BX24
+ 1738 | Lincoln                           |         2009 | BX23
+ 1739 | Lyell                             |         2009 | BR22
+ 1740 | Granity                           |         2009 | BR21
+ 1741 | Springs Junction                  |         2009 | BT22
+ 1742 | Waiuta                            |         2009 | BT21
+ 1743 | Dampier Corner                    |         2009 | BV22
+ 1744 | Cass                              |         2009 | BV21
+ 1745 | Fox Glacier                       |         2009 | BX15
+ 1746 | Twizel                            |         2009 | BZ15
+ 1747 | Waikowhai Bluff                   |         2009 | BW14ptBX14
+ 1748 | Gillespies Beach                  |         2009 | BX14
+ 1749 | Heretaniwha Point                 |         2009 | BX13
+ 1750 | Mount Barth                       |         2009 | BZ14
+ 1751 | Haast Pass / Tioripatea           |         2009 | BZ13
+ 1752 | Makarora                          |         2009 | BZ12
+ 1753 | Mount Pollux                      |         2009 | BZ11
+ 1754 | Westport                          |         2009 | BR20
+ 1755 | Ahaura                            |         2009 | BT20
+ 1756 | Runanga                           |         2009 | BT19
+ 1757 | Otira                             |         2009 | BV20
+ 1758 | Lake Kaniere                      |         2009 | BV19
+ 1759 | Darfield                          |         2009 | BX22
+ 1760 | Windwhistle                       |         2009 | BX21
+ 1761 | Methven                           |         2009 | BX20
+ 1762 | Hakatere                          |         2009 | BX19
+ 1763 | Kokatahi                          |         2009 | BV18
+ 1764 | Kakapotahi                        |         2009 | BV17
+ 1765 | Mount Oneone                      |         2009 | BV16
+ 1766 | Lake Clearwater                   |         2009 | BX18
+ 1767 | Mount Sibbald                     |         2009 | BX17
+ 1768 | Mount Elie De Beaumont            |         2009 | BX16
+ 1769 | Longbeach                         |         2009 | BZ21ptBZ20
+ 1770 | Clandeboye                        |         2009 | BZ20
+ 1771 | Timaru                            |         2009 | BZ19
+ 1772 | Fairlie                           |         2009 | BZ18
+ 1773 | Burkes Pass                       |         2009 | BZ17
+ 1774 | Dover Pass                        |         2009 | BZ16
+ 1775 | Jackson Bay                       |         2009 | BY10ptBZ10
+ 1776 | Cascade Plateau                   |         2009 | BZ10
+ 1777 | Awarua Point                      |         2009 | BZ09
+ 1778 | Waimate                           |         2009 | CB19
+ 1779 | Ikawai                            |         2009 | CB18
+ 1780 | Kurow                             |         2009 | CB17
+ 1781 | Naseby                            |         2009 | CB16
+ 1782 | Idaburn                           |         2009 | CB15
+ 1783 | Palmerston                        |         2009 | CD18
+ 1784 | Waikouaiti                        |         2009 | CD17
+ 1785 | Middlemarch                       |         2009 | CD16
+ 1786 | Paerau                            |         2009 | CD15
+ 1787 | Taieri Mouth                      |         2009 | CF16
+ 1788 | Milton                            |         2009 | CF15
+ 1789 | Dunstan Peak                      |         2009 | CB14
+ 1790 | Tarras                            |         2009 | CB13
+ 1791 | Cardrona                          |         2009 | CB12
+ 1792 | Arrowtown                         |         2009 | CB11
+ 1793 | Glenorchy                         |         2009 | CB10
+ 1794 | Hollyford                         |         2009 | CB09
+ 1795 | Poison Bay                        |         2009 | CA07ptCB07
+ 1796 | Homer Saddle                      |         2009 | CB08
+ 1797 | Bligh Sound                       |         2009 | CB07
+ 1798 | Lake Onslow                       |         2009 | CD14
+ 1799 | Roxburgh                          |         2009 | CD13
+ 1800 | Piano Flat                        |         2009 | CD12
+ 1801 | Kingston                          |         2009 | CD11
+ 1802 | Clydevale                         |         2009 | CF14
+ 1803 | Clinton                           |         2009 | CF13
+ 1804 | Gore                              |         2009 | CF12
+ 1805 | Hokonui Hills                     |         2009 | CF11
+ 1806 | Eyre Peak                         |         2009 | CD10
+ 1807 | South Mavora Lake                 |         2009 | CD09
+ 1808 | Te Anau                           |         2009 | CD08
+ 1809 | Manapouri                         |         2009 | CD07
+ 1810 | Winton                            |         2009 | CF10
+ 1811 | Nightcaps                         |         2009 | CF09
+ 1812 | Tuatapere                         |         2009 | CF08
+ 1813 | Mary Island                       |         2009 | CF07
+ 1814 | Curio Bay                         |         2009 | CH13
+ 1815 | Waipapa Point                     |         2009 | CH12
+ 1816 | Ruapuke Island                    |         2009 | CH11
+ 1817 | Sand Hill Point                   |         2009 | CG07ptCF07
+ 1818 | Foveaux Strait                    |         2009 | CH10
+ 1819 | Mount Anglem / Hananui            |         2009 | CH09
+ 1820 | Codfish Island / Whenua Hou       |         2009 | CH08
+ 1821 | Titi / Muttonbird Island          |         2009 | CJ07/CK07
+ 1822 | South Cape / Whiore               |         2009 | CK08
+ 1823 | Mount Elder                       |         2009 | CB06
+ 1824 | Deep Cove                         |         2009 | CD06
+ 1825 | Dagg Sound                        |         2009 | CD05
+ 1826 | Lake Beattie                      |         2009 | CD04ptCD05
+ 1827 | Lake Poteriteri                   |         2009 | CF06
+ 1828 | Long Sound                        |         2009 | CF05
+ 1829 | West Cape                         |         2009 | CF04
+ 1830 | Solander Island (Hautere)         |         2009 | CH05/CH06
+ 1831 | Poor Knights Islands              |         2009 | AW32
+ 1832 | Tutukaka                          |         2009 | AW31
+ 1833 | Hen and Chickens Islands          |         2009 | AX32ptsAX31,AY31,AY32
+ 1834 | Mangonui                          |         2009 | AU27
+ 1835 | Waiharara                         |         2009 | AU26
+ 1836 | Houhora                           |         2009 | AU25
+ 1837 | Whangaruru                        |         2009 | AW30
+ 1838 | Kawakawa                          |         2009 | AW29
+ 1839 | Kaikohe                           |         2009 | AW28
+ 1840 | Rawene                            |         2009 | AW27
+ 1841 | Hokianga Harbour                  |         2009 | AW26
+ 1842 | Mercury Islands                   |         2009 | AZ36ptsAZ35,BA35,BA36
+ 1843 | Cooks Beach                       |         2009 | BA36ptBA35
+ 1844 | Whitianga                         |         2009 | BA35
+ 1845 | Claris                            |         2009 | AY34
+ 1846 | Hauturu / Little Barrier Island   |         2009 | AY33
+ 1847 | Cape Rodney                       |         2009 | AY32
+ 1848 | Mangawhai                         |         2009 | AY31
+ 1849 | Coromandel                        |         2009 | BA34
+ 1850 | Waiheke Island                    |         2009 | BA33
+ 1851 | Auckland                          |         2009 | BA32
+ 1852 | Waitemata Harbour                 |         2009 | BA31
+ 1853 | Mayor Island (Tuhua)              |         2009 | BC37
+ 1854 | Katikati                          |         2009 | BC36
+ 1855 | Paeroa                            |         2009 | BC35
+ 1856 | Ngatea                            |         2009 | BC34
+ 1857 | Te Kauwhata                       |         2009 | BC33
+ 1858 | Pukekawa                          |         2009 | BC32
+ 1859 | Port Waikato                      |         2009 | BC31
+ 1860 | Maungaturoto                      |         2009 | AY30
+ 1861 | Ruawai                            |         2009 | AY29
+ 1862 | Te Kopuru                         |         2009 | AY28
+ 1863 | Helensville                       |         2009 | BA30
+ 1864 | Waipiro Bay                       |         2009 | BE45
+ 1865 | Te Puia Springs                   |         2009 | BE44
+ 1866 | Huiarua                           |         2009 | BE43
+ 1867 | Moutohora Island                  |         2009 | BD40ptBE40
+ 1868 | Houpoto                           |         2009 | BE42
+ 1869 | Opotiki                           |         2009 | BE41
+ 1870 | Whakatane                         |         2009 | BE40
+ 1871 | Matata                            |         2009 | BD39ptBE39
+ 1872 | Edgecumbe                         |         2009 | BE39
+ 1873 | Whangara                          |         2009 | BG44
+ 1874 | Gisborne                          |         2009 | BG43
+ 1875 | Ngatapa                           |         2009 | BG42
+ 1876 | Ruakituri                         |         2009 | BG41
+ 1877 | Waikaremoana                      |         2009 | BG40
+ 1878 | Ruatahuna                         |         2009 | BG39
+ 1879 | Whirinaki                         |         2009 | BJ39
+ 1880 | Lake Rotoma                       |         2009 | BE38
+ 1881 | Rotorua                           |         2009 | BE37
+ 1882 | Mamaku                            |         2009 | BE36
+ 1883 | Putaruru                          |         2009 | BE35
+ 1884 | Kihikihi                          |         2009 | BE34
+ 1885 | Pirongia                          |         2009 | BE33
+ 1886 | Kawhia                            |         2009 | BE32
+ 1887 | Albatross Point                   |         2009 | BE31
+ 1888 | Wairapukao                        |         2009 | BG38
+ 1889 | Iwitahi                           |         2009 | BG37
+ 1890 | Taupo                             |         2009 | BG36
+ 1891 | Tihoi                             |         2009 | BG35
+ 1892 | Te Pohue                          |         2009 | BJ38
+ 1893 | Kuripapango                       |         2009 | BJ37
+ 1894 | Tawake Tohunga                    |         2009 | BJ36
+ 1895 | Waiouru                           |         2009 | BJ35
+ 1896 | Piropiro                          |         2009 | BG34
+ 1897 | Ongarue                           |         2009 | BG33
+ 1898 | Ohura                             |         2009 | BG32
+ 1899 | Mokau                             |         2009 | BG31
+ 1900 | Mount Ruapehu                     |         2009 | BJ34
+ 1901 | Raetihi                           |         2009 | BJ33
+ 1902 | Pipiriki                          |         2009 | BJ32
+ 1903 | Strathmore                        |         2009 | BJ31
+ 1904 | Cape Stephens                     |         2009 | BN29ptBN28
+ 1905 | Port Hardy                        |         2009 | BN28
+ 1906 | Cape Koamaru                      |         2009 | BP30ptBQ30
+ 1907 | Farewell Spit                     |         2009 | BM25ptBN25
+ 1908 | Cape Farewell                     |         2009 | BM24ptBN24
+ 1909 | Totaranui                         |         2009 | BN25
+ 1910 | Collingwood                       |         2009 | BN24
+ 1911 | Paturau River                     |         2009 | BN23
+ 1912 | Waimarama                         |         2009 | BL39
+ 1913 | Waipukurau                        |         2009 | BL38
+ 1914 | Ongaonga                          |         2009 | BL37
+ 1915 | Norsewood                         |         2009 | BL36
+ 1916 | Kimbolton                         |         2009 | BL35
+ 1917 | Hunterville                       |         2009 | BL34
+ 1918 | Marton                            |         2009 | BL33
+ 1919 | Whanganui                         |         2009 | BL32
+ 1920 | Cape Turnagain                    |         2009 | BN38ptBN37
+ 1921 | Akitio                            |         2009 | BN37
+ 1922 | Pongaroa                          |         2009 | BN36
+ 1923 | Alfredton                         |         2009 | BN35
+ 1924 | Shannon                           |         2009 | BN34
+ 1925 | Levin                             |         2009 | BN33
+ 1926 | Stratford                         |         2009 | BJ30
+ 1927 | Mount Taranaki or Mount Egmont    |         2009 | BJ29
+ 1928 | Opunake                           |         2009 | BJ28
+ 1929 | Pihama                            |         2009 | BK28ptBJ28
+ 1930 | Kahurangi Point                   |         2009 | BN22
+ 1931 | Waikawa                           |         2009 | BQ29
+ 1932 | Havelock                          |         2009 | BQ28
+ 1933 | Rai Valley                        |         2009 | BQ27
+ 1934 | Ward                              |         2009 | BS29
+ 1935 | Kekerengu                         |         2009 | BS28
+ 1936 | Tapuae-o-Uenuku                   |         2009 | BS27
+ 1937 | Nelson                            |         2009 | BQ26
+ 1938 | Mapua                             |         2009 | BQ25
+ 1939 | Tapawera                          |         2009 | BQ24
+ 1940 | Te Wharau                         |         2009 | BQ35
+ 1941 | Martinborough                     |         2009 | BQ34
+ 1942 | Lake Wairarapa                    |         2009 | BQ33
+ 1943 | Lower Hutt                        |         2009 | BQ32
+ 1944 | Wellington                        |         2009 | BQ31
+ 1945 | Wangapeka Saddle                  |         2009 | BQ23
+ 1946 | Patanui Stream                    |         2009 | BQ36ptBQ35
+ 1947 | Severn                            |         2009 | BS25
+ 1948 | Mount Robert                      |         2009 | BS24
+ 1949 | Matakitaki                        |         2009 | BS23
+ 1950 | Waiau                             |         2009 | BU25
+ 1951 | Hanmer Springs                    |         2009 | BU24
+ 1952 | Boyle Village                     |         2009 | BU23
+ 1953 | Mount Muller                      |         2009 | BS26
+ 1954 | Oaro                              |         2009 | BU27
+ 1955 | Parnassus                         |         2009 | BU26
+ 1956 | Amberley Beach                    |         2009 | BW25ptBW24
+ 1957 | Rangiora                          |         2009 | BW24
+ 1958 | Cust                              |         2009 | BW23
+ 1959 | Akaroa                            |         2009 | BY25
+ 1960 | Birdlings Flat                    |         2009 | BY24
+ 1961 | Fishermans Point                  |         2009 | BY23
+ 1962 | Shenandoah                        |         2009 | BS22
+ 1963 | Reefton                           |         2009 | BS21
+ 1964 | Lake Sumner                       |         2009 | BU22
+ 1965 | Haupiri                           |         2009 | BU21
+ 1966 | Okarito                           |         2009 | BW15
+ 1967 | Birch Hill                        |         2009 | BY15
+ 1968 | Omarama                           |         2009 | CA15
+ 1969 | Otumotu Point                     |         2009 | BX12ptBY12
+ 1970 | Mount Ward                        |         2009 | BY14
+ 1971 | Lake Paringa                      |         2009 | BY13
+ 1972 | Haast                             |         2009 | BY12
+ 1973 | Hannahs Clearing                  |         2009 | BY11
+ 1974 | Lindis Pass                       |         2009 | CA14
+ 1975 | Lake Hawea                        |         2009 | CA13
+ 1976 | Minaret Bay                       |         2009 | CA12
+ 1977 | Aspiring Flats                    |         2009 | CA11
+ 1978 | Karamea                           |         2009 | BQ22
+ 1979 | Kongahu Point                     |         2009 | BQ21ptBQ22
+ 1980 | Charleston                        |         2009 | BS20
+ 1981 | Punakaiki                         |         2009 | BS19
+ 1982 | Moana                             |         2009 | BU20
+ 1983 | Kumara                            |         2009 | BU19
+ 1984 | Hokitika                          |         2009 | BU18
+ 1985 | Oxford                            |         2009 | BW22
+ 1986 | Springfield                       |         2009 | BW21
+ 1987 | Lake Coleridge                    |         2009 | BW20
+ 1988 | Taylors Camp                      |         2009 | BW19
+ 1989 | Whitcombe Pass                    |         2009 | BW18
+ 1990 | Harihari                          |         2009 | BW17
+ 1991 | Whataroa                          |         2009 | BW16
+ 1992 | Pendarves                         |         2009 | BY22
+ 1993 | Ashburton                         |         2009 | BY21
+ 1994 | Hinds                             |         2009 | BY20
+ 1995 | Arundel                           |         2009 | BY19
+ 1996 | Pareora                           |         2009 | CA19
+ 1997 | Ashwick Flat                      |         2009 | BY18
+ 1998 | Lake Tekapo                       |         2009 | BY17
+ 1999 | Mount Stevenson                   |         2009 | BY16
+ 2000 | Waituna                           |         2009 | CA18
+ 2001 | Cattle Creek                      |         2009 | CA17
+ 2002 | Otematata                         |         2009 | CA16
+ 2003 | Lake Williamson                   |         2009 | CA10
+ 2004 | Alabaster Pass                    |         2009 | CA09
+ 2005 | Milford Sound / Piopiotahi        |         2009 | CA08
+ 2006 | Cape Wanbrow                      |         2009 | CC19ptCC18
+ 2007 | Oamaru                            |         2009 | CC18
+ 2008 | Morrisons                         |         2009 | CC17
+ 2009 | Kyeburn                           |         2009 | CC16
+ 2010 | Patearoa                          |         2009 | CC15
+ 2011 | Taiaroa Head                      |         2009 | CE18
+ 2012 | Dunedin                           |         2009 | CE17
+ 2013 | Mosgiel                           |         2009 | CE16
+ 2014 | Waitahuna                         |         2009 | CE15
+ 2015 | Ophir                             |         2009 | CC14
+ 2016 | Alexandra                         |         2009 | CC13
+ 2017 | Bannockburn                       |         2009 | CC12
+ 2018 | Queenstown                        |         2009 | CC11
+ 2019 | Foxton                            |         2009 | BM33
+ 2020 | Masterton                         |         2009 | BP34
+ 2021 | Featherston                       |         2009 | BP33
+ 2022 | Kapiti Island                     |         2009 | BN32ptBP32
+ 2023 | Paraparaumu                       |         2009 | BP32
+ 2024 | Porirua                           |         2009 | BP31
+ 2025 | Gouland Downs                     |         2009 | BP23
+ 2026 | Opourapa Island                   |         2009 | BG30ptBH30
+ 2027 | Urenui                            |         2009 | BH30
+ 2028 | New Plymouth                      |         2009 | BH29
+ 2029 | Oakura                            |         2009 | BH28
+ 2030 | Waiinu Beach                      |         2009 | BL31ptBK31
+ 2031 | Patea                             |         2009 | BK30
+ 2032 | Manaia                            |         2009 | BK29
+ 2033 | Heaphy Beach                      |         2009 | BP22
+ 2034 | Thames                            |         2009 | BB34
+ 2035 | Seddon                            |         2009 | BR29
+ 2036 | Blenheim                          |         2009 | BR28
+ 2037 | Waihopai                          |         2009 | BR27
+ 2038 | Manurewa Point                    |         2009 | BR34
+ 2039 | Tophouse                          |         2009 | BR25
+ 2040 | Kawatiri                          |         2009 | BR24
+ 2041 | Murchison                         |         2009 | BR23
+ 2042 | Mount Northampton                 |         2009 | BT25
+ 2043 | Ada Flat                          |         2009 | BT24
+ 2044 | Lewis Pass                        |         2009 | BT23
+ 2045 | Motunau Beach                     |         2009 | BV25
+ 2046 | Waipara                           |         2009 | BV24
+ 2047 | Walter Peak                       |         2009 | CC10
+ 2048 | North Malvora Lake                |         2009 | CC09
+ 2049 | Welcome Point                     |         2009 | CC08
+ 2050 | North West Arm                    |         2009 | CC07
+ 2051 | Lawrence                          |         2009 | CE14
+ 2052 | Tapanui                           |         2009 | CE13
+ 2053 | Black Umbrella                    |         2009 | CE12
+ 2054 | Riversdale                        |         2009 | CE11
+ 2055 | Lumsden                           |         2009 | CE10
+ 2056 | Avondale                          |         2009 | CE09
+ 2057 | Blackmount                        |         2009 | CE08
+ 2058 | Lake Monowai                      |         2009 | CE07
+ 2059 | Nugget Point                      |         2009 | CG15
+ 2060 | Manawatawhi / Three Kings Islands |         2009 | AS21/AS22
+ 2061 | Owaka                             |         2009 | CG14
+ 2062 | Chaslands                         |         2009 | CG13
+ 2063 | Wyndham                           |         2009 | CG12
+ 2064 | Dacre                             |         2009 | CG11
+ 2065 | Invercargill                      |         2009 | CG10
+ 2066 | Riverton / Aparima                |         2009 | CG09
+ 2067 | Orepuki                           |         2009 | CG08
+ 2068 | Port Adventure                    |         2009 | CJ10
+ 2069 | Mount Allen                       |         2009 | CJ09
+ 2070 | Doughboy Bay                      |         2009 | CJ08
+ 2071 | Caswell Sound                     |         2009 | CC06
+ 2072 | Colonial Head                     |         2009 | CC05
+ 2073 | Lake Roe                          |         2009 | CE06
+ 2074 | Cooper Island                     |         2009 | CE05
+ 2075 | Anchor Island                     |         2009 | CE04
+ 2076 | Long Point                        |         2009 | CG06
+ 2077 | Green Islets                      |         2009 | CG05
+(445 rows)
+
