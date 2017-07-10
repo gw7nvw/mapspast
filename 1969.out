@@ -1,0 +1,261 @@
+ id  |           name           | year_printed |  sheet   
+-----+--------------------------+--------------+----------
+ 202 | Parenga                  |         1967 | N3-4
+ 204 | Doubtless Bay            |         1964 | N7
+ 206 | Kerikeri                 |         1969 | N11
+ 209 | Mangakahia               |         1969 | N19
+ 211 | Dargaville               |         1964 | N23
+ 213 | Ruawai                   |         1969 | N27
+ 215 | Pakiri                   |         1969 | N29
+ 217 | Kaipara                  |         1965 | N33
+ 220 | Helensville              |         1964 | N37
+ 222 | Moehau                   |         1966 | N39
+ 226 | Ponui                    |         1963 | N43
+ 228 | Pukekohe                 |         1964 | N46-47
+ 230 | Thames                   |         1967 | N49
+ 232 | Te Kauwhata              |         1967 | N52
+ 235 | Ngaruawahia              |         1965 | N56
+ 237 | Te Aroha                 |         1965 | N58
+ 239 | White Island and Te Kaha |         1967 | N61
+ 242 | Hamilton                 |         1965 | N65
+ 244 | Te Puke                  |         1965 | N67
+ 246 | Kawhia                   |         1953 | N73
+ 248 | Arapuni                  |         1967 | N75
+ 251 | Ruatoki                  |         1962 | N78
+ 253 | Waiotapu                 |         1967 | N85
+ 255 | Waimana                  |         1969 | N87
+ 257 | Mokau                    |         1957 | N91
+ 260 | Taupo                    |         1969 | N94
+ 262 | Maungapohatu             |         1967 | N96
+ 264 | Gisborne                 |         1965 | N98
+ 266 | Ohura                    |         1953 | N100
+ 269 | Maungataniwha            |         1967 | N104
+ 271 | Tiniroto                 |         1953 | N106
+ 273 | Inglewood                |         1965 | N109
+ 275 | Ngauruhoe                |         1968 | N112
+ 278 | Mohaka                   |         1967 | N115
+ 280 | Mahia                    |         1969 | N117-127
+ 282 | Stratford                |         1964 | N119
+ 284 | Ohakune                  |         1968 | N121
+ 287 | Esk                      |         1962 | N124
+ 289 | Oeo                      |         1963 | N129
+ 291 | Kakatahi                 |         1969 | N131
+ 294 | Waverley                 |         1965 | N137
+ 296 | Waipawa                  |         1962 | N141
+ 300 | Dannevirke               |         1962 | N145
+ 302 | Tangimoana               |         1968 | N148
+ 305 | Porangahau               |         1955 | N151
+ 307 | Eketahuna                |         1965 | N153
+ 309 | Otaki                    |         1964 | N156-157
+ 311 | Tinui                    |         1965 | N159
+ 313 | Rimutaka                 |         1968 | N161
+ 316 | Wellington               |         1967 | N164
+ 318 | Pahaoa                   |         1957 | N166
+ 320 | Kaburangi                |         1963 | S2
+ 322 | Heaphy                   |         1965 | S7
+ 325 | Karamea                  |         1965 | S12
+ 327 | Motueka                  |         1967 | S14
+ 329 | Queen Charlotte          |         1969 | S16
+ 331 | Tadmor                   |         1969 | S19
+ 334 | Picton                   |         1962 | S22
+ 336 | Hope                     |         1965 | S26
+ 338 | Blenheim                 |         1963 | S28
+ 340 | Charleston               |         1969 | S30
+ 343 | Awatere                  |         1968 | S35
+ 345 | Clarence                 |         1968 | S42-43
+ 347 | Lewis                    |         1963 | S46
+ 350 | Hokitika                 |         1965 | S50-51
+ 352 | Hanmer                   |         1962 | S54
+ 354 | Ross                     |         1958 | S57
+ 356 | Dampier                  |         1965 | S60
+ 359 | Okarito                  |         1959 | S63
+ 361 | Ashley                   |         1965 | S67
+ 363 | Gillespies               |         1965 | S70
+ 365 | Springfield              |         1963 | S74
+ 367 | Kaiapoi                  |         1969 | S76
+ 370 | Methven                  |         1968 | S82
+ 374 | Okuru                    |         1967 | S86
+ 377 | Ashburton                |         1965 | S92
+ 379 | Akaroa                   |         1965 | S94
+ 381 | Fairlie                  |         1963 | S101
+ 383 | Diadem                   |         1969 | S108
+ 386 | Timaru                   |         1959 | S111
+ 388 | Lindis                   |         1969 | S116
+ 390 | St Bathans               |         1969 | S125
+ 392 | Cromwell                 |         1969 | S133
+ 395 | Alexandra                |         1969 | S143
+ 397 | Hyde                     |         1969 | S145
+ 399 | Mossburn                 |         1965 | S150
+ 402 | Middlemarch              |         1968 | S154
+ 404 | Heriot                   |         1957 | S161
+ 406 | Dunedin                  |         1965 | S164
+ 408 | Nightcaps                |         1968 | S168
+ 411 | Waitahuna                |         1969 | S171
+ 413 | Orepuki                  |         1967 | S175
+ 415 | Invercargill             |         1960 | S177
+ 417 | Balclutha                |         1965 | S179
+ 420 | Tokanui                  |         1968 | S183
+ 422 | Ahipara                  |         1942 | N9
+ 424 | Herekino                 |         1944 | N13
+ 426 | Whangaruru               |         1942 | N16
+ 429 | Raglan                   |         1948 | N64
+ 431 | Tongoio                  |         1944 | N125
+ 433 | Matiri                   |         1943 | S25
+ 435 | Murchison                |         1943 | S32
+ 438 | Maruia                   |         1943 | S39
+ 440 | Ahaura                   |         1945 | S45
+ 442 | Stephens                 |         1945 | S5-6
+ 445 | Mt Somers                |         1943 | S81
+ 449 | Morley                   |         1946 | S159
+ 451 | Lawrence                 |         1947 | S162
+ 454 | Ward                     |         1942 | S36
+ 456 | Chetwode                 |         1945 | S11
+ 201 | North Cape               |         1954 | N1-2
+ 203 | Houhora                  |         1965 | N6
+ 205 | Kaitaia                  |         1965 | N10
+ 207 | Kaikohe                  |         1965 | N15
+ 208 | Poor Knights             |         1967 | N18
+ 210 | Whangarei                |         1964 | N20
+ 212 | Waipu                    |         1968 | N24
+ 214 | Maungaturoto             |         1965 | N28
+ 216 | Barrier                  |         1953 | N30-31
+ 218 | Warkworth                |         1967 | N34
+ 219 | Colville                 |         1968 | N35-36
+ 221 | Silverdale               |         1965 | N38
+ 223 | Coromandel               |         1965 | N40
+ 224 | Waitakere                |         1964 | N41-46
+ 225 | Auckland                 |         1966 | N42
+ 227 | Whitianga                |         1966 | N44
+ 229 | Mangatawhiri             |         1964 | N48
+ 231 | Onewhero                 |         1964 | N51
+ 233 | Paeroa                   |         1965 | N53-54
+ 234 | Te Akau                  |         1967 | N55
+ 236 | Te Aroha                 |         1965 | N57
+ 238 | Matata                   |         1967 | N59-68
+ 240 | Runaway                  |         1967 | N62
+ 241 | East Cape                |         1967 | N63
+ 243 | Matamata                 |         1963 | N66
+ 245 | Whakatane                |         1969 | N69
+ 247 | Otorohanga               |         1968 | N74
+ 249 | Rotorua                  |         1964 | N76
+ 250 | Tarawera                 |         1965 | N77
+ 252 | Whakamaru                |         1964 | N84
+ 254 | Galatea                  |         1968 | N86
+ 256 | Tolaga Bay               |         1965 | N89-90
+ 258 | Ongarue                  |         1956 | N92
+ 259 | Waihaha                  |         1968 | N93
+ 261 | Te Whaiti                |         1957 | N95
+ 263 | Ngatapa                  |         1959 | N97
+ 265 | Mimi                     |         1968 | N99
+ 267 | Tokaanu                  |         1964 | N102
+ 268 | Rangitaiki               |         1969 | N103
+ 270 | Waikaremoana             |         1967 | N105
+ 272 | New Plymouth             |         1962 | N108
+ 274 | Whangamomona             |         1967 | N110
+ 276 | Kaweka                   |         1965 | N113
+ 277 | Tutira                   |         1967 | N114
+ 279 | Wairoa                   |         1969 | N116
+ 281 | Egmont                   |         1965 | N118
+ 283 | Matemateaonga            |         1967 | N120
+ 285 | Ruapehu                  |         1966 | N122
+ 286 | Ngamatea                 |         1965 | N123
+ 288 | Oeo                      |         1965 | N128
+ 290 | Waitotara                |         1962 | N130
+ 292 | Whakarara                |         1953 | N133
+ 293 | Napier and Hastings      |         1964 | N134
+ 295 | Wanganui                 |         1967 | N138
+ 297 | Waimarama                |         1969 | N142
+ 298 | Marton                   |         1968 | N143
+ 299 | Feilding                 |         1965 | N144
+ 301 | Waipukurau               |         1962 | N146
+ 303 | Palmerston North         |         1969 | N149
+ 304 | Weber                    |         1955 | N150
+ 306 | Levin                    |         1965 | N152
+ 308 | Pongaroa and Turnagain   |         1957 | N154-155
+ 310 | Masterton                |         1973 | N158
+ 312 | Hutt                     |         1965 | N160
+ 314 | Wairarapa                |         1966 | N162
+ 315 | Whareama                 |         1966 | N163
+ 317 | Onoke                    |         1966 | N165
+ 319 | Palliser                 |         1969 | N168-169
+ 321 | Collingwood              |         1967 | S3
+ 323 | Takaka                   |         1968 | S8
+ 324 | Adele                    |         1968 | S9
+ 326 | Cobb                     |         1963 | S13
+ 328 | Rai                      |         1964 | S15
+ 330 | Little Wanganui          |         1965 | S17-18
+ 332 | Nelson                   |         1964 | S20
+ 333 | Kaituna                  |         1965 | S21
+ 335 | Westport                 |         1967 | S23-24
+ 337 | Wairau                   |         1965 | S27
+ 339 | Seddon                   |         1962 | S29
+ 341 | St Arnaud                |         1963 | S33
+ 342 | Saxton                   |         1967 | S34
+ 344 | Spenser                  |         1965 | S40
+ 346 | Greymouth                |         1964 | S44
+ 348 | Jollies                  |         1968 | S47
+ 349 | Kaikoura                 |         1966 | S49
+ 351 | Lake Sumner              |         1968 | S53
+ 353 | Parnassus                |         1967 | S55-56
+ 355 | Otira                    |         1965 | S59
+ 357 | Culverden                |         1963 | S61
+ 358 | Cheviot                  |         1966 | S62
+ 360 | Broken River             |         1969 | S66
+ 362 | Amberley and Motunau     |         1964 | S68-69
+ 364 | Lake Heron               |         1969 | S73
+ 366 | Waimakariri              |         1969 | S75
+ 368 | Paringa                  |         1966 | S77
+ 369 | Macaulay                 |         1969 | S80
+ 371 | Burnham                  |         1966 | S83
+ 372 | Christchurch             |         1968 | S84
+ 373 | Okains and Goughs        |         1963 | S85-95
+ 375 | Tasman                   |         1964 | S89
+ 376 | Lake Tekapo              |         1965 | S90
+ 378 | Rakaia                   |         1963 | S93
+ 380 | Pukaki                   |         1964 | S100
+ 382 | Geraldine                |         1962 | S102
+ 384 | Benmore                  |         1967 | S109
+ 385 | Cave                     |         1967 | S110
+ 387 | Wanaka                   |         1969 | S115
+ 389 | Omarama                  |         1968 | S117
+ 391 | Duntroon                 |         1966 | S127
+ 393 | Omakau                   |         1968 | S134
+ 394 | Oamaru                   |         1966 | S136
+ 396 | Manorburn                |         1969 | S144
+ 398 | Moeraki                  |         1966 | S146
+ 400 | Nokomai                  |         1968 | S151
+ 401 | Teviot                   |         1969 | S153
+ 403 | Waikouaiti               |         1963 | S155
+ 405 | Mosgiel                  |         1965 | S163
+ 407 | Tautapere                |         1968 | S167
+ 409 | Winton                   |         1964 | S169
+ 410 | Gore                     |         1963 | S170
+ 412 | Milton                   |         1963 | S172
+ 414 | Riverton                 |         1967 | S176
+ 416 | Wyndham                  |         1965 | S178
+ 418 | Wangaloa                 |         1969 | S180
+ 419 | Omaui and Bluff          |         1967 | S181-182
+ 421 | Papatowai                |         1969 | S184
+ 423 | Bay of Islands           |         1942 | N12
+ 425 | Hokianga                 |         1945 | N14
+ 427 | Whangarei                |         1943 | N22
+ 428 | North Head               |         1943 | N32
+ 430 | Wharereata               |         1944 | N107
+ 432 | Kidnappers               |         1943 | N135
+ 434 | Buller                   |         1944 | S31
+ 436 | Punakaiki                |         1944 | S37
+ 437 | Reefton                  |         1945 | S38
+ 439 | Molesworth               |         1944 | S41
+ 441 | Charwell                 |         1943 | S48
+ 443 | Hakataramea              |         1944 | S118
+ 444 | Waimate                  |         1943 | S119
+ 446 | Mt Peel                  |         1943 | S91
+ 447 | Waitaki                  |         1943 | S128
+ 448 | Pukeuri                  |         1943 | S137
+ 450 | Lumsdem                  |         1946 | S160
+ 452 | Kidnappers               |         1943 | N136
+ 453 | Hinds                    |         1942 | S103
+ 455 | DUrville                 |         1945 | S10
+ 457 | Omakau                   |         1946 | S1-3-4
+(257 rows)
+

@@ -1,0 +1,23 @@
+<div class="erow-10px"><b><%= link_to "Map Series", '/mapseries/', remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %></b>
+  <% provide(:title, 'Mapseries' ) %>
+  <% @title=" | Mapseries" %>
+  <%= render 'flash' %>
+  <script>
+     update_title('<%=@title%>');
+  </script>
+  <% if @mapseries %>
+    <ul>
+      <% @mapseries.each do |ms| %>
+        <li>
+          <%if ms.year_of_snapshot%>
+            <%=link_to ms.name+" ("+ms.year_of_snapshot.to_s+")", '/mapseries/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
+          <% else %>
+            <%=link_to ms.name, '/mapseries/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
+          <% end %>
+        </li>
+  
+      <% end %>
+    </ul>
+  <% end %> 
+</div>
+  

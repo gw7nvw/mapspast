@@ -1,0 +1,40 @@
+<div class="erow">
+  <% provide(:title, 'GIS | ArcGIS') %>
+  <% @title=" | GIS | ArcGIS" %>
+  <%= render 'flash' %>
+  <script>
+     update_title('<%=@title%>');
+  </script>
+
+<p><b>Using mapspast layers in ArcGIS</b></p>
+<p>The ArcGIS extension ArcBruTile now includes all of the mapspast map series.</p>
+<b>To install:</b><br/>
+<p>1) Download ArcBruTile from the following link (look for the <b>Latest Release: ArcBruTile #.# Download</b> link below the project description):</p>
+<p><a href="https://github.com/ArcBruTile/ArcBruTile/">https://github.com/ArcBruTile/ArcBruTile/</a></p>
+<p>2) Run setup.exe contained in the downloaded file</p>
+<br/>
+<p><b>To Use:</b><br/>
+<br/>
+1) Open ArcGIS <br/>
+-  Navigate to the menu: Customize -&gt; Toolbars<br/>
+-  Select arcBruTile<br/>
+<br/>
+<i>-&gt; The arcBruTile toolbar will be shown.<br/></i>
+<br/>
+2) Click 'ArcBruTile#.# v' in the toolbar and select 'Add TMS Service'<br/>
+<br/>
+3) Click 'Add provider' and select 'NZ Maps Past'*<br/>
+<br/>
+<i>*If "NZ MapsPast" is not in the list, enter the details manually:<br/></i>
+<br/>
+Name: NZ MapsPast</br>
+URL: http://au.mapspast.org.nz/arcBruTile/mapspast.xml<br/>
+<br/>
+-  Click 'Add Provider' to close the window<br/>
+<br/>
+4) Select the MapsPast layer you wish to add to your map from the dropdown.<br/>
+<br/>
+<i>Note: It may be advisable to navigate to the NZ region of the world using a layer with global coverage before switching to mapspast layers, as the local maps can be hard to spot when zoomed out to the entire globe.</i>
+</p>
+
+</div>

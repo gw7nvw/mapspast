@@ -8,6 +8,10 @@ resources :maptalk, only: [:index, :show, :update, :approve, :destroy]
 resources :address_auths, only: [:edit]
 resources :account_activations, only: [:edit]
 resources :mapsheet
+resources :arcgis, only: [:index]
+resources :gdal, only: [:index]
+resources :mapseries, only: [:index, :show]
+resources :seriessheet, only: [:show]
 resources :help, only: [:show]
 resources :query, only: [:show]
 

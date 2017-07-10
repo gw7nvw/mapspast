@@ -335,7 +335,7 @@ ul {
 //        width: calc(25% - 7px);
         overflow-y: auto;
        overflow-x: hidden;
-        height: 100%;
+        height: calc( 100% - 60px );
         float: left;
         position: fixed;
         border: 0px;
@@ -518,6 +518,13 @@ input {
 textarea {
   font-size: 0.9em !important;
   line-height: 1.1em !important;
+}
+#layerswitcher {
+  font-size: 0.7em !important;
+  line-height: 1.0em  !important;
+}
+.bootstrap-dialog-title{
+ font-size: 0.9em !important;
 }
 }
 

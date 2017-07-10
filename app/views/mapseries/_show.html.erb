@@ -1,0 +1,61 @@
+<div class="erow">
+  <div class="erow">
+    <%= link_to "Map Series-> ", '/mapseries/', remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %>
+    <b><%=link_to @mapseries.name, '/mapseries/'+@mapseries.id.to_s, remote: true, :id => 'thread_link', :onclick => "linkHandler('thread_link')" %> </b>
+  </div>
+  <% provide(:title, 'Mapseries | '+@mapseries.name ) %>
+  <% @title=" | Mapseries | "+@mapseries.name %>
+  <%= render 'flash' %>
+  <script>
+     update_title('<%=@title%>');
+     var readyStateCheckInterval = setInterval(function() {
+         if (document.readyState === "complete") {
+             clearInterval(readyStateCheckInterval);
+             document.getElementById("page_status").innerHTML = '';
+             select_maplayer("<%=@mapseries.name%>", "", "mapspast", 0, 10) ;
+         }
+     }, 10);
+
+  </script>
+
+  <p><b>Series Name</b></br>
+  <%=  @mapseries.name %></p>
+
+  <p><b>Year of snapshot</b></br>
+  <%= @mapseries.year_of_snapshot %></p>
+
+  <p><b>Edition</b></br>
+  <%= @mapseries.edition %></p>
+
+  <p><b>Scale</b></br>
+  <% if @mapseries.scale then %> <%= "1:"+@mapseries.scale.to_s %> <% end %></p>
+
+  <p><b>Details</b></br>
+  <%= @mapseries.details %></p>
+
+  <p><b>Published by</b></br>
+  LINZ / Lands and Survey
+
+  <p><b>Copyright notice</b></br>
+  CC (Attribution)
+
+  <div id="sheetlist">
+  <ul>
+  <% @mapsheets.each do |ms| %>
+
+    <%
+      name=ms.name
+      if ms.sheet and ms.sheet.length>0 then name=name+" ["+ms.sheet+"]" end
+    %>
+    <li>
+          <%if ms.year_printed%>
+            <%=link_to name+" ("+ms.year_printed.to_s+")", '/seriessheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
+          <% else %>
+            <%=link_to name, '/seriessheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
+          <% end %>
+    </li>
+  <% end %>
+  </ul>
+
+  </div>
+</div>

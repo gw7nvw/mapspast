@@ -1,0 +1,53 @@
+<div class="erow">
+  <div class="erow">
+    <%= link_to "All mapseries sheets-> ", '/seriessheet/', remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %>
+    <b><%=link_to @mapsheet.name, '/seriessheet/'+@mapsheet.id.to_s, remote: true, :id => 'thread_link', :onclick => "linkHandler('thread_link')" %> </b>
+  </div>
+  <% provide(:title, 'Mapseries | Sheet | '+@mapsheet.name ) %>
+  <% @title=" | Mapseries | Sheet | "+@mapsheet.name %>
+  <%= render 'flash' %>
+  <script>
+     update_title('<%=@title%>');
+     zoom_to_seriessheet(<%=@mapsheet.xleft%>,<%=@mapsheet.xright%>,<%=@mapsheet.ytop%>,<%=@mapsheet.ybottom%>;
+  </script>
+
+  <p><b>Sheet Name</b></br>
+  <%=  @mapsheet.name %></p>
+
+  <p><b>Series</b></br>
+  <%= @mapsheet.series %></p>
+
+  <p><b>Edition</b></br>
+  <%= @mapsheet.edition %></p>
+
+  <p><b>Scale</b></br>
+  <% if @mapsheet.scale then %> <%= "1:"+@mapsheet.scale.to_s %> <% end %></p>
+
+  <p><b>Sheet number</b></br>
+  <%= @mapsheet.sheet %></p>
+
+  <p><b>Published by</b></br>
+  LINZ / Lands and Survey
+
+  <p><b>Copyright notice</b></br>
+  CC (Attribution)
+
+  <p><b>Year printed</b></br>
+  <%= @mapsheet.year_printed %></p>
+
+  <p><b>Year surveyed/revised</b></br>
+  <%= @mapsheet.year_revised %></p>
+    
+  <p><b>Projection</b></br>
+  <% p=Projection.find_by_id(@mapsheet.source_srid) %>
+  <% if p %>
+    <%=p.name%>
+  <% end %>
+  </p>
+
+
+  <p><b>Description</b></br>
+  <p><b>Download</b></br>
+  <%= link_to @mapsheet.dlink, @mapsheet.dlink, :id => 'download_link', :target => "_blank" %>
+
+</div>

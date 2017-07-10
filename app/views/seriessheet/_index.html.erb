@@ -1,0 +1,31 @@
+<div class="erow-10px"><b><%= link_to "All mapsheets", '/mapsheet/', remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %></b>
+  <% provide(:title, 'Mapsheets' ) %>
+  <% @title=" | Mapsheets" %>
+  <%= render 'flash' %>
+  <script>
+     update_title('<%=@title%>');
+     hide_uploaded_map();
+     if (document.readyState==="completed") document.getElementById("page_status").innerHTML = '';
+  </script>
+  <% if @mapsheets %>
+    <ul>
+      <% @mapsheets.each do |ms| %>
+        <li>
+          <% if ms.mapstatus.name=="tiled" or ms.mapstatus.name=="compressed" %>
+             <%="*"%>
+          <% end %>
+          <% if ms.mapstatus_id<Mapstatus.find_by(:name => "tiled").id %>
+             <%="(dr)" %>
+          <% end %>
+          <%if ms.year_printed%>
+            <%=link_to ms.name+" ("+ms.year_printed.to_s+")", '/mapsheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
+          <% else %>
+            <%=link_to ms.name, '/mapsheet/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
+          <% end %>
+        </li>
+  
+      <% end %>
+    </ul>
+  <% end %> 
+</div>
+  

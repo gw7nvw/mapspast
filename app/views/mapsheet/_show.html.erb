@@ -69,4 +69,11 @@
 
   <p><b>Description</b></br>
   <%= @map.description %></p>
+
+  <p><b>Original scanned map image</b></br>
+  <% if @map.url and @map.url.length>0 %>
+    <%= link_to @map.url, @map.url, :id => 'download_link', :target => "_blank"  %>
+  <% else %>
+    <i>Not Available</i>
+  <% end %>
 </div>

@@ -1,0 +1,204 @@
+ id  |          name          | year_printed |  sheet   
+-----+------------------------+--------------+----------
+   3 | Onoke                  |         1953 | N165
+   5 | Eketahuna              |         1957 | N153
+   8 | Wairarapa              |         1945 | N162
+  10 | Palmerston North       |         1942 | N149
+  12 | Otaki                  |         1957 | N156-157
+  14 | Weber                  |         1955 | N150
+  17 | Tinui                  |         1945 | N159
+  19 | North Cape             |         1954 | N1-2
+  21 | Houhora                |         1950 | N6
+  23 | Kaitaia                |         1942 | N10
+  25 | Bay of Islands         |         1942 | N12
+  28 | Kaikohe                |         1942 | N15
+  30 | Poor Knights           |         1944 | N18
+  32 | Whangarei              |         1957 | N20
+  34 | Dargaville             |         1943 | N23
+  37 | Maungaturoto           |         1943 | N28
+  39 | Barrier                |         1953 | N30-31
+  41 | Kaipara                |         1943 | N33
+  44 | Helensville            |         1944 | N37
+  46 | Moehau                 |         1948 | N39
+  48 | Waitakere              |         1957 | N41-46
+  50 | Ponui                  |         1946 | N43
+  53 | Mangatawhiri           |         1957 | N48
+  55 | Onewhero               |         1943 | N51
+  57 | Paeroa                 |         1957 | N53-54
+  59 | Ngaruawahia            |         1944 | N56
+  62 | Matata                 |         1944 | N59-68
+  64 | Hamilton               |         1959 | N65
+  66 | Te Puke                |         1944 | N67
+  68 | Otorohanga             |         1955 | N74
+  71 | Tarawera               |         1952 | N77
+  73 | Waimana                |         1957 | N87
+  77 | Te Whaiti              |         1957 | N95
+  80 | Gisborne               |         1944 | N98
+  82 | Ohura                  |         1953 | N100
+  84 | Wharereata             |         1944 | N107
+  86 | Inglewood              |         1943 | N109
+  89 | Wairoa                 |         1944 | N116-117
+  91 | Esk                    |         1945 | N124
+  93 | Oeo                    |         1943 | N128
+  95 | Whakarara              |         1953 | N133
+  98 | Kidnappers             |         1943 | N136
+ 100 | Wanganui               |         1943 | N138
+ 102 | Waimarama              |         1943 | N142
+ 104 | Feilding               |         1955 | N144
+ 107 | DUrville               |         1945 | S10
+ 109 | Hinds                  |         1942 | S103
+ 111 | Timaru                 |         1959 | S111
+ 113 | Waimate                |         1943 | S119
+ 116 | Cobb                   |         1950 | S13
+ 118 | Oamaru                 |         1943 | S136
+ 120 | Motueka                |         1942 | S14
+ 122 | Rai                    |         1944 | S15
+ 125 | Morley                 |         1946 | S159
+ 127 | Lumsdem                |         1946 | S160
+ 129 | Lawrence               |         1947 | S162
+ 132 | Tautapere              |         1944 | S167
+ 134 | Winton                 |         1957 | S169
+ 136 | Waitahuna              |         1945 | S171
+ 138 | Orepuki                |         1944 | S175
+ 141 | Wyndham                |         1944 | S178
+ 143 | Wangaloa               |         1944 | S180
+ 145 | Tokanui                |         1944 | S183
+ 147 | Tadmor                 |         1943 | S19
+ 152 | Matiri                 |         1943 | S25
+ 154 | Wairau                 |         1943 | S27
+ 157 | Collingwood            |         1946 | S3
+ 159 | Buller                 |         1944 | S31
+ 161 | St Arnaud              |         1943 | S33
+ 163 | Awatere                |         1943 | S35
+ 166 | Reefton                |         1945 | S38
+ 168 | Spenser                |         1943 | S40
+ 170 | Clarence               |         1943 | S42-43
+ 172 | Ahaura                 |         1945 | S45
+ 175 | Charwell               |         1943 | S48
+ 177 | Hokitika               |         1944 | S50-51
+ 179 | Hanmer                 |         1945 | S54
+ 181 | Stephens               |         1945 | S5-6
+ 184 | Cheviot                |         1943 | S62
+ 186 | Amberley and Motunau   |         1950 | S68-69
+ 188 | Waimakariri            |         1943 | S75
+ 190 | Takaka                 |         1950 | S8
+ 193 | Burnham                |         1950 | S83
+ 195 | Okains and Goughs      |         1942 | S85-95
+ 197 | Mt Peel                |         1943 | S91
+ 199 | Rakaia                 |         1943 | S93
+   1 | Wellington             |         1950 | N164
+   2 | Hutt                   |         1943 | N160
+   4 | Levin                  |         1942 | N152
+   6 | Masterton              |         1945 | N158
+   7 | Palliser               |         1953 | N168-169
+   9 | Pahaoa                 |         1957 | N166
+  11 | Tangimoana             |         1942 | N148
+  13 | Rimutaka               |         1948 | N161
+  15 | Porangahau             |         1955 | N151
+  16 | Pongaroa and Turnagain |         1957 | N154-155
+  18 | Whareama               |         1944 | N163
+  20 | Parenga                |         1954 | N3-4
+  22 | Ahipara                |         1942 | N9
+  24 | Kerikeri               |         1942 | N11
+  26 | Herekino               |         1944 | N13
+  27 | Hokianga               |         1945 | N14
+  29 | Whangaruru             |         1942 | N16
+  31 | Mangakahia             |         1943 | N19
+  33 | Whangarei              |         1943 | N22
+  35 | Waipu                  |         1943 | N24
+  36 | Ruawai                 |         1943 | N27
+  38 | Pakiri                 |         1942 | N29
+  40 | North Head             |         1943 | N32
+  42 | Warkworth              |         1942 | N34
+  43 | Colville               |         1953 | N35-36
+  45 | Silverdale             |         1944 | N38
+  47 | Coromandel             |         1949 | N40
+  49 | Auckland               |         1951 | N42
+  51 | Whitianga              |         1957 | N44
+  52 | Pukekohe               |         1956 | N46-47
+  54 | Thames                 |         1953 | N49
+  56 | Te Kauwhata            |         1942 | N52
+  58 | Te Akau                |         1946 | N55
+  60 | Te Aroha               |         1944 | N57
+  61 | Te Aroha               |         1943 | N58
+  63 | Raglan                 |         1948 | N64
+  65 | Matamata               |         1945 | N66
+  67 | Kawhia                 |         1953 | N73
+  69 | Arapuni                |         1947 | N75
+  70 | Rotorua                |         1952 | N76
+  72 | Waiotapu               |         1955 | N85
+  74 | Wairoa                 |         1944 | N116-117
+  75 | Mokau                  |         1957 | N91
+  76 | Ongarue                |         1956 | N92
+  78 | Maungapohatu           |         1957 | N96
+  79 | Ngatapa                |         1959 | N97
+  81 | Mimi                   |         1944 | N99
+  83 | Tiniroto               |         1953 | N106
+  85 | New Plymouth           |         1943 | N108
+  87 | Tutira                 |         1958 | N114
+  88 | Mohaka                 |         1945 | N115
+  90 | Egmont                 |         1943 | N118
+  92 | Tongoio                |         1944 | N125
+  94 | Oeo                    |         1943 | N129
+  96 | Napier and Hastings    |         1943 | N134
+  97 | Kidnappers             |         1943 | N135
+  99 | Waverley               |         1943 | N137
+ 101 | Waipawa                |         1943 | N141
+ 103 | Marton                 |         1942 | N143
+ 105 | Dannevirke             |         1943 | N145
+ 106 | Waipukurau             |         1944 | N146
+ 108 | Geraldine              |         1943 | S102
+ 110 | Chetwode               |         1945 | S11
+ 112 | Hakataramea            |         1944 | S118
+ 114 | Duntroon               |         1943 | S127
+ 115 | Waitaki                |         1943 | S128
+ 117 | Omakau                 |         1946 | S1-3-4
+ 119 | Pukeuri                |         1943 | S137
+ 121 | Moeraki                |         1943 | S146
+ 123 | Middlemarch            |         1948 | S154
+ 124 | Waikouaiti             |         1943 | S155
+ 126 | Queen Charlotte        |         1944 | S16
+ 128 | Heriot                 |         1946 | S161
+ 130 | Mosgiel                |         1956 | S163
+ 131 | Dunedin                |         1959 | S164
+ 133 | Nightcaps              |         1944 | S168
+ 135 | Gore                   |         1944 | S170
+ 137 | Milton                 |         1944 | S172
+ 139 | Riverton               |         1943 | S176
+ 140 | Invercargill           |         1943 | S177
+ 142 | Balclutha              |         1945 | S179
+ 144 | Omaui and Bluff        |         1942 | S181-182
+ 146 | Papatowai              |         1945 | S184
+ 148 | Nelson                 |         1943 | S20
+ 149 | Kaituna                |         1942 | S21
+ 150 | Picton                 |         1942 | S22
+ 151 | Westport               |         1945 | S23-24
+ 153 | Hope                   |         1943 | S26
+ 155 | Blenheim               |         1942 | S28
+ 156 | Seddon                 |         1942 | S29
+ 158 | Charleston             |         1944 | S30
+ 160 | Murchison              |         1943 | S32
+ 162 | Saxton                 |         1945 | S34
+ 164 | Ward                   |         1942 | S36
+ 165 | Punakaiki              |         1944 | S37
+ 167 | Maruia                 |         1943 | S39
+ 169 | Molesworth             |         1944 | S41
+ 171 | Greymouth              |         1957 | S44
+ 173 | Lewis                  |         1943 | S46
+ 174 | Jollies                |         1951 | S47
+ 176 | Kaikoura               |         1943 | S49
+ 178 | Lake Sumner            |         1944 | S53
+ 180 | Parnassus              |         1944 | S55-56
+ 182 | Ross                   |         1958 | S57
+ 183 | Culverden              |         1943 | S61
+ 185 | Okarito                |         1959 | S63
+ 187 | Springfield            |         1957 | S74
+ 189 | Kaiapoi                |         1942 | S76
+ 191 | Mt Somers              |         1943 | S81
+ 192 | Methven                |         1956 | S82
+ 194 | Christchurch           |         1957 | S84
+ 196 | Adele                  |         1950 | S9
+ 198 | Ashburton              |         1942 | S92
+ 200 | Akaroa                 |         1950 | S94
+(200 rows)
+

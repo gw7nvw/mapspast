@@ -8,13 +8,24 @@
             <ul class="nav pull-right" id="menus">
               <li id="fat-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                   Mapsheets <b class="caret"></b>
+                   Maps <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                  <li><%= link_to 'Browse', '/mapsheet', remote: true, :id => 'home_link', :onclick => "linkHandler('homes_link')"  %></li>
+                  <li><%= link_to 'Map Series', '/mapseries', remote: true, :id => 'home_link', :onclick => "linkHandler('homes_link')"  %></li>
+                  <li><%= link_to 'Single Sheets', '/mapsheet', remote: true, :id => 'home_link', :onclick => "linkHandler('homes_link')"  %></li>
                   <% if signed_in? %>
+                    <li class="divider"></li>
                     <li><%= link_to 'Create', '/mapsheetinfo', remote: true, :id => 'ms_link', :onclick => "linkHandler('ms_link')"  %></li>
                   <% end %>
+                </ul>
+              </li>
+              <li id="fat-menu" class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                   GIS <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'GDAL / QGIS', '/gdal', remote: true, :id => 'home_link', :onclick => "linkHandler('gdal')"  %></li>
+                  <li><%= link_to 'ArcGIS', '/arcgis', remote: true, :id => 'home_link', :onclick => "linkHandler('arcgis')"  %></li>
                 </ul>
               </li>
                   <li><%= link_to 'Maptalk', '/maptalk/1/', remote: true, :id => 'forum_link', :onclick => "linkHandler('forum_link')"  %></li>

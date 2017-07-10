@@ -72,5 +72,10 @@
 .bootstrap-dialog.size-small {
   width: 250px;
   vertical-align: center;
+      position: absolute;
+    top: 50%;
+    left: 50%;
+   margin-top: 0px;
+    margin-left: -150px;
 }
 
