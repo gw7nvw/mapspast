@@ -4,7 +4,7 @@ def show
   x=params[:x].to_f
   y=params[:y].to_f
   layer=params[:layer]
-
+  if layer=="NZTM Topo 2009" then layer="Topo50 2009" end
   #serach all layers unless one is specified
   layer_id=nil
 
