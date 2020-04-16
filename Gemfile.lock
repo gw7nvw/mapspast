@@ -175,25 +175,25 @@ PLATFORMS
 DEPENDENCIES
   activerecord (>= 4.0.9)
   activerecord-postgis-adapter
-  bcrypt-ruby (>= 3.1.2)
-  bootstrap-sass (>= 2.3.2.0)
-  coffee-rails (>= 4.0.1)
-  jbuilder (>= 1.0.2)
-  jquery-rails (>= 3.0.4)
+  bcrypt-ruby (= 3.1.2)
+  bootstrap-sass (= 2.3.2.0)
+  coffee-rails (= 4.0.1)
+  jbuilder (= 1.0.2)
+  jquery-rails (= 3.0.4)
   jquery-ui-rails
-  paperclip (>= 4.2.0)
-  passenger (>= 4.0.45)
-  pg (>= 0.17.1)
+  paperclip (= 4.2.0)
+  passenger (= 4.0.45)
+  pg (= 0.17.1)
   rails (>= 4.0.5)
   resque
-  rgeo (>= 0.3.20)
-  rspec-rails (>= 2.13.1)
+  rgeo (= 0.3.20)
+  rspec-rails (= 2.13.1)
   sass-rails (>= 4.0.2)
-  sdoc (>= 0.3.20)
+  sdoc (= 0.3.20)
   sprockets (>= 2.12.5)
-  turbolinks (>= 1.1.1)
-  uglifier (>= 2.1.1)
-  will_paginate (>= 3.0.7)
+  turbolinks (= 1.1.1)
+  uglifier (= 2.1.1)
+  will_paginate (= 3.0.7)
 
 RUBY VERSION
    ruby 2.0.0p481
