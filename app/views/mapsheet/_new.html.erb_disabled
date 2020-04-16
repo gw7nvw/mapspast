@@ -1,0 +1,45 @@
+<% provide(:title, 'Mapsheet | New' ) %>
+<% @title=" | Mapsheet | New" %>
+<%= render 'flash' %>
+<script>
+   update_title('<%=@title%>');
+//   hide_uploaded_map();
+</script>
+
+<div class="erow">
+  <%= form_for  @map, :remote=> true, :html => {:name => 'uploadform'}, :url => '/mapsheet/'+@map.id.to_s   do |f| %>
+    <%= render 'shared/error_messages' %>
+
+    Sheet Name*
+    <%= f.text_field :name %>
+
+    Series (e.g. NZMS57)
+    <%= f.text_field :series %>
+
+    Edition (e.g. Edition 1)
+    <%= f.text_field :edition %>
+
+    Scale (e.g. for 1:50k enter 50000)
+    <%= f.text_field :scale %>
+
+    Sheet number (e.g. S128)
+    <%= f.text_field :sheet %>
+
+    Published by (e.g. LINZ)
+    <%= f.text_field :source %>
+
+    Copyright notice (if required)
+    <%= f.text_field :attribution %>
+
+    Year printed* (e.g. 1945)
+    <%= f.text_field :year_printed %>
+
+    Year surveyed/revised (e.g. 1942)
+    <%= f.text_field :year_revised %>
+
+    Description
+    <%= f.text_area :description %>
+
+    <%= f.submit "Create", class: "btn btn-small btn-primary", name: "create", onclick: "linkHandler('create')", id:  "create" %>
+  <% end %>
+</div>

@@ -216,6 +216,25 @@ function do_init(){
         isBaseLayer: true,
         getURL: getURL
     });
+    var nzms1939 = new OpenLayers.Layer.TMS("NZMS13 1939", "http://au.mapspast.org.nz/nzms13-1939/",
+    {
+        serviceVersion: '.',
+        layername: '.',
+        alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+        getURL: getURL
+    });
+    var nzms1929 = new OpenLayers.Layer.TMS("NZMS13 1929", "http://au.mapspast.org.nz/nzms13-1929/",
+    {
+        serviceVersion: '.',
+        layername: '.',
+        alpha: true,
+        type: 'png',
+        isBaseLayer: true,
+        getURL: getURL
+    });
+
     var nzms1919 = new OpenLayers.Layer.TMS("NZMS13 1919", "http://au.mapspast.org.nz/nzms13-1919/",
     {
         serviceVersion: '.',
@@ -246,7 +265,7 @@ function do_init(){
         getURL: getURL
     });
   
-    map.addLayers([nztm2009,nzms1999,nzms1989, nzms1979,nzms1969, nzms1959, nzms1949, nzms1919, nzms1909, nzms1899]);
+    map.addLayers([nztm2009,nzms1999,nzms1989, nzms1979,nzms1969, nzms1959, nzms1949, nzms1939, nzms1929, nzms1919, nzms1909, nzms1899]);
 
     if (document.extentform.layerid.value!="") {
       create_selected_layer(document.extentform.layerid.value, document.extentform.serverpath.value);

@@ -9,8 +9,7 @@
   </script>
   <h1>Sign up</h1>
 
-  <div class="row">
-    <div class="span6">
+  <div class="erow">
       <%= form_for(@user) do |f| %>
         <%= render 'shared/error_messages' %>	
   
@@ -34,6 +33,5 @@
   
         <%= f.submit "Create account", class: "btn btn-small btn-primary" %>
       <% end %>
-    </div>
   </div>
 </div>

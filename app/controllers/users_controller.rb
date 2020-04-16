@@ -20,14 +20,16 @@ class UsersController < ApplicationController
 
       @user.role_id=Role.find_by(:name => 'user').id
 
+      @user.activated=true
+      @user.activated_at=Time.now()
       if @user.save
 
-        @user.send_activation_email
-        flash[:info] = "Please check your email for details on how to activate your account"
-        redirect_to '/login'
-#        sign_in @user
-#        flash[:success] = "Welcome to the Route Guides"
-#        redirect_to '/users/'+@user.name
+#        @user.send_activation_email
+#        flash[:info] = "Please check your email for details on how to activate your account"
+#        redirect_to '/login'
+        sign_in @user
+        flash[:success] = "Welcome to Maps Past"
+        redirect_to '/users/'+@user.id.to_s
       else
         render 'new'
       end

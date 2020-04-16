@@ -8,12 +8,12 @@
   <%= render 'flash' %>
   <script>
      update_title('<%=@title%>');
-     hide_uploaded_map();
+//     hide_uploaded_map();
      var readyStateCheckInterval = setInterval(function() {
          if (document.readyState === "complete") {
              clearInterval(readyStateCheckInterval);
              document.getElementById("page_status").innerHTML = '';
-             update_selected_layer(<%=@map.id%>, '<%=@map.serverpath%>', <%=@map.grid_xleft%>, <%=@map.grid_xright%>, <%=@map.grid_ytop%>, <%=@map.grid_ybottom%>, <%=@map.source_srid%>, <%=@map.maxzoom%>);
+             site_update_selected_layer(<%=@map.id%>, '<%=@map.serverpath%>', <%=@map.grid_xleft%>, <%=@map.grid_xright%>, <%=@map.grid_ytop%>, <%=@map.grid_ybottom%>, <%=@map.source_srid%>, <%=@map.maxzoom%>);
          }
      }, 10);
   </script>
@@ -36,8 +36,15 @@
   <%=  @map.name %></p>
 
   <p><b>Series</b></br>
-  <%= @map.series %></p>
-
+  <% 
+     ms=Mapset.find_by_sql [ "select * from mapsets where name=?", @map.series ]
+     if ms and ms.count>0 then m=ms.first end
+     if m then %> 
+        <%= link_to @map.series, '/mapseries/'+m.id.to_s, remote: true, :id => 'all_link', :onclick => "linkHandler('mapseries_link')" %>
+ 
+     <% else %>
+        <%= @map.series %></p>
+     <% end %>
   <p><b>Edition</b></br>
   <%= @map.edition %></p>
 

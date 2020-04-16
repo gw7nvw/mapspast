@@ -5,17 +5,12 @@
   <script>
      update_title('<%=@title%>');
   </script>
-  <% if @mapseries %>
+  <% if @mapsets %>
     <ul>
-      <% @mapseries.each do |ms| %>
+      <% @mapsets.each do |ms| %>
         <li>
-          <%if ms.year_of_snapshot%>
-            <%=link_to ms.name+" ("+ms.year_of_snapshot.to_s+")", '/mapseries/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
-          <% else %>
-            <%=link_to ms.name, '/mapseries/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
-          <% end %>
+          <%=link_to ms.name, '/mapseries/'+ms.id.to_s,  remote: true, :id => 'refresh_link', :onclick => "linkHandler('refresh_link')"  %>
         </li>
-  
       <% end %>
     </ul>
   <% end %> 

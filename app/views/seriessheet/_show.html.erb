@@ -1,11 +1,11 @@
 <div class="erow">
   <div class="erow">
-    <%= link_to "Map Series -> ", '/mapseries/', remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %>
-    <%=link_to @mapseries.name+" ->", '/mapseries/'+@mapseries.id.to_s, remote: true, :id => 'thread_link', :onclick => "linkHandler('thread1_link')" %> 
+    <%= link_to "Basemap -> ", '/basemap/', remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %>
+    <%=link_to @mapseries.name+" ->", '/basemap/'+@mapseries.id.to_s, remote: true, :id => 'thread_link', :onclick => "linkHandler('thread1_link')" %> 
     <b><%=link_to @mapsheet.name, '/seriessheet/'+@mapsheet.id.to_s, remote: true, :id => 'thread_link', :onclick => "linkHandler('thread2_link')" %> </b>
   </div>
-  <% provide(:title, 'Map Series | '+@mapseries.name+' | '+@mapsheet.name ) %>
-  <% @title=" | Map Series | "+@mapseries.name+" | "+@mapsheet.name %>
+  <% provide(:title, 'Basemap | '+@mapseries.name+' | '+@mapsheet.name ) %>
+  <% @title=" | Basemap | "+@mapseries.name+" | "+@mapsheet.name %>
   <%= render 'flash' %>
  <%
     if params[:id] then
@@ -29,7 +29,7 @@
          if (document.readyState === "complete") {
              clearInterval(readyStateCheckInterval);
              document.getElementById("page_status").innerHTML = '';
-             zoom_to_seriessheet("<%=@mapseries.name%>","<%=@mapsheet.extent%>",<%=@sminx%>,<%=@smaxx%>,<%=@sminy%>,<%=@smaxy%>);
+             site_zoom_to_seriessheet("<%=@mapseries.name%>","<%=@mapsheet.extent%>",<%=@sminx%>,<%=@smaxx%>,<%=@sminy%>,<%=@smaxy%>);
          }
      }, 10);
 

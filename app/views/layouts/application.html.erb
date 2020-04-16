@@ -3,18 +3,20 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="description" content="Historical NZMS 1 and NZMS 260 series topographic maps of New Zealand">
-    <meta name="keywords" content="topo,nzms260,nzms1,one inch,63360,50000,260 series,topographic,map">
+    <meta name="description" content="Historical LINZ / Lands and Survey topographic maps of New Zealand, including NZMS1, NZMS13, NZMS15 and NZMS260 series maps">
+    <meta name="keywords" content="topo,nzms260,nzms1,nzms13,nzms15,one inch,63360,50000,260 series,topographic,map,lands and survey,linz" >
     <meta http-equiv="content-language" content="en-uk">
 
     <title>MapsPast | Current and historical topographic maps (topomaps) of New Zealand</title>
-    <script src="/assets/OpenLayers.js"></script>
 <% if @print %>
    <link rel="stylesheet" type="text/css" href="/assets/print.css" />
    <script src="/assets/html2canvas.js"></script>
    <script src="/assets/canvas-toBlob.js"></script>
    <script src="/assets/FileSaver.js"></script>
+
 <% else %>
+    <script src="/assets/ol.js"></script>
+    <link rel="stylesheet" href="/assets/ol.css" type="text/css">
     <%= stylesheet_link_tag "application", media: "all", "jquery-ui.min" => true %>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
@@ -22,7 +24,7 @@
 <% end %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   </head>
-  <body onload='init()' style="cursor: auto;"> 
+  <body onload='site_init()' style="cursor: auto;"> 
 <!--    <div style="position:absolute;"> -->
       <%= form_tag '/redisplay', :remote=> true, :id => "thelink", :name=> 'extentform', :method=> 'post'%>
       <%
@@ -61,8 +63,8 @@
 
       <div class="wrapper">
         <ul id="tab">
-            <li><%= link_to "Info ^^", "#",    :onclick => "map_bigger(); return false;" %></li>
-            <li><%= link_to "Map vv", "#",    :onclick => "map_smaller(); return false;" %></li>
+            <li><%= link_to "Info ^^", "#",    :onclick => "site_bigger_map(); return false;" %></li>
+            <li><%= link_to "Map vv", "#",    :onclick => "site_smaller_map(); return false;" %></li>
         </ul>
       </div>
 
@@ -84,5 +86,12 @@
 <% else %>
          <%=render 'viewer/map' %>
 <% end %>
+    <script>
+      <% if params[:x] %> def_x=<%=params[:x]%>; <% end %>
+      <% if params[:y] %> def_y=<%=params[:y]%>; <% end %>
+      <% if params[:zoom] %> def_zoom=<%=params[:zoom]%>; <% end %>
+      <% if params[:layerid] %> def_layer='<%=params[:layerid]%>'; <% end %>
+    </script>
   </body>
 </html>
+

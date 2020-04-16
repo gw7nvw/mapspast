@@ -1,12 +1,12 @@
 class MapseriesController < ApplicationController
 
 def show
-  @mapseries=Mapseries.find_by_id(params[:id])
-  @mapsheets=Mapsheet.find_by_sql [ "select * from mapsheets where series_id=? order by name, sheet", params[:id] ]
+  @mapset=Mapset.find_by_id(params[:id])
+  @mapsheets=Uploadedmap.find_by_sql [ "select * from uploadedmaps where series=? order by name, year_printed, sheet", @mapset.name ]
 end
 
 def index
-  @mapseries=Mapseries.find_by_sql [ "select * from mapseries where name<>'selected sheet' order by name, year_of_snapshot" ]
+  @mapsets=Mapset.find_by_sql [ "select * from mapsets order by name" ]
 end
 
 end

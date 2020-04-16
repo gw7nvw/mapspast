@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722215359) do
+ActiveRecord::Schema.define(version: 20170729113323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,15 @@ ActiveRecord::Schema.define(version: 20160722215359) do
     t.string   "details"
     t.integer  "scale"
     t.integer  "createdBy_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mapsets", force: true do |t|
+    t.string   "name"
+    t.string   "details"
+    t.string   "publisher"
+    t.string   "copyright"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

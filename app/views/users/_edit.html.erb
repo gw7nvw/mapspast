@@ -4,8 +4,7 @@
   <%= render 'flash' %>
   
   <script> update_title('<%=@title%>'); </script>
-  <div class="row">
-    <div class="span6">
+  <div class="erow">
       <%= form_for @user, remote: true do |f| %>
         <%= render 'shared/error_messages' %>
   
@@ -31,5 +30,4 @@
       <% end %>
   
     </div>
-  </div>
 </div>

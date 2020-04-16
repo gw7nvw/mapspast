@@ -4,7 +4,7 @@
 <%= render 'flash' %>
 <script>
    update_heading('<%=@title%>');
-   hide_uploaded_map();
+//   hide_uploaded_map();
 </script>
 <% if @id==0 %>
   <div class="erow-10px"><%= link_to "News-> ", '/maptalk/'+@id.to_s, remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %>

@@ -10,6 +10,7 @@ resources :account_activations, only: [:edit]
 resources :mapsheet
 resources :arcgis, only: [:index]
 resources :gdal, only: [:index]
+resources :basemap, only: [:index, :show]
 resources :mapseries, only: [:index, :show]
 resources :seriessheet, only: [:show]
 resources :help, only: [:show]
