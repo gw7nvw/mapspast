@@ -5,7 +5,7 @@ gem 'passenger', '4.0.45'
 gem 'rails', '4.0.5'
 gem "jquery-ui-rails"
 gem 'bootstrap-sass', '2.3.2.0'
-gem 'sprockets', '2.11.0'
+gem 'sprockets', '2.12.5'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'activerecord-postgis-adapter'
 gem 'paperclip', '4.2.0'
