@@ -44,7 +44,6 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.6)
-    daemon_controller (1.2.0)
     diff-lcs (1.3)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -72,8 +71,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
-    passenger (4.0.45)
-      daemon_controller (>= 1.2.0)
+    passenger (5.1.0)
       rack
       rake (>= 0.8.1)
     pg (0.17.1)
@@ -181,7 +179,7 @@ DEPENDENCIES
   jquery-rails (= 3.0.4)
   jquery-ui-rails
   paperclip (= 4.2.0)
-  passenger (= 4.0.45)
+  passenger (= 5.1.0)
   pg (= 0.17.1)
   rails (= 4.0.5)
   resque
