@@ -50,7 +50,7 @@ var defaultControls=ol.control.defaults
 var proj4=proj4
 var register=ol.proj.proj4.register
 var map_map;
-var map_current_layer="NZTM Topo 2009";
+var map_current_layer="NZTM Topo 2019";
 var map_current_proj="2193"
 var map_projection_name="EPSG:2193"
 var map_projection;
