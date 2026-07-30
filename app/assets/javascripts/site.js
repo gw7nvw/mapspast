@@ -1,3 +1,4 @@
+LINZ_API_KEY='d01gerrvztr3rkqf80hefaze1kb'
 var clickMode;
 var searchMode;
 var site_map_size=1;
@@ -164,21 +165,34 @@ function site_query_callback(e) {
 }
 
 function site_add_layers() {
-	map_add_raster_layer('NZTM Topo 2019', 'http://au.mapspast.org.nz/topo50-2019/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
-	map_add_raster_layer('NZTM Topo 2009', 'http://au.mapspast.org.nz/topo50/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
-	map_add_raster_layer('NZMS260 1999', 'http://au.mapspast.org.nz/nzms260-1999/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
-	map_add_raster_layer('NZMS1/260 1989','http://au.mapspast.org.nz/nzms-1989/{z}/{x}/{-y}.png','mapspast', 4891.969809375, 11);
-	map_add_raster_layer('NZMS1 1979', 'http://au.mapspast.org.nz/nzms-1979/{z}/{x}/{-y}.png','mapspast', 4891.969809375, 11);
-        map_add_raster_layer('NZMS1 1969','http://au.mapspast.org.nz/nzms-1969/{z}/{x}/{-y}.png','mapspast', 4891.969809375, 11);
-        map_add_raster_layer('NZMS1 1959','http://au.mapspast.org.nz/nzms-1959/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
-        map_add_raster_layer('NZMS15 1949','http://au.mapspast.org.nz/nzms15-1949/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
-        map_add_raster_layer('NZMS13 1939','http://au.mapspast.org.nz/nzms13-1939/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11); 
-        map_add_raster_layer('NZMS13 1929','http://au.mapspast.org.nz/nzms13-1929/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
-        map_add_raster_layer('NZMS13 1919','http://au.mapspast.org.nz/nzms13-1919/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
-        map_add_raster_layer('NZMS13 1909','http://au.mapspast.org.nz/nzms13-1909/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
-        map_add_raster_layer('NZMS13 1899','http://au.mapspast.org.nz/nzms13-1899/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
+        map_add_raster_layer('NZTM Topo 2019', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/topo50-2019/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+	//map_add_raster_layer('NZTM Topo 2019', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/topo50-2019/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+        map_add_raster_layer('NZTM Topo 2009', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/topo50-2009/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+	//map_add_raster_layer('NZTM Topo 2009', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/topo50/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+        map_add_raster_layer('NZMS260 1999', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms260-1999/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+	//map_add_raster_layer('NZMS260 1999', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/nzms260-1999/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+        map_add_raster_layer('NZMS1/260 1989', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms-1989/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+	//map_add_raster_layer('NZMS1/260 1989','https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/nzms-1989/{z}/{x}/{-y}.png','mapspast', 4891.969809375, 11);
+        map_add_raster_layer('NZMS1 1979', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms-1979/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+	//map_add_raster_layer('NZMS1 1979', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/nzms-1979/{z}/{x}/{-y}.png','mapspast', 4891.969809375, 11);
+        map_add_raster_layer('NZMS1 1969', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms-1969/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+        //map_add_raster_layer('NZMS1 1969','https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/nzms-1969/{z}/{x}/{-y}.png','mapspast', 4891.969809375, 11);
+        map_add_raster_layer('NZMS1 1959', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms-1959/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+        //map_add_raster_layer('NZMS1 1959','https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/nzms-1959/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
+        //map_add_raster_layer('NZMS15 1949','https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/nzms15-1949/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
+        map_add_raster_layer('NZMS15 1949', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms15-1949/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+        //map_add_raster_layer('NZMS13 1939','https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/nzms13-1939/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11); 
+        map_add_raster_layer('NZMS13 1939', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms13-1939/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+        //map_add_raster_layer('NZMS13 1929','https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/nzms13-1929/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
+        map_add_raster_layer('NZMS13 1929', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms13-1929/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+        //map_add_raster_layer('NZMS13 1919','https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/nzms13-1919/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
+        map_add_raster_layer('NZMS13 1919', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms13-1919/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+        //map_add_raster_layer('NZMS13 1909','https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/nzms13-1909/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
+        map_add_raster_layer('NZMS13 1909', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms13-1909/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
+        //map_add_raster_layer('NZMS13 1899','https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/nzms13-1899/{z}/{x}/{-y}.png','mapspast',4891.969809375, 11);
+        map_add_raster_layer('NZMS13 1899', 'https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms13-1899/{z}/{x}/{-y}.png', 'mapspast', 4891.969809375, 11);
         map_add_raster_layer('(LINZ) Topo50 latest','http://tiles-a.data-cdn.linz.govt.nz/services;key=d8c83efc690a4de4ab067eadb6ae95e4/tiles/v4/layer=767/EPSG:2193/{z}/{x}/{y}.png','linz',8690, 17);
-        map_add_raster_layer('(LINZ) Airphoto latest','http://tiles-a.data-cdn.linz.govt.nz/services;key=d8c83efc690a4de4ab067eadb6ae95e4/tiles/v4/set=2/EPSG:2193/{z}/{x}/{y}.png','linz',8690, 17);
+        map_add_raster_layer('(LINZ) Airphoto latest','https://basemaps.linz.govt.nz/v1/tiles/aerial/2193/{z}/{x}/{y}.png?api='+LINZ_API_KEY,'linz',8690, 17);
 }
 
 function site_add_controls() {
@@ -350,7 +364,7 @@ function site_update_selected_layer(layer_id, serverpath, xleft, xright, ytop, y
 }
 
 function site_create_selected_layer(layer_id, serverpath) {
-//  var url="http://au.mapspast.org.nz/tiles-"+layer_id+"/{z}/{x}/{-y}.png";
+//  var url="https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/tiles/tiles-"+layer_id+"/{z}/{x}/{-y}.png";
   var url=serverpath+"tiles-"+layer_id+"/{z}/{x}/{-y}.png";
   site_selected_layer = new TileLayer({
     source: new XYZ({
@@ -384,11 +398,11 @@ function site_printmap(filetype) {
   sheetid=document.extentform.layerid.value;
   var maxzoom=document.extentform.maxzoom.value;
   var filename=document.selectform.filename.value;
-  if (document.extentform.serverpath.value=="http://mapspast.org.nz/") {
-    window.open('http://mapspast.org.nz/assets/print.html?print=true&left='+xl+'&right='+xr+'&top='+yt+'&bottom='+yb+'&sheetid='+sheetid+'&layerid='+layerid+'&wwidth='+width+'&wheight='+height+'&maxzoom='+maxzoom+'&filetype='+filetype+'&filename='+filename, 'printwindow');
+  if (document.extentform.serverpath.value=="https://mapspast.org.nz/") {
+    window.open('https://mapspast.org.nz/assets/print.html?print=true&left='+xl+'&right='+xr+'&top='+yt+'&bottom='+yb+'&sheetid='+sheetid+'&layerid='+layerid+'&wwidth='+width+'&wheight='+height+'&maxzoom='+maxzoom+'&filetype='+filetype+'&filename='+filename, 'printwindow');
 
   } else {
-    window.open('http://au.mapspast.org.nz/print.html?print=true&left='+xl+'&right='+xr+'&top='+yt+'&bottom='+yb+'&sheetid='+sheetid+'&layerid='+layerid+'&wwidth='+width+'&wheight='+height+'&maxzoom='+maxzoom+'&filetype='+filetype+'&filename='+filename, 'printwindow');
+    window.open('https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/print.html?print=true&left='+xl+'&right='+xr+'&top='+yt+'&bottom='+yb+'&sheetid='+sheetid+'&layerid='+layerid+'&wwidth='+width+'&wheight='+height+'&maxzoom='+maxzoom+'&filetype='+filetype+'&filename='+filename, 'printwindow');
   }
   return false;
 }

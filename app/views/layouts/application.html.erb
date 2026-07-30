@@ -31,7 +31,7 @@
     if params[:id] then
        box=Mapsheet.find_by_sql [ "select ST_Extent(extent) as name from mapsheets where id=?",params[:id] ]
        extentstr=box.first.name
-       if extentstr.length>0 then
+       if extentstr and extentstr.length>0 then
          extentstr=extentstr[4..-2]
          extentlist=extentstr.split(',')
          @sminx=extentlist[0].split(' ')[0]
