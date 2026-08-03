@@ -273,7 +273,6 @@ $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
 
   options.complete = function(xhr, textStatus) {
     // textStatus can return "success", "timeout", "error", "parsererror", or "abort"
-	  alert(textStatus);
     if (textStatus === "timeout") {
       this.tryCount++;
       document.getElementById("page_status").innerHTML = 'Retrying ...';
