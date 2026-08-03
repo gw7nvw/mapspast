@@ -500,7 +500,7 @@ function map_create_dialog(modal_title, modal_body) {
 window.map_create_dialog = map_create_dialog;
 
 function map_mapLayers() {
-        window.myDialog = map_create_dialog(
+        window.currentActiveModal = map_create_dialog(
             "Select basemap",
             '<div id="info_details2">Retrieving ...</div>');
 
