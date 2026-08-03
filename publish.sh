@@ -28,7 +28,7 @@ RAILS_ENV=production bundle exec rails db:migrate
 RAILS_ENV=production bundle exec rails assets:precompile
 
 # 6. RELOAD PHUSION PASSENGER INSTANTLY WITHOUT DOWNTIME
-passenger-config restart-app $APP_PATH
+sudo service apache2 restart
 
 echo "Deployment completed successfully!"
 
