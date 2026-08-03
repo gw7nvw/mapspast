@@ -63,7 +63,7 @@ function init(){
 
   map.events.register("moveend", map, check_zoomend);
   // layers
-  var nztm2009 = new OpenLayers.Layer.TMS("LINZ Topo 2009", "http://au.mapspast.org.nz/topo50/",
+  var nztm2009 = new OpenLayers.Layer.TMS("LINZ Topo 2009", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//topo50/",
   {
       serviceVersion: '.',
       layername: '.',
@@ -74,7 +74,7 @@ function init(){
       getURL: getURL
   });
 
-  var nzms1999 = new OpenLayers.Layer.TMS("NZMS260 1999", "http://au.mapspast.org.nz/nzms260-1999/",
+  var nzms1999 = new OpenLayers.Layer.TMS("NZMS260 1999", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/nzms260-1999/",
   {
       serviceVersion: '.',
       layername: '.',
@@ -85,7 +85,7 @@ function init(){
       getURL: getURL
   });
 
-  var nzms1989 = new OpenLayers.Layer.TMS("NZMS1/260 1989", "http://au.mapspast.org.nz/nzms-1989/",
+  var nzms1989 = new OpenLayers.Layer.TMS("NZMS1/260 1989", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//nzms-1989/",
   {
       serviceVersion: '.',
       layername: '.',
@@ -96,7 +96,7 @@ function init(){
       getURL: getURL
   });
 
-  var nzms1979 = new OpenLayers.Layer.TMS("NZMS1 1979", "http://au.mapspast.org.nz/nzms-1979/",
+  var nzms1979 = new OpenLayers.Layer.TMS("NZMS1 1979", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//nzms-1979/",
   {
       serviceVersion: '.',
       layername: '.',
@@ -107,7 +107,7 @@ function init(){
       getURL: getURL
   });
 
-  var nzms1969 = new OpenLayers.Layer.TMS("NZMS1 1969", "http://au.mapspast.org.nz/nzms-1969/",
+  var nzms1969 = new OpenLayers.Layer.TMS("NZMS1 1969", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//nzms-1969/",
   {
       serviceVersion: '.',
       layername: '.',
@@ -118,7 +118,7 @@ function init(){
       getURL: getURL
   });
 
-  var nzms1959 = new OpenLayers.Layer.TMS("NZMS1 1959", "http://au.mapspast.org.nz/nzms-1959/",
+  var nzms1959 = new OpenLayers.Layer.TMS("NZMS1 1959", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//nzms-1959/",
   {
       serviceVersion: '.',
       layername: '.',
@@ -129,7 +129,7 @@ function init(){
       getURL: getURL
   });
 
-  var nzms1949 = new OpenLayers.Layer.TMS("NZMS15 1949", "http://au.mapspast.org.nz/nzms15-1949/",
+  var nzms1949 = new OpenLayers.Layer.TMS("NZMS15 1949", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//nzms15-1949/",
   {
       serviceVersion: '.',
       layername: '.',
@@ -139,7 +139,7 @@ function init(){
       tileOptions: {crossOriginKeyword: 'anonymous'},
       getURL: getURL
   });
-   var nzms1939 = new OpenLayers.Layer.TMS("NZMS13 1939", "http://au.mapspast.org.nz/nzms13-1939/",
+   var nzms1939 = new OpenLayers.Layer.TMS("NZMS13 1939", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//nzms13-1939/",
     {
         serviceVersion: '.',
         layername: '.',
@@ -148,7 +148,7 @@ function init(){
         isBaseLayer: true,
         getURL: getURL
     });
-   var nzms1929 = new OpenLayers.Layer.TMS("NZMS13 1929", "http://au.mapspast.org.nz/nzms13-1929/",
+   var nzms1929 = new OpenLayers.Layer.TMS("NZMS13 1929", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//nzms13-1929/",
     {
         serviceVersion: '.',
         layername: '.',
@@ -157,7 +157,7 @@ function init(){
         isBaseLayer: true,
         getURL: getURL
     });
-   var nzms1919 = new OpenLayers.Layer.TMS("NZMS13 1919", "http://au.mapspast.org.nz/nzms13-1919/",
+   var nzms1919 = new OpenLayers.Layer.TMS("NZMS13 1919", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//nzms13-1919/",
     {
         serviceVersion: '.',
         layername: '.',
@@ -166,7 +166,7 @@ function init(){
         isBaseLayer: true,
         getURL: getURL
     });
-   var nzms1909 = new OpenLayers.Layer.TMS("NZMS13 1909", "http://au.mapspast.org.nz/nzms13-1909/",
+   var nzms1909 = new OpenLayers.Layer.TMS("NZMS13 1909", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//nzms13-1909/",
     {
         serviceVersion: '.',
         layername: '.',
@@ -176,7 +176,7 @@ function init(){
         getURL: getURL
     });
 
-  var nzms1899 = new OpenLayers.Layer.TMS("NZMS13 1899", "http://au.mapspast.org.nz/nzms13-1899/",
+  var nzms1899 = new OpenLayers.Layer.TMS("NZMS13 1899", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//nzms13-1899/",
   {
       serviceVersion: '.',
       layername: '.',
