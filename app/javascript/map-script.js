@@ -679,3 +679,6 @@ window.map_add_feature = map_add_feature;
 window.map_get_layer_by_name = map_get_layer_by_name;
 window.epsg2193 = epsg2193;
 window.mapspast_tilegrid = mapspast_tilegrid;
+window.mapspast_origin = mapspast_origin;
+window.mapspast_extent = mapspast_extent;
+window.mapspast_resolutions = mapspast_resolutions;

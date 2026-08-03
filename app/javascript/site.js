@@ -10,6 +10,7 @@ var def_layer=null;
 import WKT from 'ol/format/WKT';
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
+import TileGrid from "ol/tilegrid/TileGrid";
 
 
 // Site-specfic stuff follows - should be in separate file
@@ -379,11 +380,12 @@ function site_update_selected_layer(layer_id, serverpath, xleft, xright, ytop, y
   document.extentform.serverpath.value=serverpath;
 
   site_selected_layer.setVisible(true);
-  map_set_default_extent([xleft,ybottom,xright,ytop]);
-  map_zoom_to_default_extent();
+//  map_set_default_extent([xleft,ybottom,xright,ytop]);
+//  map_zoom_to_default_extent();
 }
 
 function site_create_selected_layer(layer_id, serverpath) {
+
 //  var url="https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/tiles/tiles-"+layer_id+"/{z}/{x}/{-y}.png";
   var url=serverpath+"tiles-"+layer_id+"/{z}/{x}/{-y}.png";
   site_selected_layer = new TileLayer({
