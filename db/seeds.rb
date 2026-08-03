@@ -1,76 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# This file should ensure the existence of records required to run the application in every environment (production,
+# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
+# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
-# Examples:
+# Example:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-##   Mayor.create(name: 'Emanuel', city: cities.first)
-#Mapseries.create(name: "NZMS15 1949", year_of_snapshot: 1949, series: "NZMS15", edition: nil, scale:63360, details: "Snapshot of the latest editions of the NZMS15 series as of the last day of 1949", createdBy_id: 1)
-#Mapseries.create(name: "NZMS1 1959", year_of_snapshot: 1959, series: "NZMS1", edition: nil, scale:63360, details: "Snapshot of the latest editions of the NZMS1 series as of the last day of 1959", createdBy_id: 1)
-#Mapseries.create(name: "NZMS1 1969", year_of_snapshot: 1969, series: "NZMS1", edition: nil, scale:63360, details: "Snapshot of the latest editions of the NZMS1 series as of the last day of 1969", createdBy_id: 1)
-#Mapseries.create(name: "NZMS1 1979", year_of_snapshot: 1979, series: "NZMS1", edition: nil, scale:63360, details: "Snapshot of the latest editions of the NZMS1 series as of the last day of 1979", createdBy_id: 1)
-#Mapseries.create(name: "NZMS1/260 1989", year_of_snapshot: 1989, series: "NZMS1/260", edition: nil, scale:50000, details: "Snapshot of the latest editions of the NZMS260 (where available) or NZMS1 series as of the last day of 1989", createdBy_id: 1)
-#Mapseries.create(name: "NZMS260 1999", year_of_snapshot: 1999, series: "NZMS260", edition: nil, scale:50000, details: "Snapshot of the latest editions of the NZMS260 series as of the last day of 1999", createdBy_id: 1)
-#Mapseries.create(name: "Topo50 2009", year_of_snapshot: 2009, series: "Topo50", edition: nil, scale:50000, details: "Snapshot of the first editions of the Topo50 series in 1999", createdBy_id: 1)
-#Mapseries.create(name: "selected sheet", year_of_snapshot: nil, series: nil, edition: nil, scale:nil, details: nil, createdBy_id: 1)
-#Projection.create(id: 999999, name: "Trans Mercator 167.5 (meter grid)", proj4: "+proj=tmerc +lat_0=0 +lon_0=167.5 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=intl ", wkt: "", epsg: 999999)
-#Projection.create(id: 999998, name: "Trans Mercator 170.0 (meter grid)", proj4: "+proj=tmerc +lat_0=0 +lon_0=170 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs ", wkt: "", epsg: 999998)
-#Projection.create(id: 999997, name: "Trans Mercator 167.625 (meter grid)", proj4: "+proj=tmerc +lat_0=0 +lon_0=167.625 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs ", wkt: "", epsg: 999997)
-#Projection.create(id: 2193, name: "NZTM2000 (meter grid)", proj4: "+proj=tmerc +lat_0=0 +lon_0=173 +k=0.9996 +x_0=1600000 +y_0=10000000 +ellps=GRS80 +towgs84 0,0,0,0,0,0,0 +no_defs", wkt: "", epsg: 2193)
-#Projection.create(id: 4326, name: "WGS84 (lat/long)", proj4: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs", wkt: "", epsg: 4326)
-#Projection.create(id: 27200, name: "NZMG49 (meter grid)", proj4: "+proj=nzmg +lat_0=-41 +lon_0=173 +x_0=2510000 +y_0=6023150 +ellps=intl +datum=nzgd49 +units=m +no_defs", wkt: "", epsg: 27200)
-#Projection.create(id: 900913, name: "GOOGLE (meter grid)", proj4: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs", wkt: "", epsg: 900913)
-#Projection.create(id: 27291, name: "NIMG (yard grid)", proj4: "+proj=tmerc +lat_0=-39 +lon_0=175.5 +k=1 +x_0=274319.5243848086 +y_0=365759.3658464114 +ellps=intl +datum=nzgd49 +to_meter=0.9143984146160287 +no_defs", wkt: "", epsg: 27291)
-#Projection.create(id: 27292, name: "SIMG (yard grid)", proj4: "+proj=tmerc +lat_0=-44 +lon_0=171.5 +k=1 +x_0=457199.2073080143 +y_0=457199.2073080143 +ellps=intl +datum=nzgd49 +to_meter=0.9143984146160287 +no_defs", wkt: "", epsg: 27292)
-#Projection.create(id: 4272, name: "NZGD49 (lat/long)", proj4: "+proj=longlat +ellps=intl +datum=nzgd49 +no_defs", wkt: "", epsg: 4272)
-#Projection.create(id: 4167, name: "NZGD2000 (lat/long)", proj4: "+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs", wkt: "", epsg: 4167)
-
-#Mapstatus.create(id: 1, name: "new")
-#Mapstatus.create(id: 2, name: "uploading ...")
-#Mapstatus.create(id: 3, name: "uploaded")
-#Mapstatus.create(id: 4, name: "converting ...")
-#Mapstatus.create(id: 5, name: "converted")
-#Mapstatus.create(id: 6, name: "rotating ...")
-#Mapstatus.create(id: 7, name: "rotated")
-#Mapstatus.create(id: 8, name: "cropping ...")
-#Mapstatus.create(id: 9, name: "cropped")
-#Mapstatus.create(id: 10, name: "georeferencing ...")
-#Mapstatus.create(id: 11, name: "georeferenced")
-#Mapstatus.create(id: 12, name: "nearwhite ...")
-#Mapstatus.create(id: 13, name: "nearwhited")
-#Mapstatus.create(id: 14, name: "warping ...")
-#Mapstatus.create(id: 15, name: "warped")
-#Mapstatus.create(id: 16, name: "converting to RGB ...")
-#Mapstatus.create(id: 17, name: "converted to RGB")
-#Mapstatus.create(id: 18, name: "tiling ...")
-#Mapstatus.create(id: 19, name: "tiled")
-#Mapstatus.create(id: 20, name: "compressing ...")
-#Mapstatus.create(id: 21, name: "compressed")
-#Mapstatus.create(id: 22, name: "publishing ...")
-#Mapstatus.create(id: 23, name: "published")
-#
-#Papersize.create(name: "A4 portrait 96dpi", width: 793, height: 1122)
-#Papersize.create(name: "A4 landscape 96dpi", width: 1122, height: 793)
-#Papersize.create(name: "A3 portrait  96dpi", width: 1122, height: 1587)
-#Papersize.create(name: "A3 landscape 96dpi", width: 1587, height: 1122)
-#Papersize.create(name: "A4 portrait 300dpi", width: 2480, height: 3508)
-#Papersize.create(name: "A4 landscape 300dpi", width: 3508, height: 2480)
-#Papersize.create(name: "A3 portrait  300dpi", width: 3508, height: 4961)
-#Papersize.create(name: "A3 landscape 300dpi", width: 4961, height: 3508)
-
-#Maplayer.create(name: "NZTM Topo 2009", baseurl: "http://au.mapspast.org.nz/topo50/", basemap: "mapspast", minzoom: 0, maxzoom: 10, imagetype: "png")
-#Maplayer.create(name: "NZMS260 1999", baseurl: "http://au.mapspast.org.nz/nzms260-1999/", basemap: "mapspast", minzoom: 0, maxzoom: 9, imagetype: "png")
-#Maplayer.create(name: "NZMS1/260 1989", baseurl: "http://au.mapspast.org.nz/nzms-1989/", basemap: "mapspast", minzoom: 0, maxzoom: 9, imagetype: "png")
-#Maplayer.create(name: "NZMS1 1979", baseurl: "http://au.mapspast.org.nz/nzms-1979/", basemap: "mapspast", minzoom: 0, maxzoom: 9, imagetype: "png")
-#Maplayer.create(name: "NZMS1 1969", baseurl: "http://au.mapspast.org.nz/nzms-1969/", basemap: "mapspast", minzoom: 0, maxzoom: 9, imagetype: "png")
-#Maplayer.create(name: "NZMS1 1959", baseurl: "http://au.mapspast.org.nz/nzms-1959/", basemap: "mapspast", minzoom: 0, maxzoom: 9, imagetype: "png")
-#Maplayer.create(name: "NZMS15 1949", baseurl: "http://au.mapspast.org.nz/nzms15-1949/", basemap: "mapspast", minzoom: 0, maxzoom: 9, imagetype: "png")
-#Maplayer.create(name: "(LINZ) Topo50 latest", baseurl: "http://tiles-a.data-cdn.linz.govt.nz/services;key=d8c83efc690a4de4ab067eadb6ae95e4/tiles/v4/layer=767/EPSG:2193/", basemap: "linz", minzoom: 0, maxzoom: 16, imagetype: "png")
-#Maplayer.create(name: "(LINZ) Airphoto latest", baseurl: "http://tiles-a.data-cdn.linz.govt.nz/services;key=d8c83efc690a4de4ab067eadb6ae95e4/tiles/v4/set=2/EPSG:2193/", basemap: "linz", minzoom: 0, maxzoom: 16, imagetype: "png")
-#Maplayer.create(name: "(LINZ) Airphoto latest", baseurl: "http://tiles-a.data-cdn.linz.govt.nz/services;key=d8c83efc690a4de4ab067eadb6ae95e4/tiles/v4/set=2/EPSG:2193/", basemap: "linz", minzoom: 0, maxzoom: 16, imagetype: "png")
-#Maplayer.create(name: "selected sheet", baseurl: "", basemap: "mapspast", minzoom: 0, maxzoom: 0, imagetype: "png")
-
-Mapset.create(name: "NZMS273",details: "Parkmaps", publisher: "LINZ", copyright: "CC(attribution)")
-Mapset.create(name: "NZMS274",details: "Parkmaps", publisher: "LINZ", copyright: "CC(attribution)")
-
-##
+#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
+#     MovieGenre.find_or_create_by!(name: genre_name)
+#   end

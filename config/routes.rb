@@ -4,7 +4,7 @@ Mapspast::Application.routes.draw do
   mount Resque::Server.new, at: "/resque"
 resources :sessions, only: [:new, :create, :destroy]
 resources :users
-resources :maptalk, only: [:index, :show, :update, :approve, :destroy]
+resources :maptalk, only: [:index, :show, :update, :destroy]
 resources :address_auths, only: [:edit]
 resources :account_activations, only: [:edit]
 resources :mapsheet

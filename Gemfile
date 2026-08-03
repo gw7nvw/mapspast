@@ -1,167 +1,72 @@
-source 'https://rubygems.org'
-
-ruby '2.3.7'
-
-
-  gem 'roo'
-  gem 'actionmailer', '>=4.0.5'
-
-  gem 'actionpack', '>=4.0.5'
-
-  gem 'activemodel', '>=4.0.5'
-
-  gem 'activerecord', '>=4.0.5'
-
-  gem 'activerecord-deprecated_finders', '>=1.0.3'
-
-  gem 'activerecord-postgis-adapter', '>=2.1.0'
-  gem 'activerecord-session_store'
-
-
-  gem 'activesupport', '>=4.0.5'
-
-  gem 'arel', '>=4.0.2'
-
-  gem 'bcrypt-ruby', '>=3.1.2'
-  gem 'font-awesome-sass'
-  gem 'bootstrap-sass', '>=2.3.2.0'
-  gem 'builder', '>=3.1.4'
-
-  gem 'bundler', '>=1.6.2'
-
-  gem 'capybara', '>=2.1.0'
-
-  gem 'childprocess', '>=0.5.5'
-
-  gem 'climate_control', '>=0.0.3'
-
-  gem 'cocaine', '>=0.5.5'
-
-  gem 'coffee-rails', '>=4.0.1'
-
-  gem 'coffee-script', '>=2.3.0'
-
-  gem 'coffee-script-source', '>=1.8.0'
-
-  gem 'diff-lcs', '>=1.2.5'
-
-  gem 'erubis', '>=2.7.0'
-
-  gem 'execjs', '>=2.2.2'
-
-  gem 'factory_bot'
-
-  gem 'factory_bot_rails'
-
-  gem 'ffi', '>=1.9.6'
-
-  gem 'hike', '>=1.2.3'
-  gem 'htmlentities'
-
-
-  gem 'i18n', '>=0.7.0'
-
-  gem 'jbuilder', '>=1.0.2'
-
-  gem 'jquery-rails', '>=3.0.4'
-
-  gem 'jquery-ui-rails', '>=5.0.3'
-
-  gem 'json', '>=1.8.3'
-
-  gem 'mail', '>=2.5.4'
-
-  gem 'mime-types', '>=1.25.1'
-
-  gem 'mini_portile', '>=0.6.1'
-
-  gem 'minitest', '>=4.7.5'
-
-  gem 'mono_logger', '>=1.1.0'
-
-  gem 'multi_json', '>=1.10.1'
-
-  gem 'nokogiri', '=1.6.5'
-
-  gem 'paperclip', '>=4.2.0'
-
-  gem 'pg', '=0.17.1'
-
-  gem 'polyglot', '>=0.3.5'
-
-  gem 'rack', '>=1.5.2'
-
-  gem 'rack-protection', '>=1.5.3'
-
-  gem 'rack-test', '>=0.6.2'
-
-  gem 'rails', '=4.1.0'
-
-  gem 'railties', '>=4.0.5'
-
-  gem 'rake', '>=10.4.2'
-
-  gem 'rdoc', '>=3.12.2'
-
-  gem 'redis', '>=3.2.0'
-
-  gem 'redis-namespace', '>=1.5.1'
-
-  gem 'resque', '>=1.25.2'
-  gem 'resque-scheduler'
-  #gem 'resque-scheduler-web'
-
-
-  gem 'rgeo', '>=0.3.20'
-
-  gem 'rgeo-activerecord', '>=1.0.0'
-
-  gem 'rspec-core', '>=2.13.1'
-
-  gem 'rspec-expectations', '>=2.13.0'
-
-  gem 'rspec-mocks', '>=2.13.1'
-
-  gem 'rspec-rails', '>=2.13.1'
-
-  gem 'rubyzip', '>=0.9.9'
-
-  gem 'sass', '>=3.4.9'
-
-  gem 'sass-rails', '>=4.0.1'
-
-  gem 'sdoc', '>=0.3.20'
-
-  gem 'selenium-webdriver', '>=2.35.1'
-
-  gem 'sinatra', '>=1.4.5'
-
-  gem 'sprockets', '>=2.11.0'
-
-  gem 'sprockets-rails', '>=2.0.1'
-
-  gem 'thor', '>=0.19.2'
-
-  gem 'thread_safe', '>=0.3.4'
-
-  gem 'tilt', '>=1.4.1'
-
-  gem 'treetop', '>=1.4.15'
-
-  gem 'turbolinks', '>=1.1.1'
-
-  gem 'tzinfo', '>=0.3.42'
-
-  gem 'uglifier', '>=2.1.1'
-
-  gem 'vegas', '>=0.1.11'
-
-  gem 'websocket', '>=1.0.7'
-
-  gem 'will_paginate', '>=3.0.7'
-
-  gem 'xpath', '>=2.0.0'
-
-  gem 'keycloak'
-
-gem "rubocop-ruby2_1", "~> 1.0"
+source "https://rubygems.org"
+
+# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+gem "rails", "~> 8.0.0"
+# The modern asset pipeline for Rails [https://github.com/rails/propshaft]
+gem "propshaft"
+# Use postgresql as the database for Active Record
+gem "pg", "~> 1.1"
+# Use the Puma web server [https://github.com/puma/puma]
+gem "puma", ">= 5.0"
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+# Build JSON APIs with ease [https://github.com/rails/jbuilder]
+gem "jbuilder"
+# Adds PostGIS spatial data capabilities to ActiveRecord
+gem "activerecord-postgis-adapter"
+gem "rgeo"
+#gem "rgeo-proj4" # Adds the missing RGeo::CoordSys::Proj4 constant
+gem "kt-paperclip", "~> 7.2"
+gem "bcrypt"
+gem "resque"
+gem "will_paginate"
+gem "dartsass-rails"
+
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+# gem "bcrypt", "~> 3.1.7"
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem "tzinfo-data", platforms: %i[ windows jruby ]
+
+# Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
+gem "solid_cache"
+gem "solid_queue"
+gem "solid_cable"
+
+# Reduces boot times through caching; required in config/boot.rb
+gem "bootsnap", require: false
+
+# Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
+gem "kamal", require: false
+
+# Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
+gem "thruster", require: false
+
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
+
+group :development, :test do
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+
+  # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
+  gem "brakeman", require: false
+
+  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
+  gem "rubocop-rails-omakase", require: false
+end
+
+group :development do
+  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem "web-console"
+end
+
+group :test do
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "capybara"
+  gem "selenium-webdriver"
+end
+
+gem "jsbundling-rails", "~> 1.3"

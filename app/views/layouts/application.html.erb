@@ -13,18 +13,10 @@
    <script src="/assets/html2canvas.js"></script>
    <script src="/assets/canvas-toBlob.js"></script>
    <script src="/assets/FileSaver.js"></script>
-
-<% else %>
-    <script src="/assets/ol.js"></script>
-    <link rel="stylesheet" href="/assets/ol.css" type="text/css">
-    <%= stylesheet_link_tag "application", media: "all", "jquery-ui.min" => true %>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-    <%= csrf_meta_tags %>
-    <%= render 'layouts/shim' %>
-<% end %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+ <% end %>
+ <%= javascript_include_tag "application", defer: true %>
+   <%= stylesheet_link_tag "application" %>
   </head>
-  <body onload='site_init()' style="cursor: auto;"> 
 <!--    <div style="position:absolute;"> -->
       <%= form_tag '/redisplay', :remote=> true, :id => "thelink", :name=> 'extentform', :method=> 'post'%>
       <%
@@ -70,13 +62,13 @@
 
     <div id="main_page" class="container-fluid">
       <div class="row-fluid">
-         <div id="left_panel_container" class="span3"> 
+         <div id="left_panel_container" class="col-md-3"> 
            <!--<div id="info_details" class="erow"></div> -->
            <div id="left_panel">
               <%=yield %>
            </div>
          </div>
-         <div id="right_panel" class="span9">
+         <div id="right_panel" class="col-md-9">
            <%=render 'viewer/map' %>
          </div>
          <div class="clear"></div> 
@@ -90,7 +82,17 @@
       <% if params[:x] %> def_x=<%=params[:x]%>; <% end %>
       <% if params[:y] %> def_y=<%=params[:y]%>; <% end %>
       <% if params[:zoom] %> def_zoom=<%=params[:zoom]%>; <% end %>
-      <% if params[:layerid] %> def_layer='<%=params[:layerid]%>'; <% end %>
+        <% if params[:layerid] %> def_layer='<%=params[:layerid]%>'; <% end %>
+
+      document.addEventListener("DOMContentLoaded", function() {
+      // Confirm that esbuild has successfully bound the function to the global window scope
+      if (typeof window.site_init === "function") {
+        console.log("--> Turbo lifecycle loaded. Executing site_init().");
+        window.site_init();
+      } else {
+        console.warn("--> site_init() was not found on the window scope yet.");
+      }
+    });
     </script>
   </body>
 </html>

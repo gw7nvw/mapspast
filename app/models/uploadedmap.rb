@@ -1,9 +1,9 @@
 class Uploadedmap < ActiveRecord::Base
-has_attached_file :image,
-  :path => "/var/www/html/maps/:id.:extension",
-  :url => "/maps/:id.:extension"
+  has_attached_file :image,
+    path: "/var/www/html/maps/:id.:extension",
+    url: "/maps/:id.:extension"
 
-validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/tif", "image/jp2"]
+  validates_attachment_content_type :image, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/tif", "image/jp2"]
 
 validates :name, presence: true
 validates :year_printed, presence: true

@@ -1,58 +1,77 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-<div class="navbar-inner" style="font-size:0.8em">
-<!--        <div class="container"> -->
-        <div id="our_logo">
-          <%= link_to "MapsPast", root_path, id: "logo" %>
-        </div>
-          <nav>
-            <ul class="nav pull-right" id="menus">
-              <li id="fat-menu" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                   Maps <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to 'National basemaps', '/basemap', remote: true, :id => 'home_link', :onclick => "linkHandler('homes_link')"  %></li>
-                    <li class="divider"></li>
-                  <li><%= link_to 'Single sheets by series', '/mapseries', remote: true, :id => 'home_link', :onclick => "linkHandler('homes_link')"  %></li>
-                  <li><%= link_to 'Single sheets by name', '/mapsheet', remote: true, :id => 'home_link', :onclick => "linkHandler('homes_link')"  %></li>
-                  <% if signed_in? %>
-                    <li class="divider"></li>
-                    <li><%= link_to 'Create', '/mapsheetinfo', remote: true, :id => 'ms_link', :onclick => "linkHandler('ms_link')"  %></li>
-                  <% end %>
-                </ul>
-              </li>
-              <li id="fat-menu" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                   GIS <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to 'GDAL / QGIS', '/gdal', remote: true, :id => 'home_link', :onclick => "linkHandler('gdal')"  %></li>
-                  <li><%= link_to 'ArcGIS', '/arcgis', remote: true, :id => 'home_link', :onclick => "linkHandler('arcgis')"  %></li>
-                </ul>
-              </li>
-                  <li><%= link_to 'Maptalk', '/maptalk/1/', remote: true, :id => 'forum_link', :onclick => "linkHandler('forum_link')"  %></li>
-                  <li><%= link_to 'Mapnews', '/mapnews', remote: true, :id => 'news_link', :onclick => "linkHandler('news_link')"  %></li>
-              <li id="fat-menu2" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                   Menu <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to 'About', '/about', remote: true, :id => 'about_link', :onclick => "linkHandler('about_link')"  %></li>
-                  <% if signed_in? %>
-                    <li><%= link_to 'Profile', '/users/'+@current_user.id.to_s, remote: true, :id => 'user_link', :onclick => "linkHandler('user_link')"  %></li>
-                    <li> <%= link_to "Sign out", logout_path, method: "delete" %> </li>
-                  <% else %>
-                  <li><%= link_to 'Login', login_path, remote: true, :id => 'login_link', :onclick => "linkHandler('login_link')"  %></li>
-                  <li><%= link_to 'Sign Up', signup_path, remote: true, :id => 'signup_link', :onclick => "linkHandler('signup_link')"  %></li>
-                  <% end %>
+<header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="padding:0px !important">
+  <div class="container-fluid" style="font-size:0.8em">
+    
+    <div id="our_logo">
+      <%= link_to "MapsPast", root_path, id: "logo", class: "navbar-brand" %>
+    </div>
 
-                </ul>
-              </li>
-              <li>
-                <%= link_to image_tag("/assets/download.png",   :class => 'dock-item'), '/print/', remote: true, onclick: "linkHandler('print')", id:  "print", title: "Download / print current map area"  %>
-               </li>
- 
-          </ul>
-          </nav>
-        </div>
-      </header>
+    <!-- Collapsible element container required for modern menu scaling -->
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto" id="menus">
+        
+        <!-- Maps Dropdown Section -->
+        <li id="fat-menu" class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+             Maps <b class="caret"></b>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <%= link_to 'National basemaps', '/basemap', remote: true, id: 'home_link', onclick: "linkHandler('homes_link')", class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Single sheets by series', '/mapseries', remote: true, id: 'home_link', onclick: "linkHandler('homes_link')", class: "dropdown-item" %>
+            <%= link_to 'Single sheets by name', '/mapsheet', remote: true, id: 'home_link', onclick: "linkHandler('homes_link')", class: "dropdown-item" %>
+            
+            <% if signed_in? %>
+              <div class="dropdown-divider"></div>
+              <%= link_to 'Create', '/mapsheetinfo', remote: true, id: 'ms_link', onclick: "linkHandler('ms_link')", class: "dropdown-item" %>
+            <% end %>
+          </div>
+        </li>
+
+        <!-- GIS Dropdown Section -->
+        <li id="fat-menu" class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+             GIS <b class="caret"></b>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <%= link_to 'GDAL / QGIS', '/gdal', remote: true, id: 'home_link', onclick: "linkHandler('gdal')", class: "dropdown-item" %>
+            <%= link_to 'ArcGIS', '/arcgis', remote: true, id: 'home_link', onclick: "linkHandler('arcgis')", class: "dropdown-item" %>
+          </div>
+        </li>
+
+        <!-- Static Link Items -->
+        <li class="nav-item">
+          <%= link_to 'Maptalk', '/maptalk/1/', remote: true, id: 'forum_link', onclick: "linkHandler('forum_link')", class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Mapnews', '/mapnews', remote: true, id: 'news_link', onclick: "linkHandler('news_link')", class: "nav-link" %>
+        </li>
+
+        <!-- Account / Menu Dropdown Section -->
+        <li id="fat-menu2" class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+             Menu <b class="caret"></b>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <%= link_to 'About', '/about', remote: true, id: 'about_link', onclick: "linkHandler('about_link')", class: "dropdown-item" %>
+            
+            <% if signed_in? %>
+              <%= link_to 'Profile', '/users/'+@current_user.id.to_s, remote: true, id: 'user_link', onclick: "linkHandler('user_link')", class: "dropdown-item" %>
+              <%= link_to "Sign out", logout_path, method: "delete", class: "dropdown-item" %>
+            <% else %>
+              <%= link_to 'Login', login_path, remote: true, id: 'login_link', onclick: "linkHandler('login_link')", class: "dropdown-item" %>
+              <%= link_to 'Sign Up', signup_path, remote: true, id: 'signup_link', onclick: "linkHandler('signup_link')", class: "dropdown-item" %>
+            <% end %>
+          </div>
+        </li>
+
+        <!-- Image Action Control Item -->
+        <li class="nav-item">
+          <%= link_to image_tag("download.png", class: 'dock-item'), '/print/', remote: true, onclick: "linkHandler('print')", id: "print", title: "Download / print current map area", class: "nav-link" %>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</header>
+

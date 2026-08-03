@@ -12,7 +12,7 @@
   <div class="erow-10px"><%= link_to "All topics-> ", '/maptalk/'+@id.to_s, remote: true, :id => 'all_link', :onclick => "linkHandler('all_link')" %>
 <% end %>
   <% if @messages and @messages.count>0 %>
-    <b><%=link_to @messages.first.subject.capitalize, '/maptalk/'+@id.to_s+'/?thread='+URI.escape(@messages.first.subject), remote: true, :id => 'thread_link', :onclick => "linkHandler('thread_link')" %> </b></div>
+    <b><%=link_to @messages.first.subject.capitalize, '/maptalk/'+@id.to_s+'/?thread='+CGI.escape(@messages.first.subject), remote: true, :id => 'thread_link', :onclick => "linkHandler('thread_link')" %> </b></div>
 
     <% @messages.each do |message| %>
       <div class="erow">

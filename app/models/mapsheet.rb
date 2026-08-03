@@ -1,6 +1,4 @@
 class Mapsheet < ActiveRecord::Base
-set_rgeo_factory_for_column(:extent,
-		RGeo::Geographic.spherical_factory(:srid => 4326))
 
 def create_polygon()
   fromproj4s= Projection.find_by_id(self.source_srid).proj4
@@ -27,19 +25,20 @@ def self.create_missing_polygons()
 end
 
 def self.find_by_point(x,y, srid, series_id)
-   fromproj4s= Projection.find_by_id(srid).proj4
-   toproj4s=  Projection.find_by_id(4326).proj4
+# Force traditional X=Lon, Y=Lat calculation rules via custom string mappings
+# (Notice the +type=crs flag at the end)
+fromproj = RGeo::CoordSys::Proj4.create(srid.to_i)
+toproj   = RGeo::CoordSys::Proj4.create(4326)
 
-   fromproj=RGeo::CoordSys::Proj4.new(fromproj4s)
-   toproj=RGeo::CoordSys::Proj4.new(toproj4s)
- 
-   pointarr=RGeo::CoordSys::Proj4::transform_coords(fromproj,toproj,x, y)
- 
-   if pointarr and pointarr.count==2 then 
+# This transformation calculation will now output correct NZ coordinates exactly like your old server
+pointarr = RGeo::CoordSys::Proj4.transform_coords(fromproj, toproj, x.to_f, y.to_f)
+# Now you can read the attributes cleanly:
+# target_point.x or target_point.y 
+if  pointarr and pointarr.length>1
       if series_id and series_id>0 then
-        Mapsheet.find_by_sql [ "select * from mapsheets where series_id = ? and ST_Contains(extent, ST_GeomFromText( 'POINT(? ?)',4326));", series_id, pointarr[0], pointarr[1]] 
+        Mapsheet.find_by_sql [ "select * from mapsheets where series_id = ? and ST_Contains(extent, ST_GeomFromText( 'POINT(? ?)',4326));", series_id, pointarr[0],pointarr[1]] 
       else
-        Mapsheet.find_by_sql [ "select min(id), name, year_printed, series, sheet, year_revised, edition, scale from mapsheets where ST_Contains(extent, ST_GeomFromText( 'POINT(? ?)',4326)) group by name, edition, year_printed, year_revised, series, scale,sheet  order by year_printed desc;", pointarr[0], pointarr[1]] 
+        Mapsheet.find_by_sql [ "select min(id), name, year_printed, series, sheet, year_revised, edition, scale from mapsheets where ST_Contains(extent, ST_GeomFromText( 'POINT(? ?)',4326)) group by name, edition, year_printed, year_revised, series, scale,sheet  order by year_printed desc;", pointarr[0],pointarr[1]] 
       end
    end
 

@@ -1,4 +1,3 @@
-@import "bootstrap";
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -303,7 +302,7 @@ ul {
         overflow-y: auto;
        overflow-x: hidden;
         height: calc( 100% - 60px );
-        float: left;
+//       float: left;
         position: fixed;
         border: 0px;
         margin: 0px;
@@ -312,12 +311,12 @@ ul {
 #right_panel
 {
         overflow: hidden;
-       float: left;
-        height: 100%;
-        width: 75%;
+//       float: left;
+        height: 100vh;
+//        width: 75%;
         border: 0px;
         margin: 0px;
-        margin-left: 25%;
+//        margin-left: 25%;
 //        position: fixed;
         
 }

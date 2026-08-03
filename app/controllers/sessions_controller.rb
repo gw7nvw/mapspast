@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-require 'sessions_helper'
   def new
   end
 
