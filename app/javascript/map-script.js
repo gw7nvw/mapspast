@@ -51,7 +51,7 @@ import MousePosition from 'ol/control/MousePosition';
 
 var debug_f
 var map_map;
-var map_current_layer="NZTM Topo 2019";
+var window.map_current_layer="NZTM Topo 2019";
 var map_current_proj="2193"
 var map_projection_name="EPSG:2193"
 var map_projection;
@@ -390,7 +390,7 @@ function map_init(divid) {
 	window.map_map = map_map;
 	mapcontrols.forEach(map_add_control);
 
-        map_show_only_layer(map_current_layer);
+        map_show_only_layer(window.map_current_layer);
 	map_set_coord_format();
 }
 
@@ -434,7 +434,7 @@ function map_show_only_layer(name) {
         };
       };
     });
-    map_current_layer=name;
+    window.map_current_layer=name;
 }
 
 // app/javascript/map-script.js
@@ -511,7 +511,7 @@ function map_mapLayers() {
           },
           type: "GET",
           timeout: 10000,
-          url: "/layerswitcher?baselayer="+map_current_layer,
+          url: "/layerswitcher?baselayer="+window.map_current_layer,
           error: function() {
               document.getElementById("info_details2").innerHTML = 'Error contacting server';
           },
@@ -672,8 +672,6 @@ window.map_scratch_layer = map_scratch_layer;
 window.map_current_proj = map_current_proj;
 window.map_mapLayers = map_mapLayers;
 window.mapcontrols = mapcontrols;
-window.map_current_layer = map_current_layer;
-window.map_updateProjection = map_updateProjection;
 window.map_projection_name = map_projection_name;
 window.map_add_feature = map_add_feature;
 window.map_get_layer_by_name = map_get_layer_by_name;

@@ -7,8 +7,8 @@ echo "Starting Mapspast Deployment..."
 # 1. Pull the fresh repository code structure from Git
 cd $APP_PATH
 git fetch origin
-git checkout rails8-upgrade
-git pull origin rails8-upgrade
+git checkout master
+git pull origin master
 
 # 2. Install Ruby gems cleanly without development tests
 bundle config set --local deployment 'true'

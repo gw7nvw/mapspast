@@ -92,7 +92,7 @@ function site_showUrl() {
         var x=Math.round(map_map.getView().getCenter()[0]);
         var y=Math.round(map_map.getView().getCenter()[1]);
         var z=map_map.getView().getZoom()+5;
-        var l=encodeURIComponent(map_current_layer);
+        var l=encodeURIComponent(window.map_current_layer);
         if (l=='selected%20sheet') {
            url=document.location.origin+'/mapsheet/'+document.extentform.layerid.value;
            var l_id="";
@@ -108,7 +108,7 @@ function site_showUrl() {
 
 
 function site_zoomToMapsheet() {
-  layername=map_current_layer;
+  layername=window.map_current_layer;
 //  if (layername=="selected sheet") {
   if ((document.extentform.xleft!="Undefined") && (document.extentform.xleft.value>0)) {
     var sheetBounds = new OpenLayers.Bounds(
@@ -142,7 +142,7 @@ function site_query_callback(e) {
         if (searchMode=="all") {
           layername="";
         } else {
-          layername=map_current_layer;
+          layername=window.map_current_layer;
         };
         window.currentActiveModal = map_create_dialog(
             "Selected map sheet",
@@ -416,7 +416,7 @@ function site_printmap(filetype) {
   var yb=extent[3];
   var width=document.selectform.pix_width.value;
   var height=document.selectform.pix_height.value;
-  layerid=map_current_layer;
+  layerid=window.map_current_layer;
   sheetid=document.extentform.layerid.value;
   var maxzoom=document.extentform.maxzoom.value;
   var filename=document.selectform.filename.value;
