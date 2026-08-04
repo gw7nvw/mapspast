@@ -293,6 +293,7 @@ function init(){
     });
   }
   if (filetype=='pgw') {
+	alert('here');
     map.baseLayer.events.register("loadend", map.baseLayer, function() {
       map.baseLayer.events.destroy("loadend");
       document.getElementById("map_status").innerHTML="";
