@@ -258,7 +258,6 @@ function init(){
                    panel
                    ]);
   }
-	alert(layerid);
   if (layerid=='selected sheet') {
     create_selected_layer(sheetid, document.location.origin+"/");   
   } else { 
