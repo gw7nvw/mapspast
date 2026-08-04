@@ -63,7 +63,17 @@ function init(){
 
   map.events.register("moveend", map, check_zoomend);
   // layers
-  var nztm2009 = new OpenLayers.Layer.TMS("LINZ Topo 2009", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193//topo50/",
+  var nztm2009 = new OpenLayers.Layer.TMS("NZTM Topo 2009", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/topo50-2009/",
+  {
+      serviceVersion: '.',
+      layername: '.',
+      alpha: true,
+      type: 'png',
+      isBaseLayer: true,
+      tileOptions: {crossOriginKeyword: 'anonymous'},
+      getURL: getURL
+  });
+  var nztm2019 = new OpenLayers.Layer.TMS("NZTM Topo 2019", "https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_b1d1ad52024f4f1b909bfea0e41fbff8/mapspast/2193/topo50-2019/",
   {
       serviceVersion: '.',
       layername: '.',
