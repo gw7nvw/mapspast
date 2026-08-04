@@ -51,7 +51,7 @@ import MousePosition from 'ol/control/MousePosition';
 
 var debug_f
 var map_map;
-var window.map_current_layer="NZTM Topo 2019";
+//var window.map_current_layer="NZTM Topo 2019";
 var map_current_proj="2193"
 var map_projection_name="EPSG:2193"
 var map_projection;
