@@ -194,9 +194,10 @@ ul {
 
 #main_page{
  width: 100%;
- height: calc( 100% - 41px );
+ height: 100%;
  padding-top: 20px;
  padding-left:0px;
+ padding-right: 0px !important;
  overflow: hidden;
 }
 
@@ -313,11 +314,16 @@ ul {
 //        width: 75%;
         border: 0px;
         margin: 0px;
+        bottom: 0px;
+        right: 0px;
+        padding-left: 0px !important;
         margin-left: 25%;
 //        position: fixed;
         
 }
-
+#map, #map * {
+  box-sizing: border-box;
+}
 
 #map {
         overflow: hidden;
@@ -325,7 +331,7 @@ ul {
         height: 100%;
         border: 0px;
 //        margin-left: 20px;
-        margin-top: 36px;
+        top: 20px;
 //        margin-right: 20px;
         padding: 0px;
 //        float: right;

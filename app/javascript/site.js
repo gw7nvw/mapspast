@@ -11,6 +11,7 @@ import WKT from 'ol/format/WKT';
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
 import TileGrid from "ol/tilegrid/TileGrid";
+import { get as getProjection } from 'ol/proj';
 
 
 // Site-specfic stuff follows - should be in separate file
@@ -221,8 +222,8 @@ function site_bigger_map() {
     $('#left_panel_container').toggleClass('col-md-0 col-md-3');
     $('#right_panel').toggleClass('col-md-12 col-md-9');
     document.getElementById('right_panel').style.marginLeft="25%";
-    document.getElementById('right_panel').style.width="75%";
-    document.getElementById('map').style.width="75%";
+//    document.getElementById('right_panel').style.width="75%";
+//    document.getElementById('map').style.width="75%";
     document.getElementById('left_panel_container').style.display="block";
     site_map_size=1;
   }
@@ -250,6 +251,7 @@ function site_smaller_map() {
   if (site_map_size==2) {
     document.getElementById('right_panel').style.display="block";
     $('#left_panel_container').toggleClass('col-md-12 col-md-3');
+    document.getElementById('right_panel').style.marginLeft="25%";
     $('#right_panel').toggleClass('col-md-0 col-md-9');
     site_map_size=1;
   }
@@ -380,8 +382,8 @@ function site_update_selected_layer(layer_id, serverpath, xleft, xright, ytop, y
   document.extentform.serverpath.value=serverpath;
 
   site_selected_layer.setVisible(true);
-//  map_set_default_extent([xleft,ybottom,xright,ytop]);
-//  map_zoom_to_default_extent();
+  map_set_default_extent([xleft,ybottom,xright,ytop]);
+  map_zoom_to_default_extent();
 }
 
 function site_create_selected_layer(layer_id, serverpath) {
@@ -390,7 +392,7 @@ function site_create_selected_layer(layer_id, serverpath) {
   var url=serverpath+"tiles-"+layer_id+"/{z}/{x}/{-y}.png";
   site_selected_layer = new TileLayer({
     source: new XYZ({
-      projection: epsg2193,
+      projection: getProjection('EPSG:2193'),
        url: url,
        tileGrid: mapspast_tilegrid,
        maxResolution: 4891.969809375,
@@ -398,7 +400,7 @@ function site_create_selected_layer(layer_id, serverpath) {
      }),
      name: "selected sheet",
      visible: true,
-     projection: epsg2193,
+     projection: getProjection('EPSG:2193'),
      maxResolution: 4891.969809375,
      numZoomLevels: 11
    });
@@ -440,3 +442,4 @@ window.linkHandler = linkHandler;
 window.site_zoomToMapsheet = site_zoomToMapsheet;
 window.site_zoom_to_seriessheet = site_zoom_to_seriessheet;
 window.site_printmap = site_printmap;
+window.site_selected_layer = site_selected_layer;

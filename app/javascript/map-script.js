@@ -81,6 +81,7 @@ var y
 var loc
 
 var mapspast_origin=[-20037508, 20037508];
+var hybrid_mapspast_origin=[-20037508, 20037508];
 var mapspast_resolutions=[156543.0339,
                           78271.51695,
                           39135.758475,
@@ -98,10 +99,15 @@ var mapspast_resolutions=[156543.0339,
                           9.554628533935547,
                           4.777314266967774];
 var mapspast_extent=[-20037508, -20037508, 20037508, 20037508];
+var hybrid_mapspast_extent=[-20037508, -20037508, 20037508, 20037508];
 var mapspast_tilegrid=new TileGrid({
 	origin: mapspast_origin,
 	resolutions: mapspast_resolutions,
         extent: mapspast_extent});
+var mapspast_hybrid_tilegrid=new TileGrid({
+	origin: hybrid_mapspast_origin,
+	resolutions: mapspast_resolutions,
+        extent: hybrid_mapspast_extent});
 
 var linz_extent=[827933.23, 3729820.29, 3195373.59, 7039943.58];
 var linz_origin=[-1000000, 10000000];
@@ -677,6 +683,8 @@ window.map_add_feature = map_add_feature;
 window.map_get_layer_by_name = map_get_layer_by_name;
 window.epsg2193 = epsg2193;
 window.mapspast_tilegrid = mapspast_tilegrid;
+window.mapspast_hybrid_tilegrid = mapspast_hybrid_tilegrid;
 window.mapspast_origin = mapspast_origin;
+window.hybrid_mapspast_origin = hybrid_mapspast_origin;
 window.mapspast_extent = mapspast_extent;
 window.mapspast_resolutions = mapspast_resolutions;
