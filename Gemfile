@@ -18,7 +18,7 @@ gem "jbuilder"
 gem "activerecord-postgis-adapter"
 gem "rgeo"
 gem "rgeo-proj4" # Adds the missing RGeo::CoordSys::Proj4 constant
-gem "kt-paperclip", "~> 7.2"
+gem "kt-paperclip", "~> 8.0"
 gem "bcrypt"
 gem "resque"
 gem "will_paginate"
